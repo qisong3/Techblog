@@ -46,10 +46,10 @@ module.exports = {
     },
     friendLink: [
       {
-        title: '午后南杂',
-        desc: 'Enjoy when you can, and endure when you must.',
-        email: '1156743527@qq.com',
-        link: 'https://www.recoluan.com'
+        title: '朝花熙拾',
+        desc: '一个关于文艺和历史的分享网站',
+        email: 'qisong3@gmail.com',
+        link: 'https://www.errison.cn'
       },
       {
         title: 'vuepress-theme-reco',
@@ -67,13 +67,15 @@ module.exports = {
     // 最后更新时间
     lastUpdated: 'Last Updated',
     // 作者
-    author: 'reco_luan',
+    author: 'Errison',
     // 作者头像
     authorAvatar: '/avatar.png',
     // 备案号
-    record: 'xxxx',
+    record: '@CopyRight 2019 Errison 备案号 京ICP备19057613号-1',
+    // 备案链接
+    recordLink: 'http://beian.miit.gov.cn',
     // 项目开始时间
-    startYear: '2017'
+    startYear: '2020'
     /**
      * 密钥 (if your blog is private)
      */
