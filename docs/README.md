@@ -10,5 +10,5 @@ actionText: Guide
 actionLink: /views/other/guide
 features:
 - title: Share
-  details: æŠ€æœ¯åˆ†äº«
+  details: ¼¼Êõ·ÖÏí
 ---
