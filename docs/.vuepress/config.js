@@ -1,6 +1,6 @@
 module.exports = {
   title: "Errison's blog center",
-  description: 'A blog with altitude',
+  description: '不负光阴不负卿',
   dest: 'dist',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -69,6 +69,11 @@ module.exports = {
         link: 'https://vuepress-theme-reco.recoluan.com'
       },
     ],
+    // valine 评论
+    valineConfig: {
+      appId: 'r6o8BYsCAFqvRFP0OPLl7bk5-gzGzoHsz',// your appId
+      appKey: 'cNGiIw55BEnEWYtIWUngp3dx', // your appKey
+    },
     logo: '/logo.png',
     // 搜索设置
     search: true,
