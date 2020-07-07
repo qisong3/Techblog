@@ -1,7 +1,7 @@
 ---
 home: true
-heroText: vuepress-theme-reco
-tagline: A simple and beautiful vuepress blog theme.
+heroText: Errison's blog
+tagline: Errison's share
 # heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',

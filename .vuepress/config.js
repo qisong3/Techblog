@@ -1,7 +1,7 @@
 module.exports = {
-  title: "vuepress-theme-reco",
-  description: 'A simple and beautiful vuepress blog theme .',
-  dest: 'public',
+  title: "Errison's blog center",
+  description: 'A blog with altitude',
+  dest: 'dist',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
@@ -20,7 +20,7 @@ module.exports = {
       { text: 'Contact', 
         icon: 'reco-message',
         items: [
-          { text: 'GitHub', link: 'https://github.com/recoluan', icon: 'reco-github' }
+          { text: 'GitHub', link: 'https://github.com/qisong3', icon: 'reco-github' }
         ]
       }
     ],
@@ -47,7 +47,7 @@ module.exports = {
     friendLink: [
       {
         title: '朝花熙拾',
-        desc: '一个关于文艺和历史的分享网站',
+        desc: '一个关于文学和历史的分享网站',
         email: 'qisong3@gmail.com',
         link: 'https://www.errison.cn'
       },
@@ -76,6 +76,8 @@ module.exports = {
     recordLink: 'http://beian.miit.gov.cn',
     // 项目开始时间
     startYear: '2020'
+
+
     /**
      * 密钥 (if your blog is private)
      */
@@ -95,6 +97,10 @@ module.exports = {
     //   appKey: '...', // your appKey
     // }
   },
+
+  // code theme
+  codeTheme: 'tomorrow',
+  
   markdown: {
     lineNumbers: true
   }
