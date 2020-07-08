@@ -2,10 +2,11 @@ module.exports = {
   title: "Errison's blog center",
   description: '不负光阴不负卿',
   dest: 'dist',
+
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     // 引入百度统计
-    ['script', {}, 
+    ['script', {},
             `var _hmt = _hmt || [];
             (function() {
               var hm = document.createElement("script");
@@ -19,17 +20,19 @@ module.exports = {
   ],
   theme: 'reco',
   themeConfig: {
+    mode: 'light', // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
+    modePicker: true, // 默认 true，false 不显示模式调节按钮，true 则显示
     nav: [
       { text: 'Home', link: '/', icon: 'reco-home' },
       { text: 'TimeLine', link: '/timeline/', icon: 'reco-date' },
-      { text: 'Docs', 
+      { text: 'Docs',
         icon: 'reco-message',
         items: [
           { text: 'blog-setting', link: '/docs/blog-setting/' },
           { text: 'atittude', link: '/docs/atittude/' }
         ]
       },
-      { text: 'Contact', 
+      { text: 'Contact',
         icon: 'reco-message',
         items: [
           { text: 'GitHub', link: 'https://github.com/qisong3', icon: 'reco-github' }
@@ -43,7 +46,7 @@ module.exports = {
         'plugin',
         'api'
       ]
-    },  
+    },
     type: 'blog',
     // 博客设置
     blogConfig: {
@@ -117,8 +120,8 @@ module.exports = {
 
   // code theme
   codeTheme: 'tomorrow',
-  
+
   markdown: {
     lineNumbers: true
   }
-}  
+}
