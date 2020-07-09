@@ -2,6 +2,31 @@ module.exports = {
   title: "Errison's blog center",
   description: '不负光阴不负卿',
   dest: 'dist',
+  plugins: [
+    [
+        '@vuepress/search',
+          {
+            searchMaxSuggestions: 10
+          }
+    ],
+    [
+        '@vuepress/pwa',
+            {
+              serviceWorker: true,
+              updatePopup: {
+                message: "发现新内容",
+                buttonText: "刷新"
+              }
+            }
+    ],
+    [
+      '@vuepress/google-analytics',
+      {
+        ga: 'UA-172114031-1'
+      }
+    ],
+  ],
+
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     // 引入百度统计
@@ -74,17 +99,26 @@ module.exports = {
         link: 'https://vuepress-theme-reco.recoluan.com'
       },
     ],
-    // valine 评论
+
+    /**
+     * valine 设置 (if you need valine comment )
+     */
     valineConfig: {
       appId: 'r6o8BYsCAFqvRFP0OPLl7bk5-gzGzoHsz',// your appId
       appKey: 'cNGiIw55BEnEWYtIWUngp3dx', // your appKey
+
+      placeholder: '填写邮箱可以收到回复提醒哦！',
+      verify: true, // 验证码服务
+      // notify: true, //
+      recordIP: true,
+      showComment: false
     },
     logo: '/logo.png',
     // 搜索设置
     search: true,
     searchMaxSuggestions: 10,
     // 自动形成侧边导航
-    // sidebar: 'auto',
+    sidebar: 'auto',
     // 最后更新时间
     lastUpdated: 'Last Updated',
     // 作者
@@ -109,9 +143,7 @@ module.exports = {
     //   lineColor: '#42b983'
     // },
 
-    /**
-     * valine 设置 (if you need valine comment )
-     */
+
 
     // valineConfig: {
     //   appId: '...',// your appId
@@ -120,23 +152,22 @@ module.exports = {
 
     // github配置
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-    repo: 'https://github.com/qisong3/Techblog.git',
+     repo: 'https://github.com/qisong3/Techblog.git',
     // 自定义仓库链接文字。默认从 `themeConfig.repo` 中自动推断为
     // "GitHub"/"GitLab"/"Bitbucket" 其中之一，或是 "Source"。
-    repoLabel: '查看源码',
+     repoLabel: 'GitHub',
 
     // 以下为可选的编辑链接选项
-
     // 假如你的文档仓库和项目本身不在一个仓库：
-    //docsRepo: 'qisong3/Techblog',
+    docsRepo: 'https://github.com/qisong3/Techblog',
     // 假如文档不是放在仓库的根目录下：
-    //docsDir: 'docs',
+    docsDir: 'docs',
     // 假如文档放在一个特定的分支下：
-    //docsBranch: 'master',
+    docsBranch: 'master',
     // 默认是 false, 设置为 true 来启用
     editLinks: true,
     // 默认为 "Edit this page"
-    editLinkText: '帮助我们改善此页面！'
+    editLinkText: 'Edit this page！'
   },
 
   // code theme
