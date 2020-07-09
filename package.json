@@ -4,8 +4,8 @@
   "description": "Errison's blog",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "dev": "vuepress dev",
+    "build": "vuepress build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Errison",
@@ -15,10 +15,12 @@
     "@vuepress/plugin-pwa": "^1.5.2",
     "@vuepress/plugin-search": "^1.5.2",
     "vuepress": "^1.5.2",
+    "vuepress-auto-sidebar": "^1.1.0",
     "vuepress-theme-reco": "^1.5.3"
   },
   "dependencies": {
     "@vuepress-reco/theme-cli": "^1.0.2",
-    "valine": "^1.4.14"
+    "valine": "^1.4.14",
+    "vuepress-plugin-auto-sidebar": "^1.5.0"
   }
 }
