@@ -10,13 +10,5 @@ keywords:
  - Java
 ---
 
-## Java 语言历史
 
-## Java 版本特性
-
-### JDK 1.0
-### JDK 1.1
-### JDK 1.2
-### JDK 1.3
-### JDK 1.4
 
