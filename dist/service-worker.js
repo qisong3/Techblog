@@ -27,7 +27,7 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "2b051d0b22c219f2b8b5ffd4b58ee761"
+    "revision": "cdcc5da703f3c9df97b55da9310c1b4e"
   },
   {
     "url": "assets/css/0.styles.adfe6b18.css",
@@ -54,40 +54,44 @@ self.__precacheManifest = [
     "revision": "e48d548884b8b57abbf18cbe5736a160"
   },
   {
-    "url": "assets/js/12.7df671e9.js",
-    "revision": "6c0d54c0f9dc8cfc367bd1f8daf51e12"
+    "url": "assets/js/12.16184919.js",
+    "revision": "5b5a5ea293eaca2981eaac6f799d64fe"
   },
   {
-    "url": "assets/js/13.2eba1141.js",
-    "revision": "605693f7bb05fc197dc556f803921239"
+    "url": "assets/js/13.1a9c7120.js",
+    "revision": "4b4ca833cd10a447a2665179c369419f"
   },
   {
-    "url": "assets/js/14.82336714.js",
-    "revision": "63bf1ee6b1867fbf4ef9ca84d2464977"
+    "url": "assets/js/14.231159b5.js",
+    "revision": "7fe6b85e7901d6cb2b2cff03d9ade6e6"
   },
   {
-    "url": "assets/js/15.1dfcc014.js",
-    "revision": "dd1ddd15a6720ab432f72184c0db5d2a"
+    "url": "assets/js/15.898b378c.js",
+    "revision": "0d4aab68b5e4705918c31eedb70b2b56"
   },
   {
-    "url": "assets/js/16.b0bacc27.js",
-    "revision": "d4c7a896eccd0b66e705110f949eb3d9"
+    "url": "assets/js/16.7e0c3206.js",
+    "revision": "d918ce5f6f0b5ef72d5601040985f2cc"
   },
   {
-    "url": "assets/js/17.e1c7313c.js",
-    "revision": "40c25ee994981433c9a2ead87a5b1e04"
+    "url": "assets/js/17.752d2f00.js",
+    "revision": "52c0c534a9b7d667f9b87565b41bc96f"
   },
   {
-    "url": "assets/js/18.6887a21f.js",
-    "revision": "3b40a1c3f6bde8a3224ab426ea6f2e0b"
+    "url": "assets/js/18.a659c591.js",
+    "revision": "76ad9c2666109d90f0df4564a33f8b6c"
   },
   {
-    "url": "assets/js/19.aa71c0b3.js",
-    "revision": "e07cd8f673e9b891afc353fd8706f26f"
+    "url": "assets/js/19.eef63dd4.js",
+    "revision": "a48e349f79a3c9fa9003840cfe3398ab"
   },
   {
-    "url": "assets/js/20.f80cacfc.js",
-    "revision": "4c3f210986f292c89f5cf73fdc8f7e7a"
+    "url": "assets/js/20.34f1e2e0.js",
+    "revision": "2c1db4c89985b4d173976b54c491b900"
+  },
+  {
+    "url": "assets/js/21.21c2f338.js",
+    "revision": "dd6b50c0b1cce6ef257e9915c148bc37"
   },
   {
     "url": "assets/js/3.a3205613.js",
@@ -114,12 +118,12 @@ self.__precacheManifest = [
     "revision": "0eb0968ceb2c77a25dc00322620d347e"
   },
   {
-    "url": "assets/js/9.e13b7c0b.js",
-    "revision": "ea0c38a667a3aee28939dfc7bd86f105"
+    "url": "assets/js/9.6ac2f6f6.js",
+    "revision": "4ae69a93d588950e573dd7e7e902e6a9"
   },
   {
-    "url": "assets/js/app.e2f614e5.js",
-    "revision": "33a2d9a079e6acaee8e28a6bc1a500d8"
+    "url": "assets/js/app.c9467fdf.js",
+    "revision": "366daebadcbed82da3675a5e297b57f7"
   },
   {
     "url": "avatar.png",
@@ -130,48 +134,52 @@ self.__precacheManifest = [
     "revision": "5f53fafcd30e71be561d33a98e4ac0be"
   },
   {
-    "url": "blogs/技术/2020-07-10-使用vuepress搭建博客.html",
-    "revision": "673e0647f8bbcdce195a79607c2acf83"
+    "url": "blogs/技术/2020-07-13-从零开始搭建vuepress.html",
+    "revision": "2bfda252c7103a6f6d68a23d468a517e"
+  },
+  {
+    "url": "blogs/技术/vuepress-低调不失风格的在线文档(博客)框架.html",
+    "revision": "d6472e3216f75366e6cc9379fec9f60d"
   },
   {
     "url": "blogs/框架/JavaSE 版本演进之路.html",
-    "revision": "5f244808e825b426cf4ad1414cb9aeec"
+    "revision": "9cb3f75d5c745db84e64f08375ff422a"
   },
   {
     "url": "blogs/源码/guide.html",
-    "revision": "5a3144e241e627f20740e73cc77eaf00"
+    "revision": "2662924b1863d1759582ce8a40ae6cea"
   },
   {
     "url": "categories/技术/index.html",
-    "revision": "87ad1a59f2ecec50199e63a3e51c1315"
+    "revision": "b092ef7cd3d8f228ad3d779272b97da3"
   },
   {
     "url": "categories/index.html",
-    "revision": "38e360ee21e93395a8536db5eadaf148"
+    "revision": "51483ca2230beab1ffc313d58d27a8f6"
   },
   {
     "url": "categories/Java/index.html",
-    "revision": "a061f21f6bdac68caa2d288b9e6d8fbd"
+    "revision": "5b6697acf289bf460fe52582d09f6352"
   },
   {
     "url": "docs/Java/api.html",
-    "revision": "0ade57d4988188cc062a2d2e487763cb"
+    "revision": "ec45cf264357cb8f262878be9e41c070"
   },
   {
     "url": "docs/Java/index.html",
-    "revision": "53d015f95fd07c78860740d4f3112288"
+    "revision": "9b0269fb426c9f22e398d7c17116559b"
   },
   {
     "url": "docs/Java/JavaSE 版本演进之路.html",
-    "revision": "1f6c0ef9c44a9772b957ed96a3403b64"
+    "revision": "3f4e652f2ef88bb95eb0562cec02bec4"
   },
   {
     "url": "docs/Java/plugin.html",
-    "revision": "87abeedb25b971c1cf1a5493907a1422"
+    "revision": "47589757a6826053f3e6f6a8c2227730"
   },
   {
     "url": "docs/Java/theme.html",
-    "revision": "171246618ef6e6c18e958077bc8b7277"
+    "revision": "12cfa95b784c39369e232000b0ef21c5"
   },
   {
     "url": "hero.png",
@@ -179,7 +187,7 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "4349b6da3b41175c3c13dc38311948bd"
+    "revision": "1fe2f4bd74b11c97d0242c557d02fc10"
   },
   {
     "url": "logo.png",
@@ -187,19 +195,19 @@ self.__precacheManifest = [
   },
   {
     "url": "tag/index.html",
-    "revision": "c49ab4cff2b167f5dc1d83120135c815"
+    "revision": "dc30d6ecd7df27a0d0ab302fc677ce70"
   },
   {
     "url": "tag/Java/index.html",
-    "revision": "74c4cab5b0cd1d4009dcb2477277e3f6"
+    "revision": "68880a5af7bf3589e11da43c1af209dc"
   },
   {
     "url": "tag/vuepress/index.html",
-    "revision": "79800ba5140a86185e702e89364e3c71"
+    "revision": "f103c89e8596d019135f5ac50040434d"
   },
   {
     "url": "timeline/index.html",
-    "revision": "8b6a2921de018eefd4c2961d2139ff3c"
+    "revision": "c73bb85799b235161eb97f6b87dec578"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});

@@ -1,7 +1,7 @@
 ---
-title: 2020-07-10-使用vuepress搭建博客
+title: vuepress-低调不失风格的在线文档(博客)框架
 date: 2020-07-10
-last-update: 2020-07-12
+last-update: 2020-07-13
 tags:
  - vuepress
 categories:
@@ -12,9 +12,10 @@ keywords:
  - 博客 
 ---
 
-## 博客搭建方式
+## 博客选择
+
 ### 博客搭建方式比较
-  一般来说，开发人员如果要开设博客，有这么几种常用选择，对这些方式做了简单对比:
+  一般来说，开发人员如果要开设博客或者为项目搭建一个文档，有这么几种常用选择，对这些方式做了简单对比:
   
   搭建方式|自定义形式|自主可控|复杂度|费用|样例|
   |:--:|:--:|:--:|:--:|:--:|:--:|
@@ -27,7 +28,7 @@ keywords:
 
 这其中，vuepress作为后起之秀，以其轻量级的搭建方式和开箱即用的功能，成为了很多人的首选。
 
-### 为什么使用vuepress
+### 为什么使用vuepress - 1 框架比较
 
 1. Nuxt
 
@@ -46,56 +47,9 @@ Hexo 一直驱动着 Vue 的文档 —— 事实上，在把我们的主站从 H
 我们的子项目文档一直都在使用 GitBook。GitBook 最大的问题在于当文件很多时，每次编辑后的重新加载时间长得令人无法忍受。它的默认主题导航结构也比较有限制性，并且，主题系统也不是 Vue 驱动的。GitBook 背后的团队如今也更专注于将其打造为一个商业产品而不是开源工具。
 
 
-## vuepress博客搭建
+### 为什么使用vuepress - 2 博客主题
 
-### 准备工作
-::: warning 前提条件
-VuePress 需要 [Node.js](https://nodejs.org/en/) >= 8.6
-:::
 
-本文会帮助你从头搭建一个简单的 VuePress 文档。如果你想在一个现有项目中使用 VuePress 管理文档，从步骤 3 开始。
-
-1. 创建并进入一个新目录
-
-   ``` bash
-   mkdir vuepress-starter && cd vuepress-starter
-   ```
-
-2. 使用你喜欢的包管理器进行初始化
-
-   ``` bash
-   yarn init # npm init
-   ```
-
-3. 将 VuePress 安装为本地依赖
-
-   我们已经不再推荐全局安装 VuePress
-
-   ``` bash
-   yarn add -D vuepress # npm install -D vuepress
-   ```
-
-   ::: warning 注意
-   如果你的现有项目依赖了 webpack 3.x，我们推荐使用 [Yarn](https://classic.yarnpkg.com/zh-Hans/) 而不是 npm 来安装 VuePress。因为在这种情形下，npm 会生成错误的依赖树。
-   :::
-
-4. 创建你的第一篇文档
-
-   ``` bash
-   mkdir docs && echo '# Hello VuePress' > docs/README.md
-   ```
-
-5. 在 `package.json` 中添加一些 [scripts](https://classic.yarnpkg.com/zh-Hans/docs/package-json#toc-scripts)
-
-   这一步骤是可选的，但我们推荐你完成它。在下文中，我们会默认这些 scripts 已经被添加。
-
-   ``` json
-   {
-     "scripts"
-   }
-   ```
-
-### 主题
 vuepress的功能如果仅仅局限于此，未免太过简单，官方和开发者贡献了各种开箱即用的主题和插件，
 便于使用。
 
@@ -104,11 +58,12 @@ vuepress的功能如果仅仅局限于此，未免太过简单，官方和开发
  - [**reco**](https://www.recoluan.com/)
  - [**vdoing**](https://xugaoyi.com/)
 这些主题既都支持博客和文档的功能，还添加了标签管理等，十分方便，上手容易。
-### 插件
+
+### 为什么使用vuepress - 3 博客插件
 
 主题是网站的功能和呈现形式，插件则是为了实现某些功能，比较常用的插件总结如下：
   |插件名称|插件功能|官方介绍|
-  |:--:|:--:|:--:|
+  |:--|:--|:--|
   |plugin-active-header-links|页面滚动时自动激活侧边栏链接的插件|[链接](https://v1.vuepress.vuejs.org/zh/plugin/official/plugin-active-header-links.html)|
   |plugin-back-to-top|页面从任意位置回到头部|[plugin-back-to-to](https://v1.vuepress.vuejs.org/zh/plugin/official/plugin-back-to-top.html)|
   |plugin-blog|分类：强大的分类系统让你快速将贴文分类。<br> 分页： 极其简单的开箱即用的分页功能。<br>客户端 API: 透过客户端 API 轻松地写一个博客主题。|[plugin-blog](https://vuepress-plugin-blog.ulivz.com/)|
@@ -120,5 +75,6 @@ vuepress的功能如果仅仅局限于此，未免太过简单，官方和开发
   |plugin-nprogress|进度条|[plugin-nprogress](https://github.com/rstacruz/nprogress)|
   |vuepress-plugin-export|将vuepress转换为一个pdf文档|[vuepress-plugin-export](https://github.com/ulivz/vuepress-plugin-export)||
 
-
-### 完整搭建流程
+## 后记
+本文介绍了vuepress作为博客或者文档框架的优点。诚然，搭建vuepress，包括官方文档等晚上教程都有介绍，但搭建过程中，难免
+有文档叙述不尽详细或者容易踩坑的地方，这篇[博客](2020-07-13-从零开始搭建vuepress.md)将介绍一片vuepress从零搭建。
