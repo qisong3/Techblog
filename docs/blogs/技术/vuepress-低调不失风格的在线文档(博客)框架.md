@@ -4,6 +4,7 @@ date: 2020-07-10
 last-update: 2020-07-13
 tags:
  - vuepress
+ - blog
 categories:
  - 技术
 keywords:
@@ -11,8 +12,6 @@ keywords:
  - vuepress
  - 博客 
 ---
-
-[[toc]]
 
 ## vuepress简介
 vuepress是大名鼎鼎的[vue](https://cn.vuejs.org/)框架的作者尤雨溪的又一力作，它基于vue，是一个极简静态网站

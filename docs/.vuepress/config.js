@@ -25,7 +25,6 @@ module.exports = {
     themeConfig: ThemeConfig,
     // code theme
     codeTheme: 'tomorrow',
-
     markdown: {
         lineNumbers: true
     }
