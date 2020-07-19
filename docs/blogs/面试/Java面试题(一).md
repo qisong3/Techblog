@@ -13,7 +13,7 @@ keywords:
 ---
 
 ## 题干
-一道比较经典且易混的Java面试题，牵扯到了多个基本概念。
+一道比较经典且易混的Java面试题，牵扯到了多个基础概念。
 ```java
  public class A {
         public String show(D obj){
@@ -53,9 +53,10 @@ keywords:
         System.out.println("4--" + a2.show(b));
         System.out.println("5--" + a2.show(c));
         System.out.println("6--" + a2.show(d));
-        System.out.println("7--" +  b.show(b));
-        System.out.println("8--" +  b.show(c));
-        System.out.println("9--" +  b.show(d));
+        System.out.println("7--" +  b.show(a));
+        System.out.println("8--" +  b.show(b));
+        System.out.println("9--" +  b.show(c));
+        System.out.println("10--" +  b.show(d));
 
     }
 ```
@@ -97,17 +98,25 @@ keywords:
 :::
 `a1.show(d)`容易理解，a中定义了此方法，结果为D，`a1.show(b),a1.show(c)`,由于A类中并没有定义如下方法`show(B obj)`，`show(C obj)`
 与上面同理，传入的c和d只能向上转不能向下转，因此只能调用方法`show(A obj)`。至此，前六个答案都确定了。<br>
-再来看b对象的操作：`b.show(b)`,`b.show(c)`,`b.show(d)`。
+再来看b对象的操作：`b.show(a)`,`b.show(b)`,`b.show(c)`,`b.show(d)`。<br>
+B类中和A类中同样有show(A obj)方法，根据继承覆盖原则，B中的同名同参数方法会覆盖父类A中的。<br>
 同样的，`b.show(b)`参数匹配的原方法，答案很容易确定
-`b.show(c)`,c可以向上强转为B对象或者A对象，根据参数就近匹配原则，优先转为B，故而调用`show(B obj)`方法。`b.show(d)`因为父类A中有`show(A obj)`，
-孤儿继承而得可以直接调用，答案也是很清晰了。
+`b.show(c)`,c可以向上强转为B对象或者A对象，根据参数就近匹配原则，优先转为B，故而调用`show(B obj)`方法。`b.show(d)`因为继承父类A的`show(A obj)`方法得以直接调用，答案也是很清晰了。
 
+## 知识点小结
+- ##继承
+- ##多态
+- ##类型转换
 
-
-
-## 知识点汇总
-### 继承
-### 多态
-### 类型转换
 ## 举一反三
+接着上面的体感，如果继续追问
+```java
+System.out.println("11--" +  c.show(b));
+System.out.println("12--" +  c.show(c));
+System.out.println("13--" +  c.show(d));
 
+System.out.println("11--" +  (A)d.show(b));
+System.out.println("12--" +  (A)d.show(c));
+System.out.println("13--" +  (A)d.show(d));
+```
+知识点已在上文中述及，示例可参考[Demo](https://github.com/qisong3/Java-Review-Demo),可以持续关注。
