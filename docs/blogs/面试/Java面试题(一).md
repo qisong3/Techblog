@@ -22,6 +22,9 @@ keywords:
         public String show(A obj){
             return ("A and A");
         }
+        public String show(){
+            return("A from A")
+        }
     }
     public class B extends A {
         public String show(B obj){
@@ -30,6 +33,9 @@ keywords:
         public String show(A obj){
             return ("B and A");
         }
+         public String show(){
+            return("B from B")
+         }
     }
 
     public class C extends B {
@@ -47,50 +53,58 @@ keywords:
         C c = new C();
         D d = new D();
         
-        System.out.println("1--" + a1.show(b));
-        System.out.println("2--" + a1.show(c));
-        System.out.println("3--" + a1.show(d));
-        System.out.println("4--" + a2.show(b));
-        System.out.println("5--" + a2.show(c));
-        System.out.println("6--" + a2.show(d));
-        System.out.println("7--" +  b.show(a));
-        System.out.println("8--" +  b.show(b));
-        System.out.println("9--" +  b.show(c));
-        System.out.println("10--" +  b.show(d));
+    System.out.println("1--" + a1.show(a1));
+    System.out.println("2--" + a1.show(a2));
+    System.out.println("3--" + a1.show(b));
+    System.out.println("4--" + a1.show(c));
+    System.out.println("5--" + a1.show(d));
+
+    System.out.println("11--" + a2.show(a1));
+    System.out.println("12--" + a2.show(a2));
+    System.out.println("13--" + a2.show(b));
+    System.out.println("14--" + a2.show(c));
+    System.out.println("15--" + a2.show(d));
 
     }
 ```
 ## 思路
-乍一看，此题没有什么困难的，也就是考察继承而已，想想结果，再自己尝试运行一遍，和自己想的一致吗？
+乍一看，此题没有什么困难的，也就是考察继承而已，想想结果，再自己尝试运行一遍，和自己想的一致吗？<br>
+
+### 继承关系
+
 首先看题目中类的定义，继承关系如下：B-->A, C-->B, D-->B 。<br>
 那么C和D是否也是A的子类呢？
 ::: tip 
-是的，因为继承是传递的。
+是的，因为Java中继承是传递的。
 :::
-下面看这两行语句:
+A和B中都有一个无参的`show()`方法，B类继承了A类，因此B中的`show()`将覆盖其父类的同名方法。
+::: tip 
+子类覆盖父类的方法要满足三个条件：
+- 同名
+- 参数相同
+- 返回结果
+:::
+### 类型转换
+
+厘清继承关系后看定义语句，其他语句都比较清晰，关键看这句。
 ```java
- A a1 = new A();
  A a2 = new B();
 ```
-`a1`很容易理解，就是A对象的一个实例，`a2`呢，究竟是A的实例还是B的实例呢？<br>
-如果这样问有点混淆，那换一种问法，是不是就容易理解了，这条语句究竟干了啥？<br>
-这一条语句涉及到了三个基本概念：<br>
+这条定义语句究竟做了什么？<br>
+实际上这一条语句涉及到了三个基本概念：<br>
 1. 变量声明 — 以A类型定义a2变量
 2. 对象初始化 — 生成一个B对象的实例
 3. 变量赋值 — 将等号右侧的实例赋值给左边的变量
-
-容易理解的是1和2，3这个地方需要注意，两边的数据类型实际并不匹配，或者说并不完全相同，但是赋值还是成功了，反过来可以吗？
-```java
- B a1 = new A();
-```
-如果写下这行语句，编译器是不会通过的，一正一反，为何结果不同？<br>
-因为用B实例去初始化一个父类A，是upcasting，也就是向上转型，是可以的。<br>
-`可以这么理解，鹅类有子类大鹅和天鹅，一只天鹅说它是个鹅，是没有问题的。
-但是反过来说就有问题了，来了一只鹅，不能直接指就是天鹅，因为它也有可能是大鹅。`
-::: tip
+关键就在于3变量赋值，两边的类型实际上并不完全匹配，怎么可以赋值成功呢？<br>
+原因在于B是A的子类，可以用子类给父类赋值，反之不可。
+::: warning
 赋值操作可以向上转型，但是不能向下转型
 :::
-所以就清楚了a2是个A类型的变量，它拥有A类型的所有方法，因此，原题中的a1和a2实际上是一个类型的变量，因此执行结果也完全相同。
+赋值完了，`a2`究竟是A类型还是B类型的？
+
+
+
+
 那就以a1举例，a1执行`a1.show(b),a1.show(c),a1.show(d)`，分别应该显示什么结果呢？<br>
 这就是考Java的多态了。
 ::: tip
@@ -110,13 +124,16 @@ B类中和A类中同样有show(A obj)方法，根据继承覆盖原则，B中的
 
 ## 举一反三
 接着上面的体感，如果继续追问
+### 追问一
 ```java
-System.out.println("11--" +  c.show(b));
-System.out.println("12--" +  c.show(c));
-System.out.println("13--" +  c.show(d));
+System.out.println("21--" +  c.show(b));
+System.out.println("22--" +  c.show(c));
+System.out.println("23--" +  c.show(d));
 
-System.out.println("11--" +  (A)d.show(b));
-System.out.println("12--" +  (A)d.show(c));
-System.out.println("13--" +  (A)d.show(d));
+System.out.println("31--" +  (A)d.show(b));
+System.out.println("32--" +  (A)d.show(c));
+System.out.println("33--" +  (A)d.show(d));
 ```
+### 追问二
+
 知识点已在上文中述及，示例可参考[Demo](https://github.com/qisong3/Java-Review-Demo),可以持续关注。
