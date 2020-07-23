@@ -1149,10 +1149,10 @@
     inquirer "^6.3.1"
     ora "^3.4.0"
 
-"@vuepress-reco/vuepress-plugin-back-to-top@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@vuepress-reco/vuepress-plugin-back-to-top/-/vuepress-plugin-back-to-top-1.4.0.tgz#f2c3851352e627d426982e35b02f651615b5861f"
-  integrity sha512-h2pMkHTH/yTqVAyLsZSrS5Oh4RJpqM0xxtDMKZth4EaxnGeiB5VqrG+M6Fht8nxjUHFZ8Zy9JIduIe4tgP1jOw==
+"@vuepress-reco/vuepress-plugin-back-to-top@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/@vuepress-reco/vuepress-plugin-back-to-top/-/vuepress-plugin-back-to-top-1.5.4.tgz#da74fb8805a037551646e72511d065c2934a1ac3"
+  integrity sha512-wfMzwYoqyxBCToe7zYWYHu3ytsxvTne2vjU9EK2FUHSZGgO2idcPwaGgzFpKo0CZM+VjW8ww4zulJxHBq7G6lg==
 
 "@vuepress-reco/vuepress-plugin-comments@^1.4.6":
   version "1.4.6"
@@ -9026,12 +9026,12 @@ vuepress-plugin-smooth-scroll@^0.0.9:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-vuepress-theme-reco@^1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/vuepress-theme-reco/-/vuepress-theme-reco-1.5.3.tgz#937d7abcfd06c3caafef60198d9999da72d07377"
-  integrity sha512-kNsLvyuX+nkD/8sbbDBFHU5XKJlf8dz//HRZT1JALn047zliMwTe1wfsdmKseH9HQggyxD4kvcdPtruB2ezRdg==
+vuepress-theme-reco@^1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/vuepress-theme-reco/-/vuepress-theme-reco-1.5.4.tgz#eea83bbb26320e053b0f33d04d4274fbb1155d97"
+  integrity sha512-zvuGslzxlLj9r2h1In8DSIgTjL34AtBqn/1Whke+FTzQX1KsstasGfyLLUTMxDBBCQ8uK+UnioX2nxXtXbZqUA==
   dependencies:
-    "@vuepress-reco/vuepress-plugin-back-to-top" "^1.4.0"
+    "@vuepress-reco/vuepress-plugin-back-to-top" "^1.5.4"
     "@vuepress-reco/vuepress-plugin-comments" "^1.4.6"
     "@vuepress-reco/vuepress-plugin-loading-page" "^1.4.0"
     "@vuepress-reco/vuepress-plugin-pagation" "^1.4.7"
@@ -9040,6 +9040,7 @@ vuepress-theme-reco@^1.5.3:
     docsearch.js "2.6.3"
     md5 "2.2.1"
     vue-click-outside "1.1.0"
+    vuepress-plugin-smooth-scroll "^0.0.9"
 
 vuepress@^1.5.2:
   version "1.5.2"

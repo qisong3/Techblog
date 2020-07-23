@@ -1,7 +1,7 @@
 ---
-title: Java面试题(一)
-date: 2020-07-16
-last-update: 2020-07-20
+title: Java多态面试题(二)
+date: 2020-07-17
+last-update: 2020-07-22
 tags:
  - Java
  - 面试
@@ -81,6 +81,7 @@ keywords:
 编译器在编译程序的时候并不知道一个对象的实际类型是什么。<br>
 因此，`a2`**静态类型**是`A`，**实际类型**是`B`。
 如果在A中定义一个变量`a`,在B中定义一个变量`b`,可以试验一下`a2.a`可以调用，`a2.b`则会编译失败。
+
 ### test1
 ```java    
 System.out.println("1--" + a1.show());
@@ -89,13 +90,14 @@ System.out.println("2--" + a2.show());
 1 的答案无可争辩，2按理说，应该是执行父类A的方法，输出`"A from A"`，输出却是`"B from B"`<br>
 先前的类型推断是没有问题的，执行方法时又涉及到了另一个概念，类的`虚方法表`。
 简单来说，每个类都有一个`虚方法表`，如下图所示:
-![虚方法表](/img/Java面试题(一)/class_method_table.png)
+![虚方法表](/img/Java面试题(二)/class_method_table.png)
 ::: details 虚方法表
 中存放着各个方法的实际入口地址。如果某个方法在子类中没有被重写，那子类的虚方法表中的地址入口和父类相同方法的地址入口是一致的，都指向父类的实现入口。如果子类中**重写**了这个方法，子类虚方法表中的地址也会被替换为指向子类实现版本的入口地址。
 :::
 简单来说，`a2`执行的`show()`方法，由于子类型方法覆写了，所以调用时指向的时子类方法的地址，即B中的`show()`。<br>
 
 ### test2
+
 下面我们对题干进行一定的扩展，具体如下：
 ```java 
     public class A {
@@ -165,10 +167,8 @@ System.out.println("2--" + a2.show());
 参数调用时依据传入变量的**静态类型**决定被调用的重载函数
 :::
 最后看5，6，7，8，根据前面的汇总，根据继承的关系，可以直接得出答案。`b.show(b)`呢？
-在回答这个问题之前，我们先看一道经典的面试题。[Java面试题(一)](Java面试题(一).md)<br>
-
-这个面试题很好地解释了方法的重载，即运行时动态根据参数类型选择执行的函数，亦即多态。<br>
-
+在回答这个问题之前，我们可以回顾之前的的文章。[Java面试题(一)](Java面试题(一).md)<br>
+这就是多态择优选择匹配参数的问题，可以由读者自己思考答案。
 
 
 
@@ -176,19 +176,19 @@ System.out.println("2--" + a2.show());
 - ##继承
 - ##多态
 - ##类型转换
+- ##静态类型
+- ##动态类型
 
 ## 举一反三
 接着上面的体感，如果继续追问
-### 追问一
 ```java
-System.out.println("21--" +  c.show(b));
-System.out.println("22--" +  c.show(c));
-System.out.println("23--" +  c.show(d));
+System.out.println("11--" +  c.show(b));
+System.out.println("12--" +  c.show(c));
+System.out.println("13--" +  c.show(d));
 
-System.out.println("31--" +  (A)d.show(b));
-System.out.println("32--" +  (A)d.show(c));
-System.out.println("33--" +  (A)d.show(d));
+System.out.println("21--" +  (A)d.show(b));
+System.out.println("22--" +  (A)d.show(c));
+System.out.println("23--" +  (A)d.show(d));
 ```
-### 追问二
-
-知识点已在上文中述及，示例可参考[Demo](https://github.com/qisong3/Java-Review-Demo),可以持续关注。
+那输出的结果会是什么？<br>
+所有的面试题都可以在[Github](https://github.com/qisong3/Java-Review-Demo)上找到，可以持续关注。
