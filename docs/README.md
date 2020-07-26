@@ -7,7 +7,7 @@ bgImage: /bg.png
 # bgImageStyle: {
 #  height: '450px'
 #}
-
+sidebar: false
 isShowTitleInHome: true
 actionText: Guide
 actionLink: /views/other/guide
