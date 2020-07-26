@@ -6,7 +6,7 @@
           v-if="recoShowModule && $frontmatter.heroImage"
           :style="heroImageStyle || {}"
           :src="$withBase($frontmatter.heroImage)"
-          alt="hero">l
+          alt="hero">
       </ModuleTransition>
       <ModuleTransition delay="0.04">
         <h1 v-if="recoShowModule && $frontmatter.heroText !== null">{{ $frontmatter.heroText || $title || 'vuePress-theme-reco' }}</h1>

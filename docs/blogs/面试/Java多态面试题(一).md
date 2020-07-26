@@ -8,7 +8,7 @@ tags:
 categories:
  - 面试
 keywords:
- - 继承 
+ - 继承
 ---
 <!-- 这里是摘要部分 -->
 ## 题干

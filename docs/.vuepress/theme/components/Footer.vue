@@ -1,15 +1,15 @@
 <template>
   <div class="footer-wrapper">
-    <span v-if="$themeConfig.record">
-      <i class="iconfont reco-beian"></i>
-      <a :href="$themeConfig.recordLink || '#'">{{ $themeConfig.record }}</a>
-    </span>
     <span>
       <i class="iconfont reco-copyright"></i>
       <a>
         <span v-if="$themeConfig.author || $site.title">{{ $themeConfig.author || $site.title }}</span>
         &nbsp;&nbsp;
       </a>
+    </span>
+    <span v-if="$themeConfig.record">
+      <i class="iconfont reco-beian"></i>
+      <a :href="$themeConfig.recordLink || '#'">{{ $themeConfig.record }}</a>
     </span>
     <span v-show="$themeConfig.valineConfig !== undefined">
       <i class="iconfont reco-eye"></i>
