@@ -6,6 +6,8 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "sitemap:build": "vuepress build docs -d dist",
+    "sitemap:postbuild" : "vuepress-sitemap -H https://blog.errison.cn -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Errison",
@@ -28,6 +30,7 @@
   "dependencies": {
     "@vuepress-reco/theme-cli": "^1.0.2",
     "valine": "^1.4.14",
-    "vuepress-plugin-auto-sidebar": "^1.5.0"
+    "vuepress-plugin-auto-sidebar": "^1.5.0",
+    "vuepress-plugin-copyright": "^1.0.2"
   }
 }

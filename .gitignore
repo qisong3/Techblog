@@ -2,3 +2,5 @@ node_modules/
 *.iml
 *.xml
 .idea/
+dist/
+yarn-error.log
