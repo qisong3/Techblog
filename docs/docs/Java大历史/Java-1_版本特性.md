@@ -5,6 +5,9 @@ tags:
  - Java
 keywords:
  - Java
+
+prev: ./Java发家史
+next: ./Java-1.1_版本特性
 ---
 
 ## level 2

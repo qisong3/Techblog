@@ -22,6 +22,7 @@
     "vuepress": "^1.5.2",
     "vuepress-auto-sidebar": "^1.1.0",
     "vuepress-plugin-flowchart": "^1.4.3",
+    "vuepress-plugin-nuggets-style-copy": "^1.0.3",
     "vuepress-theme-reco": "^1.5.4"
   },
   "dependencies": {
