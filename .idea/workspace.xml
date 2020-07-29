@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="18ec6013-a3b9-41db-874b-5783f2c03319" name="Default Changelist" comment="修改Java文档。">
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/config/sidebar.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/apple-touch-icon-120x120.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/apple-touch-icon-152x152.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/apple-touch-icon-180x180.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/apple-touch-icon-60x60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/apple-touch-icon-76x76.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/msapplication-icon-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/mstile-150x150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/public/icons/safari-pinned-tab.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/__tests__/components/DropdownLink.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/__tests__/components/NavLink.spec.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/__tests__/components/__snapshots__/DropdownLink.spec.js.snap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/__tests__/components/__snapshots__/NavLink.spec.js.snap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/PageEdit.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/PageNav.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/config.styl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/algorithm/Leetcode/FIRST.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/algorithm/Leetcode/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/algorithm/Leetcode/SECOND.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/algorithm/Leetcode/THIRD.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/framework/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/java/basic/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/java/deep/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/java/review/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/share/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/css/0.styles.3567c905.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/img/home-bg.7b267d7c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/img/search.83621669.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/1.e7001280.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/10.27f9126b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/11.5356d049.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/12.5e009bb5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/13.45e40d50.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/14.b7fb668b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/15.9aa44eb3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/16.fc5a1cdd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/17.4dd53384.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/18.9e3e97a0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/19.a4466dca.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/2.5b7311d1.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/20.c8b146e2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/21.78399e86.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/4.cb940767.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/5.3715fb8e.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/6.d99e57fe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/7.d4c14a53.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/8.33874e95.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/9.9e34ee76.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/js/app.a7e10dac.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/avatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/blogs/技术/vuepress-低调不失风格的在线文档(博客)框架.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/blogs/技术/从零开始搭建vuepress.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/blogs/面试/Java多态面试题(一).html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/blogs/面试/Java多态面试题(二).html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/categories/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/categories/技术/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/categories/面试/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/docs/Java简史/Java-1.1_版本特性.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/docs/Java简史/Java-1_版本特性.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/docs/Java简史/Java诞生史.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/docs/Java简史/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/hero.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/Java面试题(二)/class_method_table.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/public/images/Java面试题(二)/class_method_table.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/从零开始搭建vuepress/default_full.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/public/images/从零开始搭建vuepress/default_full.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/img/从零开始搭建vuepress/empty_home.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/public/images/从零开始搭建vuepress/empty_home.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/service-worker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/sitemap.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/tag/Java/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/tag/blog/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/tag/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/tag/vuepress/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/tag/面试/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/timeline/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/config/nav.config" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/config/nav.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/config/plugin.config" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/config/plugin.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/config/theme.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/public/avatar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/public/hero.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/public/img/Java面试题(二)/class_method_table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/public/img/从零开始搭建vuepress/default_full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/public/img/从零开始搭建vuepress/empty_home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/.npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/.npmignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/AlgoliaSearchBox.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/AlgoliaSearchBox.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Common.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/DropdownLink.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/DropdownLink.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/DropdownTransition.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/DropdownTransition.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Footer.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/FriendLink.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/HomeBlog.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/MobShare.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Mode/ModePicker.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Mode/applyMode.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Mode/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Mode/modeOptions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/ModuleTransition.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/NavLink.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/NavLink.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/NavLinks.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/NavLinks.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/NoteAbstract.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/NoteAbstractItem.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Page.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/Page.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/PageInfo.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Password.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/PersonalInfo.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/SearchBox.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Sidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/Sidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarGroup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarGroup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarLink.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarLink.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarLinks.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/SidebarLinks.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/TagList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/enhanceApp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/global-components/Badge.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/global-components/Badge.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/helpers/other.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/helpers/postData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/helpers/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/util/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/images/home-bg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/images/home-head.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/images/icon_vuepress_reco.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/404.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/Category.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/Layout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/Layout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/Tag.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/Tags.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/TimeLines.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/lib/vuepress-theme-reco.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/locals/en.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/locals/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/locals/ja.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/locals/ko.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/locals/zh-hans.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/locals/zh-hant.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/mixins/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/mixins/locals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/mixins/moduleTransiton.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/mixins/pagination.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/mixins/posts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/arrow.styl" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/arrow.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/code.styl" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/code.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/custom-blocks.styl" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/custom-blocks.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/iconfont.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/mobile.styl" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/mobile.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/mode.styl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/palette.styl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/theme.styl" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/index.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/blogs/技术/vuepress-低调不失风格的在线文档(博客)框架.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/share/vuepress-低调不失风格的在线文档(博客)框架.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/blogs/技术/从零开始搭建vuepress.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/share/从零开始搭建vuepress.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/blogs/面试/Java多态面试题(一).md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/java/review/Java多态面试题(一).md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/blogs/面试/Java多态面试题(二).md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/java/review/Java多态面试题(二).md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/Java简史/Java-1.1_版本特性.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/java/history/Java-1.1_版本特性.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/Java简史/Java-1_版本特性.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/java/history/Java-1_版本特性.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/Java简史/Java诞生史.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/java/history/Java诞生史.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/docs/Java简史/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/java/history/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Errison &lt;qisong3@gmail.com&gt;" />
+        <option value="errison &lt;qisong3@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="1ec057jTDfZeNUU2AEQMHFrA2W7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs/.vuepress/theme" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github\front\Techblog\docs\.vuepress\public\img\vuepress-低调不失风格的在线文档(博客)框架" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\front\Techblog\docs\.vuepress\theme" />
+      <recent name="D:\Github\front\Techblog\docs\.vuepress\theme\components" />
+      <recent name="D:\Github\front\Techblog\docs\.vuepress\config" />
+      <recent name="D:\Github\front\Techblog\docs\docs\历数Java" />
+      <recent name="D:\Github\front\Techblog\docs\.vuepress\public\img\Java面试题(一)" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.docs:dev">
+    <configuration name="docs:build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="docs:build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="docs:dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="docs:dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="npm" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.docs:dev" />
+        <item itemvalue="npm.docs:build" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="18ec6013-a3b9-41db-874b-5783f2c03319" name="Default Changelist" comment="" />
+      <created>1594605387721</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594605387721</updated>
+      <workItem from="1594605389222" duration="5761000" />
+      <workItem from="1594702927961" duration="971000" />
+      <workItem from="1594777728657" duration="17879000" />
+      <workItem from="1594864191569" duration="4202000" />
+      <workItem from="1594869419328" duration="5650000" />
+      <workItem from="1594962602655" duration="4642000" />
+      <workItem from="1595221030470" duration="159000" />
+      <workItem from="1595382725387" duration="16572000" />
+      <workItem from="1595468791846" duration="18222000" />
+      <workItem from="1595555005781" duration="2846000" />
+      <workItem from="1595584286337" duration="783000" />
+      <workItem from="1595828213201" duration="15256000" />
+      <workItem from="1595904541652" duration="9528000" />
+      <workItem from="1595987275277" duration="4509000" />
+      <workItem from="1596003115645" duration="2555000" />
+      <workItem from="1596009868152" duration="4241000" />
+    </task>
+    <task id="LOCAL-00001" summary="1 更新面试(一)文档。">
+      <created>1595413678531</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1595413678532</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1 页面改为服务器端生成。">
+      <created>1595565614145</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1595565614145</updated>
+    </task>
+    <task id="LOCAL-00003" summary="修改Java文档。">
+      <created>1595844019360</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1595844019361</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1 更新面试(一)文档。" />
+    <MESSAGE value="1 页面改为服务器端生成。" />
+    <MESSAGE value="1 修改Java历史。" />
+    <MESSAGE value="修改Java文档。" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改Java文档。" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="817" y="355" key="#Notifications" timestamp="1595845113184">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="817" y="355" key="#Notifications/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595845113184" />
+    <state x="651" y="304" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594807067940">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="651" y="304" key="#com.intellij.fileTypes.FileTypeChooser/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594807067940" />
+    <state x="607" y="128" key="#docs:dev" timestamp="1594610431032">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="607" y="128" key="#docs:dev/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594610431032" />
+    <state x="486" y="12" key="CommitChangelistDialog2" timestamp="1596010066064">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="486" y="12" key="CommitChangelistDialog2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596010066064" />
+    <state x="687" y="200" key="FileChooserDialogImpl" timestamp="1596012946317">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="687" y="200" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596012946317" />
+    <state width="1510" height="348" key="GridCell.Tab.0.bottom" timestamp="1596014024389">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1510" height="348" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1596014024389" />
+    <state width="1894" height="331" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596013041008" />
+    <state width="1510" height="348" key="GridCell.Tab.0.center" timestamp="1596014024389">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1510" height="348" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1596014024389" />
+    <state width="1894" height="331" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596013041008" />
+    <state width="1510" height="348" key="GridCell.Tab.0.left" timestamp="1596014024389">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1510" height="348" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1596014024389" />
+    <state width="1894" height="331" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596013041008" />
+    <state width="1510" height="348" key="GridCell.Tab.0.right" timestamp="1596014024389">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1510" height="348" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1596014024389" />
+    <state width="1894" height="331" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596013041008" />
+    <state x="728" y="153" key="RollbackChangesDialog" timestamp="1595828253829">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="728" y="153" key="RollbackChangesDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595828253829" />
+    <state x="344" y="78" key="SettingsEditor" timestamp="1595468930947">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="344" y="78" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595468930947" />
+    <state x="452" y="188" key="Vcs.Push.Dialog.v2" timestamp="1595844021360">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="452" y="188" key="Vcs.Push.Dialog.v2/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595844021360" />
+    <state x="635" y="264" key="git4idea.merge.GitPullDialog" timestamp="1595904550279">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="635" y="264" key="git4idea.merge.GitPullDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595904550279" />
+    <state x="532" y="237" key="run.anything.popup" timestamp="1594965345723">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="532" y="237" key="run.anything.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1594965345723" />
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup" timestamp="1595836067325">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="539" y="5" width="840" height="1034" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1595836067325" />
+  </component>
+</project>

@@ -1,19 +1,22 @@
 <template>
   <nav
-    class="nav-links"
     v-if="userLinks.length || repoLink"
+    class="nav-links"
   >
     <!-- user links -->
     <div
-      class="nav-item"
       v-for="item in userLinks"
-      :key="item.link">
+      :key="item.link"
+      class="nav-item"
+    >
       <DropdownLink
         v-if="item.type === 'links'"
-        :item="item"/>
+        :item="item"
+      />
       <NavLink
         v-else
-        :item="item"/>
+        :item="item"
+      />
     </div>
 
     <!-- repo link -->
@@ -22,35 +25,41 @@
       :href="repoLink"
       class="repo-link"
       target="_blank"
-      rel="noopener noreferrer">
-      <i :class="`iconfont reco-${repoLabel.toLowerCase()}`"></i>
+      rel="noopener noreferrer"
+    >
       {{ repoLabel }}
-      <OutboundLink/>
+      <OutboundLink />
     </a>
   </nav>
 </template>
 
 <script>
-import DropdownLink from '@theme/components/DropdownLink'
-import { resolveNavLinkItem } from '@theme/helpers/utils'
-import NavLink from '@theme/components/NavLink'
+import DropdownLink from '@theme/components/DropdownLink.vue'
+import { resolveNavLinkItem } from '../util'
+import NavLink from '@theme/components/NavLink.vue'
 
 export default {
-  components: { NavLink, DropdownLink },
+  name: 'NavLinks',
+
+  components: {
+    NavLink,
+    DropdownLink
+  },
 
   computed: {
     userNav () {
-      return this.$themeLocaleConfig.nav || this.$themeConfig.nav || []
+      return this.$themeLocaleConfig.nav || this.$site.themeConfig.nav || []
     },
 
     nav () {
-      const { $site: { locales }, userNav } = this
+      const { locales } = this.$site
       if (locales && Object.keys(locales).length > 1) {
         const currentLink = this.$page.path
         const routes = this.$router.options.routes
-        const themeLocales = this.$themeConfig.locales || {}
+        const themeLocales = this.$site.themeConfig.locales || {}
         const languageDropdown = {
           text: this.$themeLocaleConfig.selectText || 'Languages',
+          ariaLabel: this.$themeLocaleConfig.ariaLabel || 'Select language',
           items: Object.keys(locales).map(path => {
             const locale = locales[path]
             const text = themeLocales[path] && themeLocales[path].label || locale.lang
@@ -69,51 +78,9 @@ export default {
             return { text, link }
           })
         }
-        return [...userNav, languageDropdown]
+        return [...this.userNav, languageDropdown]
       }
-
-      // blogConfig 的处理，根绝配置自动添加分类和标签
-      const blogConfig = this.$themeConfig.blogConfig || {}
-      const isHasCategory = userNav.some(item => {
-        if (blogConfig.category) {
-          return item.text === (blogConfig.category.text || '分类')
-        } else {
-          return true
-        }
-      })
-      const isHasTag = userNav.some(item => {
-        if (blogConfig.tag) {
-          return item.text === (blogConfig.tag.text || '标签')
-        } else {
-          return true
-        }
-      })
-
-      if (!isHasCategory && Object.hasOwnProperty.call(blogConfig, 'category')) {
-        const category = blogConfig.category
-        const $categories = this.$categories
-        userNav.splice(parseInt(category.location || 2) - 1, 0, {
-          items: $categories.list.map(item => {
-            item.link = item.path
-            item.text = item.name
-            return item
-          }),
-          text: category.text || '分类',
-          type: 'links',
-          icon: 'reco-category'
-        })
-      }
-      if (!isHasTag && Object.hasOwnProperty.call(blogConfig, 'tag')) {
-        const tag = blogConfig.tag
-        userNav.splice(parseInt(tag.location || 3) - 1, 0, {
-          link: '/tag/',
-          text: tag.text || '标签',
-          type: 'links',
-          icon: 'reco-tag'
-        })
-      }
-
-      return userNav
+      return this.userNav
     },
 
     userLinks () {
@@ -125,19 +92,19 @@ export default {
     },
 
     repoLink () {
-      const { repo } = this.$themeConfig
+      const { repo } = this.$site.themeConfig
       if (repo) {
         return /^https?:/.test(repo)
           ? repo
           : `https://github.com/${repo}`
       }
-      return ''
+      return null
     },
 
     repoLabel () {
       if (!this.repoLink) return
-      if (this.$themeConfig.repoLabel) {
-        return this.$themeConfig.repoLabel
+      if (this.$site.themeConfig.repoLabel) {
+        return this.$site.themeConfig.repoLabel
       }
 
       const repoHost = this.repoLink.match(/^https?:\/\/[^/]+/)[0]
@@ -160,11 +127,9 @@ export default {
   display inline-block
   a
     line-height 1.4rem
-    color var(--text-color)
+    color inherit
     &:hover, &.router-link-active
       color $accentColor
-      .iconfont
-        color $accentColor
   .nav-item
     position relative
     display inline-block
@@ -181,6 +146,9 @@ export default {
       margin-left 0
 
 @media (min-width: $MQMobile)
+  .nav-links a
+    &:hover, &.router-link-active
+      color $textColor
   .nav-item > a:not(.external)
     &:hover, &.router-link-active
       margin-bottom -2px

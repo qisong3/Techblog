@@ -4,7 +4,6 @@
     class="algolia-search-wrapper search-box"
     role="search"
   >
-    <i class="iconfont reco-search"></i>
     <input
       id="algolia-search-input"
       class="search-query"
@@ -15,12 +14,26 @@
 
 <script>
 export default {
+  name: 'AlgoliaSearchBox',
+
   props: ['options'],
+
   data () {
     return {
       placeholder: undefined
     }
   },
+
+  watch: {
+    $lang (newValue) {
+      this.update(this.options, newValue)
+    },
+
+    options (newValue) {
+      this.update(newValue, this.$lang)
+    }
+  },
+
   mounted () {
     this.initialize(this.options, this.$lang)
     this.placeholder = this.$site.themeConfig.searchPlaceholder || ''
@@ -45,7 +58,9 @@ export default {
             }, algoliaOptions),
             handleSelected: (input, event, suggestion) => {
               const { pathname, hash } = new URL(suggestion.url)
-              this.$router.push(`${pathname}${hash}`)
+              const routepath = pathname.replace(this.$site.base, '/')
+              const _hash = decodeURIComponent(hash)
+              this.$router.push(`${routepath}${_hash}`)
             }
           }
         ))
@@ -56,49 +71,37 @@ export default {
       this.$el.innerHTML = '<input id="algolia-search-input" class="search-query">'
       this.initialize(options, lang)
     }
-  },
-
-  watch: {
-    $lang (newValue) {
-      this.update(this.options, newValue)
-    },
-
-    options (newValue) {
-      this.update(newValue, this.$lang)
-    }
   }
 }
 </script>
 
 <style lang="stylus">
-@require '../styles/mode.styl'
 .algolia-search-wrapper
   & > span
     vertical-align middle
   .algolia-autocomplete
     line-height normal
     .ds-dropdown-menu
-      background-color var(--background-color)
-      border-radius $borderRadius
-      font-size 15px
+      background-color #fff
+      border 1px solid #999
+      border-radius 4px
+      font-size 16px
       margin 6px 0 0
       padding 4px
       text-align left
-      box-shadow var(--box-shadow)
       &:before
-        display none
+        border-color #999
       [class*=ds-dataset-]
-        background-color var(--background-color)
         border none
         padding 0
       .ds-suggestions
         margin-top 0
       .ds-suggestion
-        border-bottom 1px solid var(--border-color)
+        border-bottom 1px solid $borderColor
     .algolia-docsearch-suggestion--highlight
-      color $accentColor
+      color #2c815b
     .algolia-docsearch-suggestion
-      border-color var(--border-color)
+      border-color $borderColor
       padding 0
       .algolia-docsearch-suggestion--category-header
         padding 5px 10px
@@ -109,24 +112,22 @@ export default {
         .algolia-docsearch-suggestion--highlight
           background rgba(255, 255, 255, 0.6)
       .algolia-docsearch-suggestion--wrapper
-        background var(--background-color)
         padding 0
       .algolia-docsearch-suggestion--title
         font-weight 600
         margin-bottom 0
-        color var(--text-color)
+        color $textColor
       .algolia-docsearch-suggestion--subcategory-column
         vertical-align top
         padding 5px 7px 5px 5px
-        border-color var(--border-color)
-        background var(--background-color)
+        border-color $borderColor
+        background #f1f3f5
         &:after
           display none
       .algolia-docsearch-suggestion--subcategory-column-text
-        color var(--text-color)
+        color #555
     .algolia-docsearch-footer
-      border-color var(--border-color)
-      background var(--background-color)
+      border-color $borderColor
     .ds-cursor .algolia-docsearch-suggestion--content
       background-color #e7edf3 !important
       color $textColor
@@ -157,7 +158,7 @@ export default {
       padding 5px 7px 5px 5px !important
     .algolia-docsearch-suggestion--subcategory-column
       padding 0 !important
-      background var(--border-color) !important
+      background white !important
     .algolia-docsearch-suggestion--subcategory-column-text:after
       content " > "
       font-size 10px

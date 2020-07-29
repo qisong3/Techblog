@@ -1,22 +1,25 @@
 <template>
   <aside class="sidebar">
-    <PersonalInfo/>
-    <NavLinks/>
-    <slot name="top"/>
-    <SidebarLinks :depth="0" :items="items"/>
-    <slot name="bottom"/>
+    <NavLinks />
+
+    <slot name="top" />
+
+    <SidebarLinks
+      :depth="0"
+      :items="items"
+    />
+    <slot name="bottom" />
   </aside>
 </template>
 
 <script>
-import SidebarLinks from '@theme/components/SidebarLinks'
-import PersonalInfo from '@theme/components/PersonalInfo'
-import NavLinks from '@theme/components/NavLinks'
+import SidebarLinks from '@theme/components/SidebarLinks.vue'
+import NavLinks from '@theme/components/NavLinks.vue'
 
 export default {
   name: 'Sidebar',
 
-  components: { SidebarLinks, NavLinks, PersonalInfo },
+  components: { SidebarLinks, NavLinks },
 
   props: ['items']
 }
@@ -24,8 +27,6 @@ export default {
 
 <style lang="stylus">
 .sidebar
-  .personal-info-wrapper
-    display none
   ul
     padding 0
     margin 0
@@ -34,7 +35,7 @@ export default {
     display inline-block
   .nav-links
     display none
-    border-bottom 1px solid var(--border-color)
+    border-bottom 1px solid $borderColor
     padding 0.5rem 0 0.75rem 0
     a
       font-weight 600
@@ -54,8 +55,6 @@ export default {
 
 @media (max-width: $MQMobile)
   .sidebar
-    .personal-info-wrapper
-      display block
     .nav-links
       display block
       .dropdown-wrapper .nav-dropdown .dropdown-item a.router-link-active::after

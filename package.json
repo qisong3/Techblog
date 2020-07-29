@@ -1,36 +1,44 @@
 {
-  "name": "errisonblog",
+  "name": "vuepress-demo",
   "version": "1.0.0",
-  "description": "Errison's blog",
+  "description": "vuepress demo",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "sitemap:build": "vuepress build docs -d dist",
-    "sitemap:postbuild" : "vuepress-sitemap -H https://blog.errison.cn -d dist",
+    "site:build": "vuepress build docs -d dist",
+    "site:postbuild": "vuepress-sitemap -H https://blog.errison.cn -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Errison",
+  "keywords": [
+    "vuepress"
+  ],
+  "author": "errison",
   "license": "ISC",
   "devDependencies": {
     "@vuepress/plugin-active-header-links": "^1.5.2",
+    "@vuepress/plugin-back-to-top": "^1.5.2",
+    "@vuepress/plugin-google-analytics": "^1.5.2",
+    "@vuepress/plugin-medium-zoom": "^1.5.2",
+    "@vuepress/plugin-pwa": "^1.5.2",
+    "@vuepress/plugin-register-components": "^1.5.2",
+    "@vuepress/plugin-search": "^1.5.2",
+    "moment": "^2.27.0",
+    "vuepress": "^1.5.2",
+    "vuepress-plugin-copyright": "^1.0.2",
+    "vuepress-plugin-flowchart": "^1.4.3",
+    "vuepress-plugin-sitemap": "^2.3.1"
+  },
+  "dependencies": {
+    "@vuepress/plugin-active-header-links": "^1.5.2",
+    "@vuepress/plugin-back-to-top": "^1.5.2",
     "@vuepress/plugin-google-analytics": "^1.5.2",
     "@vuepress/plugin-medium-zoom": "^1.5.2",
     "@vuepress/plugin-pwa": "^1.5.2",
     "@vuepress/plugin-search": "^1.5.2",
-    "@vuepress/theme-blog": "^2.3.0",
-    "@vuepress/theme-vue": "^1.5.2",
-    "moment": "^2.27.0",
     "vuepress": "^1.5.2",
     "vuepress-auto-sidebar": "^1.1.0",
     "vuepress-plugin-flowchart": "^1.4.3",
-    "vuepress-plugin-nuggets-style-copy": "^1.0.3",
-    "vuepress-theme-reco": "^1.5.4"
-  },
-  "dependencies": {
-    "@vuepress-reco/theme-cli": "^1.0.2",
-    "valine": "^1.4.14",
-    "vuepress-plugin-auto-sidebar": "^1.5.0",
-    "vuepress-plugin-copyright": "^1.0.2"
+    "vuepress-plugin-sitemap": "^2.3.1"
   }
 }

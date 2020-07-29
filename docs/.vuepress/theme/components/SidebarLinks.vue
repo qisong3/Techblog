@@ -1,9 +1,12 @@
 <template>
   <ul
-    class="sidebar-links"
     v-if="items.length"
+    class="sidebar-links"
   >
-    <li v-for="(item, i) in items" :key="i">
+    <li
+      v-for="(item, i) in items"
+      :key="i"
+    >
       <SidebarGroup
         v-if="item.type === 'group'"
         :item="item"
@@ -14,7 +17,7 @@
       />
       <SidebarLink
         v-else
-        :sidebarDepth="sidebarDepth"
+        :sidebar-depth="sidebarDepth"
         :item="item"
       />
     </li>
@@ -22,9 +25,9 @@
 </template>
 
 <script>
-import SidebarGroup from '@theme/components/SidebarGroup'
-import SidebarLink from '@theme/components/SidebarLink'
-import { isActive } from '@theme/helpers/utils'
+import SidebarGroup from '@theme/components/SidebarGroup.vue'
+import SidebarLink from '@theme/components/SidebarLink.vue'
+import { isActive } from '../util'
 
 export default {
   name: 'SidebarLinks',
@@ -33,7 +36,7 @@ export default {
 
   props: [
     'items',
-    'depth', // depth of current sidebar links
+    'depth',  // depth of current sidebar links
     'sidebarDepth' // depth of headers to be extracted
   ],
 
@@ -43,72 +46,17 @@ export default {
     }
   },
 
-  created () {
-    this.refreshIndex()
-  },
-
   watch: {
     '$route' () {
       this.refreshIndex()
     }
   },
 
-  mounted () {
-    this.activationLink()
-    this.isInViewPortOfOne()
-  },
-
-  updated: function () {
-    this.isInViewPortOfOne()
+  created () {
+    this.refreshIndex()
   },
 
   methods: {
-    activationLink () {
-      const subtitleName = decodeURIComponent(this.$route.fullPath)
-      if (!subtitleName || subtitleName == '') return
-      // eslint-disable-next-line no-undef
-      const subtitles = [].slice.call(document.querySelectorAll(AHL_SIDEBAR_LINK_SELECTOR))
-      for (let i = 0; i < subtitles.length; i++) {
-        if (decodeURIComponent(subtitles[i].getAttribute('href')).indexOf(subtitleName) != -1) {
-          subtitles[i].click()
-          this.activationAnchor()
-          return
-        }
-      }
-    },
-
-    activationAnchor () {
-      // eslint-disable-next-line no-undef
-      const anchors = [].slice.call(document.querySelectorAll(AHL_HEADER_ANCHOR_SELECTOR))
-        .filter(anchor => decodeURIComponent(this.$route.fullPath).indexOf(decodeURIComponent(anchor.hash)) != -1)
-      if (anchors == null || anchors.length < 1 || anchors[0].offsetTop == undefined) return
-      setTimeout(function () {
-        window.scrollTo(0, anchors[0].offsetTop + 160)
-      }, 100)
-    },
-
-    isInViewPortOfOne () {
-      const siderbarScroll = document.getElementsByClassName('sidebar')[0]
-      let el = document.getElementsByClassName('active sidebar-link')[1]
-      if (el == null || el == undefined || el.offsetTop == undefined) {
-        el = document.getElementsByClassName('active sidebar-link')[0]
-      }
-      if (el == null || el == undefined || el.offsetTop == undefined) return
-
-      const viewPortHeight = siderbarScroll.clientHeight || window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-      const offsetTop = el.offsetTop
-      const offsetBottom = el.offsetTop + el.offsetHeight
-      const scrollTop = siderbarScroll.scrollTop
-      const bottomVisible = (offsetBottom <= viewPortHeight + scrollTop)
-      if (!bottomVisible) {
-        siderbarScroll.scrollTop = (offsetBottom + 5 - viewPortHeight)
-      }
-      const topVisible = (offsetTop >= scrollTop)
-      if (!topVisible) {
-        siderbarScroll.scrollTop = (offsetTop - 5)
-      }
-    },
-
     refreshIndex () {
       const index = resolveOpenGroupIndex(
         this.$route,
@@ -132,10 +80,23 @@ export default {
 function resolveOpenGroupIndex (route, items) {
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
-    if (item.type === 'group' && item.children.some(c => c.type === 'page' && isActive(route, c.path))) {
+    if (descendantIsActive(route, item)) {
       return i
     }
   }
   return -1
+}
+
+function descendantIsActive (route, item) {
+  if (item.type === 'group') {
+    return item.children.some(child => {
+      if (child.type === 'group') {
+        return descendantIsActive(route, child)
+      } else {
+        return child.type === 'page' && isActive(route, child.path)
+      }
+    })
+  }
+  return false
 }
 </script>
