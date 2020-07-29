@@ -37,6 +37,7 @@ module.exports = {
         displayAllHeaders: false,
         activeHeaderLinks: true,
         smoothScroll: true,
+        logo: '/logo.png',
 
         // 以下为可选的编辑链接选项
         // 假如你的文档仓库和项目本身不在一个仓库：
@@ -48,7 +49,9 @@ module.exports = {
         // 默认是 false, 设置为 true 来启用
         editLinks: true,
         // 默认为 "Edit this page"
-        editLinkText: '在Github上编辑此页'
+        editLinkText: '在Github上编辑此页',
+        recordLink: 'http://beian.miit.gov.cn',
+        record: '备案号 京ICP备19057613号-1'
     },
 
 

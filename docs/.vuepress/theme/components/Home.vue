@@ -56,7 +56,12 @@
       class="footer"
     >
       {{ data.footer }}
+      <p>
+        <img src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" alt="">
+        <a :href="$themeConfig.recordLink || '#'">{{$themeConfig.record}}</a>
+      </p>
     </div>
+
   </main>
 </template>
 
@@ -92,12 +97,12 @@ export default {
   .hero
     text-align center
     img
-      max-width: 100%
-      max-height 390px
+      max-width  100%
+      max-height 350px
       display block
       margin 3rem auto 1.5rem
     h1
-      font-size 3rem
+      font-size 2.5rem
     h1, .description, .action
       margin 1.8rem auto
     .description
@@ -143,6 +148,18 @@ export default {
     border-top 1px solid $borderColor
     text-align center
     color lighten($textColor, 25%)
+    img
+      margin-right .5rem
+      width 20px
+      height 20px
+      vertical-align middle
+    a
+      vertical-align middle
+      color lighten($textColor, 25%)
+
+
+
+
 
 @media (max-width: $MQMobile)
   .home
