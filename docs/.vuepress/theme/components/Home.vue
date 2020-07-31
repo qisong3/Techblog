@@ -51,27 +51,19 @@
 
     <Content class="theme-default-content custom" />
 
-    <div
-      v-if="data.footer"
-      class="footer"
-    >
-      {{ data.footer }}
-      <p>
-        <img src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" alt="">
-        <a :href="$themeConfig.recordLink || '#'">{{$themeConfig.record}}</a>
-      </p>
-    </div>
+    <Footer/>
 
   </main>
 </template>
 
 <script>
 import NavLink from '@theme/components/NavLink.vue'
+import Footer  from "./Footer";
 
 export default {
   name: 'Home',
 
-  components: { NavLink },
+  components: { NavLink,Footer },
 
   computed: {
     data () {
@@ -156,8 +148,6 @@ export default {
     a
       vertical-align middle
       color lighten($textColor, 25%)
-
-
 
 
 

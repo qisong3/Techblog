@@ -30,7 +30,11 @@ module.exports = {
         ],
     ],
     plugins: PluginConfig,
+
     themeConfig: {
+
+
+        copyRight: '@copyright2019-2020 Errison  ',
         nav: NavConfig,
         sidebar: SidebarConfig,
         sidebarDepth: 1,
@@ -50,6 +54,7 @@ module.exports = {
         editLinks: true,
         // 默认为 "Edit this page"
         editLinkText: '在Github上编辑此页',
+        // 备案信息
         recordLink: 'http://beian.miit.gov.cn',
         record: '备案号 京ICP备19057613号-1'
     },
