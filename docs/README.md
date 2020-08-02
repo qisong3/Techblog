@@ -1,27 +1,28 @@
 ---
 home: true
 heroImage: /bg.png
-actionText: Get Started →
-actionLink: /guide/
-footer: Copyright © 2019-present Errison
 ---
 
 <div class="features">
   <div class="feature">
-    <h2>Simplicity First</h2>
-    <p>Minimal setup with markdown-centered project structure helps you focus on writing.</p>
+    <h2>Java</h2>
+    <p>Deep into Java source code, java fundamental, jvm etc. </p>
   </div>
   <div class="feature">
-    <h2>Vue-Powered</h2>
-    <p>Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.</p>
+    <h2>Algorithm</h2>
+    <p>Base on the example quiz of algorithm, analyse the basic and thought of algorithm. </p>
   </div>
   <div class="feature">
-    <h2>Performant</h2>
-    <p>VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.</p>
+    <h2>Review</h2>
+    <p>List and explain the review questions.</p>
   </div>
+  <div class="feature">
+      <h2>Framework</h2>
+      <p>View kinds of useful framework's source code and the design of composing framework.</p>
+   </div>
 </div>
 
-### As Easy as 1, 2, 3
+### As long as you stick to it as me
 
 ``` bash
 # Scaffold VuePress site
@@ -39,9 +40,5 @@ yarn dev
 yarn build
 # OR npm run build
 ```
-
-::: warning COMPATIBILITY NOTE
-VuePress requires Node.js >= 8.6.
-:::
 
 

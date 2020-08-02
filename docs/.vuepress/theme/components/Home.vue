@@ -10,19 +10,19 @@
         :alt="data.heroAlt || 'hero'"
       >
 
-      <h1
-        v-if="data.heroText !== null"
-        id="main-title"
-      >
-        {{ data.heroText || $title || 'Hello' }}
-      </h1>
+<!--      <h1-->
+<!--        v-if="data.heroText !== null"-->
+<!--        id="main-title"-->
+<!--      >-->
+<!--        {{ data.heroText || $title || 'Hello' }}-->
+<!--      </h1>-->
 
-      <p
-        v-if="data.tagline !== null"
-        class="description"
-      >
-        {{ data.tagline || $description || 'Welcome to your VuePress site' }}
-      </p>
+<!--      <p-->
+<!--        v-if="data.tagline !== null"-->
+<!--        class="description"-->
+<!--      >-->
+<!--        {{ data.tagline || $description || 'Welcome to your VuePress site' }}-->
+<!--      </p>-->
 
       <p
         v-if="data.actionText && data.actionLink"
@@ -89,8 +89,8 @@ export default {
   .hero
     text-align center
     img
-      max-width  100%
-      max-height 350px
+      width   $contentWidth
+      max-height 450px
       display block
       margin 3rem auto 1.5rem
     h1
@@ -125,8 +125,8 @@ export default {
     justify-content space-between
   .feature
     flex-grow 1
-    flex-basis 30%
-    max-width 30%
+    flex-basis 25%
+    max-width 25%
     h2
       font-size 1.4rem
       font-weight 500

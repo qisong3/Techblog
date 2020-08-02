@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc1b68fb-b725-457e-9f57-5ee23eb774f1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/Footer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/iconfont.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vuepress/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vuepress/config/plugin.config" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/config/plugin.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/public/bg.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/public/bg.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/styles/palette.styl" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/styles/palette.styl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/components/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/components/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/404.vue" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/layouts/404.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/.vuepress/theme/styles/index.styl" beforeDir="false" afterPath="$PROJECT_DIR$/docs/.vuepress/theme/styles/index.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,13 +26,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs/.vuepress/theme/layouts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/docs/.vuepress/public" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.1.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Develop\Github\front\Techblog\docs\.vuepress\public" />
       <recent name="D:\Github\front\Techblog\docs\.vuepress\theme\layouts" />
       <recent name="D:\Github\front\Techblog\docs\.vuepress\theme\styles" />
       <recent name="D:\Github\front\Techblog\docs\.vuepress\theme\components" />
@@ -67,6 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1596029653816</updated>
       <workItem from="1596029654922" duration="4254000" />
+      <workItem from="1596375050379" duration="5576000" />
     </task>
     <servers />
   </component>
@@ -74,29 +75,30 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1424" y="109" key="FileChooserDialogImpl" timestamp="1596074744033">
-      <screen x="-1920" y="0" width="1536" height="832" />
+    <state x="620" y="136" key="FileChooserDialogImpl" timestamp="1596376609708">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1424" y="109" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1596074744033" />
-    <state width="1894" height="338" key="GridCell.Tab.0.bottom" timestamp="1596088048310">
+    <state x="620" y="136" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596376609708" />
+    <state width="1894" height="56" key="GridCell.Tab.0.bottom" timestamp="1596379809312">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1894" height="338" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596088048310" />
-    <state width="1894" height="421" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596033786466" />
-    <state width="1894" height="338" key="GridCell.Tab.0.center" timestamp="1596088048309">
+    <state width="1894" height="56" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596379809312" />
+    <state width="1894" height="56" key="GridCell.Tab.0.center" timestamp="1596379809311">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1894" height="338" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596088048309" />
-    <state width="1894" height="421" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596033786466" />
-    <state width="1894" height="338" key="GridCell.Tab.0.left" timestamp="1596088048309">
+    <state width="1894" height="56" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596379809311" />
+    <state width="1894" height="56" key="GridCell.Tab.0.left" timestamp="1596379809311">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1894" height="338" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596088048309" />
-    <state width="1894" height="421" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596033786466" />
-    <state width="1894" height="338" key="GridCell.Tab.0.right" timestamp="1596088048309">
+    <state width="1894" height="56" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596379809311" />
+    <state width="1894" height="56" key="GridCell.Tab.0.right" timestamp="1596379809311">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1894" height="338" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1596088048309" />
-    <state width="1894" height="421" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596033786466" />
+    <state width="1894" height="56" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596379809311" />
   </component>
 </project>
