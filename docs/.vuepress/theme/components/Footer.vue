@@ -2,7 +2,8 @@
   <div class="footer-wrapper">
     <p class="cyber-security" v-if="$themeConfig.record">
       <img src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" alt="">
-      <a :href="$themeConfig.recordLink || '#'">{{ $themeConfig.record }} &nbsp;&nbsp;&nbsp;&nbsp;{{$themeConfig.copyRight}} </a>
+      <a :href="$themeConfig.recordLink || '#'">{{ $themeConfig.record }}</a>
+      <a :href="$themeConfig.docsRepo || '#'">{{$themeConfig.copyRight}}</a>
     </p>
   </div>
 </template>

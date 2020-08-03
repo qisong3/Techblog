@@ -5,40 +5,29 @@ heroImage: /bg.png
 
 <div class="features">
   <div class="feature">
-    <h2>Java</h2>
-    <p>Deep into Java source code, java fundamental, jvm etc. </p>
+    <h2>源码</h2>
+    <p>深入Java语言，优秀框架的源码和基本原理，探寻设计者初衷和设计实现的精妙之处。</p>
   </div>
   <div class="feature">
-    <h2>Algorithm</h2>
-    <p>Base on the example quiz of algorithm, analyse the basic and thought of algorithm. </p>
+    <h2>算法</h2>
+    <p>基于经典的算法示例题目，分析算法解题思路和解题技巧，分门别类探寻算法银弹。</p>
   </div>
   <div class="feature">
-    <h2>Review</h2>
-    <p>List and explain the review questions.</p>
+    <h2>面试</h2>
+    <p>列举各种类型的面试题，从面试官的角度讨论出题的思路和考察点。</p>
   </div>
-  <div class="feature">
-      <h2>Framework</h2>
-      <p>View kinds of useful framework's source code and the design of composing framework.</p>
-   </div>
 </div>
 
 ### As long as you stick to it as me
 
 ``` bash
-# Scaffold VuePress site
-yarn create vuepress [directoryName]
-# OR npx create-vuepress [directoryName]
+##收藏Errison's blog  
+(https://blog.errison.cn)
 
-# Navigate to your new VuePress directory
-cd [directoryName]
+跟随Errison日常更新的日志和博客，跟进最新内容。
 
-# Start local dev server
-yarn dev
-# OR npm run dev
-
-# Build static files
-yarn build
-# OR npm run build
+## 在Github上fork这个，修正Errison描述不准确的地方，补充自己的新内容！
+[repo](https://github.com/qisong3/Techblog)
 ```
 
 
