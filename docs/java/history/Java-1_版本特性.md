@@ -7,8 +7,6 @@ keywords:
 tags:
  - Java
  
-prev: ./Java诞生史
-next: ./Java-1.1_版本特性
 ---
 
 ## level 2
