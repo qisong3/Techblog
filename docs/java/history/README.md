@@ -1,5 +1,5 @@
 ---
-title: Java简洁
+title: Java简介
 date: 2020-07-12
 last-update: 2020-07-27
 keywords:
@@ -11,10 +11,12 @@ tags:
 
 ## 一 Java简介
 
+Java是一门面向对象的健壮的高级编译语言。<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说到Java语言，就不得不提到与之紧密相关的三个概念，`JDK，JRE，JVM`，正是他们构成了Java语言开发运行环境。
-**Java**是由Sun微系统公司原创开发的编程语言, 在1995年发布，用作Sun微系统公司的Java平台的核心组件。它从C和C++派生了许多语法，但有一个简洁的对象模型和更少的底层组件。
-从成立之初的实验室项目到如今风靡全球长期占据编程语言首位的编程语言之一，Java经历了具有传奇特色的前半生。本专题将追述Java的发展史，各个Java版本的特点，展望未来。<br>
+**Java**是由Sun微系统公司原创开发的编程语言, 在命名为Java之前，它的原名叫Oak，以为橡树，由于这个名字已经被一个公司注册，所以后来做了更名，才有了
+如今人尽皆知的Java语言。<br>
+
+Java从成立之初的实验室项目到如今风靡全球长期占据编程语言首位的编程语言之一，Java经历了具有传奇特色的前半生。本专题将追述Java的发展史，各个Java版本的特点，展望未来。<br>
 
 Java的口号是`"一处编写，随处运行"`，即可以运行在各个平台的Java虚拟机上，不依赖或绑定计算机硬件和操作系统，这也是Java流行的因素之一。<br>
 
@@ -66,7 +68,7 @@ jstat,jinfo,jlink等，用于开发基于Java语言的应用程序。<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相比于Java ME和Java EE，Java SE无疑是Java系列最成功的产品线。后面的文章也将围绕Java SE的发展史，逐一介绍Java各个版本的历史和特性。<br>
 
 ::: tip 提示
-人们日常所所的IDE，不在上述讨论的名词范围内。知名的Java开发IDE如IDEA, Eclipse等都是开发工具，是为了更方便的开发Java程序。
+人们日常所所的IDE，不在上述讨论的名词范围内。知名的Java开发IDE如IDEA, Eclipse等都是开发工具，是为了更方便的开发Java语言的应用程序。
 :::
 
 
