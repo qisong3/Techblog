@@ -37,7 +37,7 @@ module.exports = {
         copyRight: '@copyright2019-2020 Errison  ',
         nav: NavConfig,
         sidebar: SidebarConfig,
-        sidebarDepth: 1,
+        sidebarDepth: 2,
         displayAllHeaders: false,
         activeHeaderLinks: true,
         smoothScroll: true,

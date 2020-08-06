@@ -9,7 +9,7 @@ tags:
  
 ---
 
-## 一 Java简介
+## Java是什么
 
 Java是一门面向对象的健壮的高级编译语言。<br>
 
@@ -24,7 +24,7 @@ Java的口号是`"一处编写，随处运行"`，即可以运行在各个平台
 Java之所以能做到口号所说的平台无关性，本质上是Java语言的运行环境实际上是Java虚拟机，Java语言是平台无关的，但是虚拟机默默为各个平台做了适配。<br>
 ::: 
 
-## 二 JVM JDK JRE 
+## JVM JDK JRE 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;说到Java语言，就不得不提到与之紧密相关的三个概念，`JVM，JDK，JRE`，正是他们构成了Java语言开发运行环境。而这几个基本
 概念也是Java基础中的基础，也容易弄混。
