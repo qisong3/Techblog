@@ -7,7 +7,6 @@ keywords:
 
 ---
 
-## 发布
 1997年2月19日，Sun发布了JDK1.1，相较于JDK1.0的初代版本，JDK1.1有了诸多新特性和改进。
 
 ## JIT编译器
@@ -28,7 +27,9 @@ javaCode(path1, bottom)->javac->byteCode(path1,bottom)->jvm->systemCode(path1,bo
 
 还有一种是即时编译，就是取一段字节码（通常是以方法为单位），整体翻译成机器码再执行。这也就是Just In Time Compiler (及时编译器)的工作模式。
 
-Java语言自此以后，一直同时并存着两种编译器，配合执行字节码的翻译工作。
+::: warning
+注意，此时的JIT还是在Windows系统上以外挂的形式存在，正式进入JVM需要下一个版本再正式官方登场
+:::
 
 ::: tip AOT
 后来又演变出了Ahead of Time(AOT)编译器，即提前将字节码翻译成机器码，这样虚拟机的效率将与C/C++传统编译型语言性能相差无几。不过这也改变了Java``Write Once, Run Anywhere`的初衷。
@@ -73,8 +74,194 @@ JDBC API是用于Java编程语言与大量数据库、SQL数据库和其他表�
 注意到，这是一个接口标准，各个厂商或组织需要实现这个标准才能实现Java与数据库的连接使用。如mysql-connector-java驱动就是实现了JDBC标准的官方驱动。
 
 JDBC与数据库关系如下图所示<br>
-![JDBC架构图](/images/Java-1.1/jdbc-architecture.jpg)
-JDBC是一个持续升级的规范，后面的各个版本的JDK中也多有JDBC标准的修改。
+![JDBC架构图](/images/Java-history/jdbc-architecture.jpg)<br>
+JDBC是一个持续升级的规范，后面的各个版本的JDK中也多有对JDBC标准的升级补充。
+
+## 内部类
+Java中的类是不能使用private修饰的，但是在类中定义的内部类就可以，内部类可以直接访问类中的其他私有方法和字段，是增强Java安全性的机制。
+
+Java中的内部类有三种形式
+- 普通内部类
+- 方法内部类
+- 匿名内部类
+
+可以见下面的示例，具体代码可见[github](https://github.com/qisong3/Java-Review-Demo)
+
+```java
+
+public class Demo1 {
+
+    private String innerValue = "inner value";
+
+    private String innerMethod() {
+        return "inner method";
+    }
+
+    private class InnerClass {
+
+        private void printResult() {
+            System.out.println("1--- Get innerValue from OuterClass" + innerValue);
+            System.out.println("1--- Get innerMethod from OuterClass" + innerMethod());
+        }
+    }
+
+    private void methodWithInnerClass() {
+
+        int num = 23;
+        // method-local inner class
+        class MethodInnerClass {
+            public void print() {
+                System.out.println("2---This is method inner class " + num);
+            }
+        } // end of inner class
+
+        // Accessing the inner class
+        MethodInnerClass inner = new MethodInnerClass();
+        inner.print();
+    }
+
+    abstract class AnonymousInnerClass{
+
+        protected void abstractMethod(){
+
+        }
+    }
+
+    public static void main(String[] args) {
+        Demo1 demo1 = new Demo1();
+        // 1 Normal nner class
+        // 注意内部类的声明方式
+        Demo1.InnerClass innerClass = demo1.new InnerClass();
+        innerClass.printResult();
+        // 2 local method inner class
+        demo1.methodWithInnerClass();
+        // 3 Anonymous Class
+        AnonymousInnerClass anonymousInnerClass = demo1.new AnonymousInnerClass(){
+            protected void abstractMethod(){
+                System.out.println("3---Method from Anonymous Inner class");
+            }
+        };
+        anonymousInnerClass.abstractMethod();
+    }
+}
+```
+::: tip 提示
+在Java8支持Lambda语法以后，内部类可以被Lambda表达式以更简洁的方式替代，后面会详细说明。
+:::
+## AWT增强
+AWT是早期的Java GUI编程API，现在使用Java做界面编程较少
+JDK1.1版本提供了如下方面增强，只列出不具体展开
+- 增加委托事件模式
+- 增加弹出按钮
+
+## 支持Jar格式
+Jar全称Java ARchive, 基于zip压缩。Jar的出现主要动机是为了当时方便从网络上以一个完整压缩包的形式下载Applet（包括class文件，音频图片文件等）。
+
+虽然现在Applet已经几乎销声匿迹，但Jar格式由于其跨平台和通用性好，已经成为Java程序的标准打包输出方式。
+
+## 网络增强
+- 对Socket和SocketServer API的修改
+- 支持Socket选项和Socket Exception
+
+## IO 增强
+- 修改了部分IO接口
+- 支持Character Stream，即从只支持字节流到支持字符流
+
+## Math 增强
+支持`BigInteger`和`BigDecimal
+
+## Remote Method Invocation(RMI)
+RMI使得人们可以开发分布式的Java-to-Java的程序，即可以调用其他虚拟机中的对象中的方法。Java一旦拥有远程对象的引用后，就可以直接调用该对象的方法。
+
+RMI的实现由两部分组成，服务端和客户端。服务端暴露对象，客户端可以持有和调用对象。具体可见(tutorial)https://docs.oracle.com/javase/tutorial/rmi/overview.html。
+
+RMI是部分Java分布式服务的基础，著名的微服务框架Dubbo就依赖于RMI技术。Demo可见[github](https://github.com/qisong3/Java-Review-Demo)。
+
+## 序列化
+要实现RMI，就需要在网络中传输对象，网络中只能传递字节流。序列化是Java对象转换为字节数组的过程，反序列化则反之。
+
+Java对象如需要实现序列化，需要做到以下几点：
+- 实现`java.io.Serializable`接口
+- 将不需要序列化的字段使用`transient`关键字标记
+- 实现`writeObject`方法来控制哪些字段需要被保存，或者向流中增加额外信息
+- 实现`readObject`方法来读取`writeObject`写入的方法
+
+一个简单的例子如下：
+```java   
+
+public class Employee implements Serializable {
+
+    // 此项必须有
+    private static final long serialVersionUID = 1L;
+
+    public String name;
+    public String address;
+    public transient int SSN;
+    public int number;
+
+    public void mailCheck() {
+        System.out.println("Mailing a check to " + name
+                + " " + address);
+    }
+
+    private void serializeMethod() {
+        Employee employee = new Employee();
+        employee.name = "Reyan Ali";
+        employee.address = "Phokka Kuan, Ambehta Peer";
+        employee.SSN = 11122333;
+        employee.number = 101;
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream("d://test.obj");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(employee);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in d://test.obj");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    private void deSerializeMethod() {
+        Employee employee = null;
+        try {
+            File file = new File("d:\\test.obj");
+            FileInputStream fileIn = new FileInputStream(file);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            employee = (Employee) in.readObject();
+            in.close();
+            fileIn.close();
+            file.delete();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+        }
+        System.out.println("Deserialized Employee...");
+        System.out.println("Name: " + employee.name);
+        System.out.println("Address: " + employee.address);
+        System.out.println("SSN: " + employee.SSN);
+        System.out.println("Number: " + employee.number);
+    }
+
+    public static void main(String[] args) {
+        Employee employee = new Employee();
+        employee.serializeMethod();
+        employee.deSerializeMethod();
+    }
+}
+
+```
+
+## Java Native Interface(JNI)
+
+JNI是一个使Java支持本地程序的标准编程接口。通过JNI接口，Java可以轻松调Java语言不方便实现的类库，如各种打印机驱动，FFmpeg音视频库等以便Java扩展功能和提升效率。
+
+
+
+
 
 
 
