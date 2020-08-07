@@ -2,8 +2,12 @@
 title: Java-1.1
 date: 2020-07-16
 last-update: 2020-07-27
+tags:
+ - Java
 keywords:
  - Java
+ - JDK 
+ - features
 
 ---
 
