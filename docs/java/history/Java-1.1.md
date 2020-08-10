@@ -264,8 +264,114 @@ public class Employee implements Serializable {
 JNI是一个使Java支持本地程序的标准编程接口。通过JNI接口，Java可以轻松调Java语言不方便实现的类库，如各种打印机驱动，FFmpeg音视频库等以便Java扩展功能和提升效率。
 
 
+##  反射
+反射是Java可以在运行时通过API调用的方式动态获取和操作JVM运行时的类和对象的功能。具体来说，反射可以实现以下功能：
+- 构建新的类实例和数组
+- 获取和修改类的字段和属性
+- 调用类和对象中的方法
+- 获取和修改数组中的元素
+
+一个反射的样例如下：
+```java
+package cn.errison.feature.demo.reflection;
+
+import java.lang.reflect.*;
+
+public class Demo1 {
+
+    public static final String PARENT_CLASS_NAME = "cn.errison.feature.demo.reflection.Person";
+
+    public static final String CHILD_CLASS_NAME = "cn.errison.feature.demo.reflection.Child";
+
+    public static void main(String[] args) throws Exception {
+        demo1();
+        demo2();
+        demo3();
+    }
+
+    /**
+     * demo1：通过Java反射机制得到类的包名和类名，并构造新的包
+     */
+    public static void demo1() throws Exception {
+        // 1 获得包名和类名
+        Person person = new Person();
+        System.out.println("写法1，包名：" + person.getClass().getPackage().getName());
+        System.out.println("完整类名：" + person.getClass().getName());
+
+        Class<?> class1 = Person.class;
+        System.out.println("写法2，包名：" + class1.getPackage().getName() + " , 完整类名：" + class1.getName());
+
+        String name = class1.getClassLoader().getClass().getName();
+        System.out.println("类加载器类名：" + name);
+
+        // 构造新的对象
+        Class<?> class2 = Class.forName(PARENT_CLASS_NAME);
+        Person reflectPerson = (Person) class2.newInstance();
+        reflectPerson.setName("Errison");
+        reflectPerson.setAge(18);
+        System.out.println(reflectPerson.toString());
+
+        // 用构造器构造
+        Class<?> class3 = Class.forName(PARENT_CLASS_NAME);
+        Constructor<?>[] constructors = class3.getConstructors();
+        Person reflectPerson1 = (Person) constructors[0].newInstance();
+        reflectPerson1.setName("Tom");
+        reflectPerson1.setAge(20);
+        System.out.println(reflectPerson1.toString());
+
+        Person reflectPerson2 = (Person) constructors[0].newInstance();
+        reflectPerson2.setName("Tom Errison");
+        reflectPerson2.setAge(30);
+        System.out.println(reflectPerson2.toString());
+
+    }
 
 
+    
+    /**
+     * demo2：通过Java反射机制得到类的一些属性：继承的接口、父类、函数信息、成员信息、类型等
+     */
+    public static void demo2() throws Exception {
+        Class<?> class1 = Class.forName(CHILD_CLASS_NAME);
+
+        //取得父类名称
+        Class<?> superclass = class1.getSuperclass();
+        System.out.println("Child类的父类名：" + superclass.getName());
+
+        Field[] fields = class1.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            System.out.println("类中的成员" + i + "： " + fields[i]);
+        }
+
+        //取得类方法
+        Method[] methods = class1.getDeclaredMethods();
+        for (int i = 0; i < methods.length; i++) {
+            System.out.println("取得Child类的方法" + i + "：");
+            System.out.println("函数名：" + methods[i].getName());
+            System.out.println("函数返回类型：" + methods[i].getReturnType());
+            System.out.println("函数访问修饰符：" + Modifier.toString(methods[i].getModifiers()));
+            System.out.println("函数代码写法： " + methods[i]);
+        }
+
+        //取得类实现的接口，因为接口类也属于Class，所以得到接口中的方法也是一样的方法得到哈
+        Class<?> interfaces[] = class1.getInterfaces();
+        for (int i = 0; i < interfaces.length; i++) {
+            System.out.println("实现的接口类名： " + interfaces[i].getName());
+        }
+
+        System.out.println("调用无参方法fly()：");
+        Method method = class1.getMethod("fly");
+        method.invoke(class1.newInstance());
+
+        System.out.println("调用有参方法walk(int m)：");
+        method = class1.getMethod("walk", int.class);
+        method.invoke(class1.newInstance(), 100);
+    }
+
+}
+
+```
+具体示例可访问[github](https://github.com/qisong3/Java-Review-Demo)
 
 
 
