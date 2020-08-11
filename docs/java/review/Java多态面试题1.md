@@ -1,16 +1,14 @@
 ---
-title: Java多态面试题(一)
+title: Java多态面试题1
 date: 2020-07-16
 last-update: 2020-07-20
 tags:
  - Java
  - 面试
-categories:
- - 面试
 keywords:
  - 继承
 ---
-<!-- 这里是摘要部分 -->
+
 ## 题干
 ```java
  public class Demo1 {

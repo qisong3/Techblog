@@ -179,7 +179,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 配置好这些，执行一下`uepress dev docs`
 
 不出意外，就可以看到主页了，应该是空空如也，不过至此已经入门了。
-![avatar](/img/从零开始搭建vuepress/empty_home.png)
+![avatar](/images/从零开始搭建vuepress/empty_home.png)
 
 ### 主题配置
 当然，一个空旷的主页是没法做文档或者博客的，下面我们需要稍加内容，让主页像vuepress的主页那样。
@@ -256,7 +256,7 @@ next: ./SECOND  // 后一页
 :::
 
 至此，一篇官网格式的在线文档/博客已经搭建完毕，形式如下。
-![avatar](/img/从零开始搭建vuepress/default_full.png)
+![avatar](/images/从零开始搭建vuepress/default_full.png)
 本问所述的样例可以在[vuepress-demo](https://github.com/qisong3/vuepress-demo)找到。
 
 ### 博客主题推荐
@@ -266,4 +266,4 @@ next: ./SECOND  // 后一页
 -[**vuepress-reco**](https://https://vuepress-theme-reco.recoluan.com/) 着重推荐的主题，界面精美，功能齐全，文档清晰，
 而且一直处于开发维护过程中，是建站的好选择。效果如[本站](https://blog.errison.cn)和[作者主页](https://www.recoluan.com/)。
 
-## 后记
+
