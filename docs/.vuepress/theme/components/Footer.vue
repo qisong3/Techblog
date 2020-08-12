@@ -9,13 +9,6 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      version
-    }
-  }
-}
 </script>
 
 <style lang="stylus" scoped>

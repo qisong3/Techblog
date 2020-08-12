@@ -1,13 +1,8 @@
 ---
-title: guide index page
-description: java guide page
+title: hashtable算法类概述
+description: hashtable算法类概述
 date: 2020-07-10
-prev: false
-next: ./FIRST
+last-update: 2020-08-12
 ---
 
-# HELLO from guide index page
 
-## SECOND
-
-### THIRD

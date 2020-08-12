@@ -1,17 +1,14 @@
 ---
-title: vuepress-低调不失风格的在线文档(博客)框架
+title: vuepress简介&搭建
 date: 2020-07-10
 last-update: 2020-07-13
 tags:
  - vuepress
  - blog
-categories:
- - 技术
 keywords:
  - vue 
  - vuepress
  - 博客 
-sidebar: auto
 ---
 
 ## vuepress简介
