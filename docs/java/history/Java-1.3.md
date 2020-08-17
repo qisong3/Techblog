@@ -87,5 +87,5 @@ JDK1.3版本中推出了裁剪，播放回放音乐和MIDI（Musical Intstrument
 - MIDI可波合成和排序软件，并可访问硬件的MIDI设备
 - 全软件混音器，可以混合和渲染多达64个通道的数字音频和合成MIDI音乐
 
-## 
+## Synthetic proxy classes
 
