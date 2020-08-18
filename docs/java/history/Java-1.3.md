@@ -87,5 +87,140 @@ JDK1.3版本中推出了裁剪，播放回放音乐和MIDI（Musical Intstrument
 - MIDI可波合成和排序软件，并可访问硬件的MIDI设备
 - 全软件混音器，可以混合和渲染多达64个通道的数字音频和合成MIDI音乐
 
-## Synthetic proxy classes
+## 动态代理
+
+代理意为代为管理执行。Java中的代理一般分为静态代理，动态代理和字节码增强代理等，随着JDK1.3的发布，Java原生API有效支持了Java的动态代理。
+
+Java的动态代理机制支持为任意接口列表在运行时而非编译时合成代理类。所需要做的也仅仅是创建一个InvocationHandler的子类，以此作为代理类和被代理类之间的桥梁。
+![Java-proxy](/images/java-history/java-proxy.png)
+
+InvocationHandler是一个接口，只有一个函数invoke。通过实现InvocationHandler接口，即可实现对被代理类中方法的调用。
+```java
+    /**
+     * @param obj 被代理的对象实例
+     * @param Method 需要被代理调用的接口方法
+     * @param 调用参数
+     */
+    public interface InvocationHandler {
+      abstract Object invoke(Object obj,
+        Method method, Object[] args) throws Throwable;
+    }
+```
+生成被代理的实例，需要用到Proxy代理类，方法如下
+```java
+
+    /**
+     * @param   被代理类加载的ClassLoader
+     * @param   被代理类要实现的接口集合
+     * @param   InvocationHandler实例
+     */
+public static Object newProxyInstance(ClassLoader loader,
+                                          Class<?>[] interfaces,
+                                          InvocationHandler h)
+        throws IllegalArgumentException;
+
+```
+
+以一个列子说明，例子中包含如下对象
+- Task 被代理类的接口
+- TaskImpl 被代理类
+- MyInvocationHandler 代理实现
+- ProxyFactory 代理工厂类
+
+```java
+public interface Task {
+
+    void setData(String data);
+
+    int getCalData(int x);
+}
+
+public class TaskImpl implements Task {
+	@Override
+	public void setData(String data) {
+		System.out.println(data+ " Data is saved");
+	}
+	@Override
+	public int getCalData(int x) {
+		return x*10;
+	}
+}
+
+public class MyInvocationHandler  implements InvocationHandler{
+    private Object obj;
+    public  MyInvocationHandler(Object obj) {
+        this.obj = obj;
+    }
+    public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
+        Object result;
+        try{
+        	if(m.getName().indexOf("get")>-1){
+	           System.out.println("...get Method Executing...");
+        	}else{
+        		System.out.println("...set Method Executing...");
+        	}
+        	result = m.invoke(obj, args);
+	    } catch (InvocationTargetException e) {
+	        throw e;
+	    } catch (Exception e) {
+	        throw e;
+	    }
+        return result;
+    }
+}
+
+public class ProxyFactory {
+
+	public static Object newInstance(Object ob) {
+		return Proxy.newProxyInstance(ob.getClass().getClassLoader(),
+				new Class<?>[] { Task.class }, new MyInvocationHandler(ob));
+	}
+
+	public static void main(String[] args) {
+		Task task = (Task)ProxyFactory.newInstance(new TaskImpl());
+		task.setData("Test");
+		System.out.println(task.getCalData(5));
+	}
+
+}
+
+```
+执行ProxyFactory的main方法，输出如下
+```
+    ...set Method Executing...
+    Test Data is saved
+    ...get Method Executing...
+    50
+```
+动态代理可以在对被代理的类无入侵的前提下，实现被代理类的调用，方便进行方法审计，日志审计等织入功能。
+
+这里可以思考一个问题，如果两个接口中定义了一个同名函数，除了返回值都相同，那通过代理调用的时候会选择哪个接口的方法呢？
+代码可见[Github](https://github.com/qisong3/Java-Review-Demo)，可以持续关注。
+
+## JPDA 
+Java Platform Debugger Architecture(JPDA)是一个层调试体系结构，它允许工具开发人员轻松创建调试器应用程序，这些程序可以在平台、虚拟机(VM)实现和JDK版本之间可移植地运行。
+
+JPDA包括三层：
+- JVM TI - Java Tool Interface 定义VM提供的调试服务，在JDK1.3时为Java Virtual Machine Profiling Interface JVMPI
+- JDWP - Java Debug Wire Protocol  定义调试进程和调试器进程之间的通信
+- JDI - Java Debug Interface 定义高级Java语言接口，工具开发人员可以轻松使用该接口编写远程调试器应用程序。
+整体架构关系图如下
+ ```
+ Components                          Debugger Interfaces
+
+                /    |--------------|
+               /     |     VM       |
+ debuggee ----(      |--------------|  <------- JVM TI - Java VM Tool Interface
+               \     |   back-end   |
+                \    |--------------|
+                /           |
+ comm channel -(            |  <--------------- JDWP - Java Debug Wire Protocol
+                \           |
+                     |--------------|
+                     | front-end    |
+                     |--------------|  <------- JDI - Java Debug Interface
+                     |      UI      |
+                     |--------------|
+```
+
 
