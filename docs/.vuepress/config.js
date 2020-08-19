@@ -30,6 +30,9 @@ module.exports = {
         ],
     ],
     plugins: PluginConfig,
+    markdown: {
+        lineNumbers: true
+    },
 
     themeConfig: {
 

@@ -12,8 +12,247 @@ keywords:
 
 2002年2月6日，JDK1.4发布，这是第一版在JCP管理下发布的版本，该版本新增以及更新了部分内容。
 
-## 正则表达式
+## Regex 正则
+
+    正则表达式是一种基于集合中每个字符串所共享的共同特征来描述一组字符串的方法。正则表达式可用于搜索、编辑或操作文本和数据。
+
+### 正则表达式的语法
+<table class="reference"><tbody><tr><th><p>字符</p></th><th><p>说明</p></th></tr><tr><td><p>\</p></td><td><p>
+将下一字符标记为特殊字符、文本、反向引用或八进制转义符。例如，"n"匹配字符"n"。"\n"匹配换行符。序列"\\\\"匹配"\\"，"\\("匹配"("。</p></td></tr><tr><td><p>^</p></td><td><p>匹配输入字符串开始的位置。如果设置了 <b>RegExp</b> 对象的 <b>Multiline</b> 属性，^ 还会与"\n"或"\r"之后的位置匹配。</p></td></tr><tr><td><p>$</p></td><td><p>匹配输入字符串结尾的位置。如果设置了 <b>RegExp</b> 对象的 <b>Multiline</b> 属性，$ 还会与"\n"或"\r"之前的位置匹配。</p></td></tr><tr><td><p>*</p></td><td><p>零次或多次匹配前面的字符或子表达式。例如，zo* 匹配"z"和"zoo"。* 等效于 {0,}。</p></td></tr><tr><td><p>+</p></td><td><p>一次或多次匹配前面的字符或子表达式。例如，"zo+"与"zo"和"zoo"匹配，但与"z"不匹配。+ 等效于 {1,}。</p></td></tr><tr><td><p>?</p></td><td><p>零次或一次匹配前面的字符或子表达式。例如，"do(es)?"匹配"do"或"does"中的"do"。? 等效于 {0,1}。</p></td></tr><tr><td><p>{<i>n</i>}</p></td><td><p><i>n </i>是非负整数。正好匹配 <i>n</i> 次。例如，"o{2}"与"Bob"中的"o"不匹配，但与"food"中的两个"o"匹配。</p></td></tr><tr><td><p>{<i>n</i>,}</p></td><td><p><i>n </i>是非负整数。至少匹配 <i>n </i>次。例如，"o{2,}"不匹配"Bob"中的"o"，而匹配"foooood"中的所有 o。"o{1,}"等效于"o+"。"o{0,}"等效于"o*"。</p></td></tr><tr><td><p>{<i>n</i>,<i>m</i>}</p></td><td><p><i>m</i> 和 <i>n</i> 是非负整数，其中 <i>n</i> &lt;= <i>m</i>。匹配至少 <i>n</i> 次，至多 <i>m</i> 次。例如，"o{1,3}"匹配"fooooood"中的头三个 o。'o{0,1}' 等效于 'o?'。注意：您不能将空格插入逗号和数字之间。</p></td></tr><tr><td><p>?</p></td><td><p>当此字符紧随任何其他限定符（*、+、?、{<i>n</i>}、{<i>n</i>,}、{<i>n</i>,<i>m</i>}）之后时，匹配模式是"非贪心的"。"非贪心的"模式匹配搜索到的、尽可能短的字符串，而默认的"贪心的"模式匹配搜索到的、尽可能长的字符串。例如，在字符串"oooo"中，"o+?"只匹配单个"o"，而"o+"匹配所有"o"。</p></td></tr><tr><td><p>.</p></td><td><p>匹配除"\r\n"之外的任何单个字符。若要匹配包括"\r\n"在内的任意字符，请使用诸如"[\s\S]"之类的模式。</p></td></tr><tr><td><p>(<i>pattern</i>)</p></td><td><p>匹配 <i>pattern</i> 并捕获该匹配的子表达式。可以使用 <b>$0…$9</b> 属性从结果"匹配"集合中检索捕获的匹配。若要匹配括号字符 ( )，请使用"\("或者"\)"。</p></td></tr><tr><td><p>(?:<i>pattern</i>)</p></td><td><p>匹配 <i>pattern</i> 但不捕获该匹配的子表达式，即它是一个非捕获匹配，不存储供以后使用的匹配。这对于用"or"字符 (|) 组合模式部件的情况很有用。例如，'industr(?:y|ies) 是比 'industry|industries' 更经济的表达式。</p></td></tr><tr><td><p>(?=<i>pattern</i>)</p></td><td><p>执行正向预测先行搜索的子表达式，该表达式匹配处于匹配 <i>pattern</i> 的字符串的起始点的字符串。它是一个非捕获匹配，即不能捕获供以后使用的匹配。例如，'Windows (?=95|98|NT|2000)' 匹配"Windows 2000"中的"Windows"，但不匹配"Windows 3.1"中的"Windows"。预测先行不占用字符，即发生匹配后，下一匹配的搜索紧随上一匹配之后，而不是在组成预测先行的字符后。</p></td></tr><tr><td><p>(?!<i>pattern</i>)</p></td><td><p>执行反向预测先行搜索的子表达式，该表达式匹配不处于匹配 <i>pattern</i> 的字符串的起始点的搜索字符串。它是一个非捕获匹配，即不能捕获供以后使用的匹配。例如，'Windows (?!95|98|NT|2000)' 匹配"Windows 3.1"中的 "Windows"，但不匹配"Windows 2000"中的"Windows"。预测先行不占用字符，即发生匹配后，下一匹配的搜索紧随上一匹配之后，而不是在组成预测先行的字符后。</p></td></tr><tr><td><p><i>x</i>|<i>y</i></p></td><td><p>匹配 <i>x</i> 或 <i>y</i>。例如，'z|food' 匹配"z"或"food"。'(z|f)ood' 匹配"zood"或"food"。</p></td></tr><tr><td><p>[<i>xyz</i>]</p></td><td><p>字符集。匹配包含的任一字符。例如，"[abc]"匹配"plain"中的"a"。</p></td></tr><tr><td><p>[^<i>xyz</i>]</p></td><td><p>反向字符集。匹配未包含的任何字符。例如，"[^abc]"匹配"plain"中"p"，"l"，"i"，"n"。</p></td></tr><tr><td><p>[<i>a-z</i>]</p></td><td><p>字符范围。匹配指定范围内的任何字符。例如，"[a-z]"匹配"a"到"z"范围内的任何小写字母。</p></td></tr><tr><td><p>[^<i>a-z</i>]</p></td><td><p>反向范围字符。匹配不在指定的范围内的任何字符。例如，"[^a-z]"匹配任何不在"a"到"z"范围内的任何字符。</p></td></tr><tr><td><p>\b</p></td><td><p>匹配一个字边界，即字与空格间的位置。例如，"er\b"匹配"never"中的"er"，但不匹配"verb"中的"er"。</p></td></tr><tr><td><p>\B</p></td><td><p>非字边界匹配。"er\B"匹配"verb"中的"er"，但不匹配"never"中的"er"。</p></td></tr><tr><td><p>\c<i>x</i></p></td><td><p>匹配 <i>x</i> 指示的控制字符。例如，\cM 匹配 Control-M 或回车符。<i>x</i> 的值必须在 A-Z 或 a-z 之间。如果不是这样，则假定 c 就是"c"字符本身。</p></td></tr><tr><td><p>\d</p></td><td><p>数字字符匹配。等效于 [0-9]。</p></td></tr><tr><td><p>\D</p></td><td><p>非数字字符匹配。等效于 [^0-9]。</p></td></tr><tr><td><p>\f</p></td><td><p>换页符匹配。等效于 \x0c 和 \cL。</p></td></tr><tr><td><p>\n</p></td><td><p>换行符匹配。等效于 \x0a 和 \cJ。</p></td></tr><tr><td><p>\r</p></td><td><p>匹配一个回车符。等效于 \x0d 和 \cM。</p></td></tr><tr><td><p>\s</p></td><td><p>匹配任何空白字符，包括空格、制表符、换页符等。与 [&nbsp;\f\n\r\t\v] 等效。</p></td></tr><tr><td><p>\S</p></td><td><p>匹配任何非空白字符。与 [^&nbsp;\f\n\r\t\v] 等效。</p></td></tr><tr><td><p>\t</p></td><td><p>制表符匹配。与 \x09 和 \cI 等效。</p></td></tr><tr><td><p>\v</p></td><td><p>垂直制表符匹配。与 \x0b 和 \cK 等效。</p></td></tr><tr><td><p>\w</p></td><td><p>匹配任何字类字符，包括下划线。与"[A-Za-z0-9_]"等效。</p></td></tr><tr><td><p>\W</p></td><td><p>与任何非单词字符匹配。与"[^A-Za-z0-9_]"等效。</p></td></tr><tr><td><p>\x<i>n</i></p></td><td><p>匹配 <i>n</i>，此处的 <i>n</i> 是一个十六进制转义码。十六进制转义码必须正好是两位数长。例如，"\x41"匹配"A"。"\x041"与"\x04"&amp;"1"等效。允许在正则表达式中使用 ASCII 代码。</p></td></tr><tr><td><p>\<i>num</i></p></td><td><p>匹配 <i>num</i>，此处的 <i>num</i> 是一个正整数。到捕获匹配的反向引用。例如，"(.)\1"匹配两个连续的相同字符。</p></td></tr><tr><td><p>\<i>n</i></p></td><td><p>标识一个八进制转义码或反向引用。如果 \<i>n</i> 前面至少有 <i>n</i> 个捕获子表达式，那么 <i>n</i> 是反向引用。否则，如果 <i>n</i> 是八进制数 (0-7)，那么 <i>n</i> 是八进制转义码。</p></td></tr><tr><td><p>\<i>nm</i></p></td><td><p>标识一个八进制转义码或反向引用。如果 \<i>nm</i> 前面至少有 <i>nm</i> 个捕获子表达式，那么 <i>nm</i> 是反向引用。如果 \<i>nm</i> 前面至少有 <i>n</i> 个捕获，则 <i>n</i> 是反向引用，后面跟有字符 <i>m</i>。如果两种前面的情况都不存在，则 \<i>nm</i> 匹配八进制值 <i>nm</i>，其中 <i>n </i>和 <i>m</i> 是八进制数字 (0-7)。</p></td></tr><tr><td><p>\<span class="parameter" sdata="paramReference">nml</span></p></td><td><p>当 <i>n</i> 是八进制数 (0-3)，<i>m</i> 和 <i>l</i> 是八进制数 (0-7) 时，匹配八进制转义码 <i>nml</i>。</p></td></tr><tr><td><p>\u<i>n</i></p></td><td><p>匹配 <i>n</i>，其中 <i>n</i> 是以四位十六进制数表示的 Unicode 字符。例如，\u00A9 匹配版权符号 (©)。</p></td></tr></tbody></table>
 
 
+### Java中的正则
+::: warning 注意
+在其他语言中，`\\` 表示：我想要在正则表达式中插入一个普通的（字面上的）反斜杠，请不要给它任何特殊的意义。在 Java 中，`\\` 表示：我要插入一个正则表达式的反斜线，所以其后的字符具有特殊的意义。
+
+所以，在其他的语言中（如Perl），一个反斜杠 `\` 就足以具有转义的作用，而在 Java 中正则表达式中则需要有两个反斜杠才能被解析为其他语言中的转义作用。也可以简单的理解在Java的正则表达式中，两个`\\`代表其他语言中的一个 `\`，这也就是为什么表示一位数字的正则表达式是 `\\d`，而表示一个普通的反斜杠是 `\\\\`。
+:::
+
+Java的正则表达式实现依赖于`java.util.regex`这个包来实现，主要包括三个类， Pattern, Matcher, 和PatternSyntaxException。
+
+- Pattern 是一个正则表达式的编译形式。通过接收正则表达式来创建一个Pattern对象
+- Matcher 是对输入字符串进行解释和匹配操作的引擎。
+- PatternSyntaxException PatternSyntaxException对象是一个未检查的异常，它指示正则表达式模式中的语法错误。
+
+以一个简单的例子来代入Java正则的使用
+```java
+import java.util.regex.Pattern;
+
+   public class Demo1 {
+    
+    public static void main(String[] args){
+
+        // 待验证字符串
+        String content = "This is Chaitanya " +
+                "from Beginnersbook.com.";
+        // 正则表达式
+        String pattern = ".*book.*";
+        // 正则匹配
+        boolean isMatch = Pattern.matches(pattern, content);
+        System.out.println("The text contains 'book'? " + isMatch);
+    }
+
+}
+```
+这是一个验证字符串中是否包含`*book.`的例子。
+
+下面来介绍`Pattern`和`Matcher`这两个核心类。
+
+#### Pattern.compile()
+Pattern有两个`compile`方法用于构建Pattern对象，其中一个无参，上面的例子已经展示过，还有一个带编译参数的方法
+```java {3}
+    String content = "This is a tutorial Website!";
+    String patternString = ".*tuToRiAl.";
+    Pattern pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
+```
+#### Pattern.matcher()
+matcher方法用于将传入的pattern和要匹配的字符串构建一个Matcher对象
+```java {4}
+    String content = "This is a tutorial Website!";
+    String patternString = ".*tuToRiAl.*";
+    Pattern pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
+    Matcher matcher = pattern.matcher(content);
+```
+####  Pattern.split()
+split方法将文本按照一个正则分隔符分割成多个子字符串。
+```java {5}
+    String text = "ThisIsChaitanya.ItISMyWebsite";
+    // Pattern for delimiter
+	String patternString = "is";
+	Pattern pattern = Pattern.compile(patternString, Pattern.CASE_INSENSITIVE);
+	String[] myStrings = pattern.split(text);
+```
+#### Matcher.matches()
+```java
+    Matcher matcher = pattern.matcher(content);
+    boolean isMatch = matcher.matches();
+```
+计算文本内容是否匹配正则表达式
+
+#### Matcher.lookingAt()
+与matches方法稿功能相似，不过是找到即可返回而不要求整个文本匹配
+
+#### Matcher.find()
+查找是否有下一个匹配正则表达式的，一般在循环中调用
+
+#### Matcher.start() Matcher.end()
+通常与find()方法一起使用标记找到的字串的起止位置
+```java {1-4}
+        while(matcher.find()) {
+            System.out.println("Found at: "+ matcher.start()
+                    +
+                    " - " + matcher.end());
+        }
+```
+
+## Chained Exception 链式异常
+链式异常的主要目的是在程序中跨多个逻辑层传播时保留原始异常。这对于抛出异常时的调试过程非常有帮助，因为程序员可以分析异常的完整堆栈跟踪。
+
+![异常链示例](/images/java-history/exception-chain.png)
+
+通过将下一级的异常传入如下的方法，可以使得异常得以继续传播，直到处理异常。以一个例子说明一下。
+
+先定义三个层次的异常类。
+```java 
+    public class Layer1Exception extends Exception {
+    
+        public Layer1Exception(String message, Throwable throwable){
+            super(message, throwable);
+        }
+    }
+
+    public class Layer2Exception extends Exception {
+    
+        public Layer2Exception(String message, Throwable throwable){
+            super(message, throwable);
+        }
+    }
+
+    public class Layer3Exception extends Exception {
+    
+        public Layer3Exception(String message, Throwable throwable){
+            super( message, throwable);
+        }
+    }
+```
+再在一个调用链中依次抛出异常，并捕获上一层的异常。
+```java
+public class BusService {
+
+    private static void throwLayer1Exception() throws Layer1Exception{
+        throw new Layer1Exception("this is layer1 excption", null);
+    }
+
+    private static void throwLayer2Exception() throws Layer2Exception{
+        try {
+            throwLayer1Exception();
+        }catch (Layer1Exception e){
+            throw new Layer2Exception("this is layer2 exception", e);
+        }
+    }
+
+    private static void throwLayer3Exception() throws Layer3Exception{
+        try {
+            throwLayer2Exception();
+        }catch (Layer2Exception e){
+            throw new Layer3Exception("this is layer3 exception", e);
+        }
+    }
+
+    private static void catchAllException()  {
+        try {
+            throwLayer3Exception();
+        }catch (Layer3Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        catchAllException();
+    }
+}
+```
+输出可见，各层抛出的异常都被捕获了，这样有利于最终定位并发现问题。
+```
+cn.errison.feature.demo.exception.chain.Layer3Exception: this is layer3 exception
+	at cn.errison.feature.demo.exception.chain.BusService.throwLayer3Exception(BusService.java:21)
+	at cn.errison.feature.demo.exception.chain.BusService.catchAllException(BusService.java:27)
+	at cn.errison.feature.demo.exception.chain.BusService.main(BusService.java:34)
+Caused by: cn.errison.feature.demo.exception.chain.Layer2Exception: this is layer2 exception
+	at cn.errison.feature.demo.exception.chain.BusService.throwLayer2Exception(BusService.java:13)
+	at cn.errison.feature.demo.exception.chain.BusService.throwLayer3Exception(BusService.java:19)
+	... 2 more
+Caused by: cn.errison.feature.demo.exception.chain.Layer1Exception: this is layer1 excption
+	at cn.errison.feature.demo.exception.chain.BusService.throwLayer1Exception(BusService.java:6)
+	at cn.errison.feature.demo.exception.chain.BusService.throwLayer2Exception(BusService.java:11)
+	... 3 more
+```
+
+## IPV6 Support IPV6支持
+互联网协议版本4 (IPv4)长期以来一直是互联网协议(IP)的行业标准版本，用于在互联网上传输数据。由于IPV4有诸多限制，尤其是IP地址太少，IPV6逐步开始推广起来。
+
+随着IPv6越来越受到业界的重视，Java从1.4版开始支持Linux和Solaris平台上的IPv6。1.5版起又加入了对Windows平台上的支持。
+
+Java对IPV6的支持非常友好，对用户来说，使用IPV4或者IPV6是完全透明无感的的。当然，用户也可以通过一些选项制定究竟使用那种协议。
+
+Java网络栈首先检查底层OS上是否支持IPv6。如果支持IPv6，它会尝试使用IPv6网络栈。更准确地说，在同时支持IPV4和IPV6网络栈的情形下，Java会优先创建IPV6 socket。
+
+在网络栈分离的系统中要稍微复杂一些。Java运行时会创建两个sockets，一个用于IPV4通信，一个用于IPV6通信。对于TCP的client端，一旦连接建立了，网络协议就确定了，另外的socket会被关闭。
+
+对于TCP的server端，因为无法知道下一个连接是哪个IP协议族的类型，所以两个socket都将一致维持。
+
+对于UDP应用，在整个连接过程中，两个socket都必须保持通信。
+
+## Java Logging API Support
+
+日志记录是在程序执行期间将日志消息写到一个集中的地方。日志信息有助于日后找回和分析运行时的信息和异常信息。
+
+JDK1.4开始，Java通过java.util.logging包的Logger类来提供日志相关功能。
+
+以一个例子进行完整说明，包括构建Logger对象，日志输出控制，输出格式化以及日志级别。
+```java
+
+public class Demo1 {
+
+    // 构建Logger对象
+    private static Logger logger =
+            Logger.getLogger(Demo1.class.getName());
+
+    private static FileHandler fileHandler;
 
 
+    // 格式化输出
+    private static class CustomFormatter extends Formatter {
+        private static final String format =
+                "[%1$tF %1$tT] [%2$-4s] %3$s %n";
+
+        public String format(LogRecord record) {
+            return String.format(format,
+                    record.getMillis(),
+                    record.getLevel().getLocalizedName(),
+                    record.getMessage());
+        }
+    }
+
+
+    public static void main(String[] args) throws
+            IOException {
+        // 输出到文件
+        fileHandler = new
+                FileHandler(Demo1.class.getName() + ".log");
+        logger.setLevel(Level.ALL);
+        fileHandler.setFormatter(new CustomFormatter());
+        logger.addHandler(fileHandler);
+        // 日志级别
+        logger.fine("Log message redirected to a file");
+        logger.finer("The name of the logger is " +
+                logger.getName());
+        logger.finest("This is same as class name: " +
+                Demo1.class.getName());
+    }
+
+}
+```
+## Java Image I/O API
+
+## NIO
