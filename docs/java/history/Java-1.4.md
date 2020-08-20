@@ -253,6 +253,320 @@ public class Demo1 {
 
 }
 ```
-## Java Image I/O API
 
 ## NIO
+Java IO（输入/输出）用于执行读取和写入操作。Java IO是基于数据流的，即每次可以从数据流中读取或者写入一个或者多个字节，工作模式见下图。
+
+![java-io](/images/java-history/java-io.png)
+
+Java IO是一种阻塞IO，同一时间内，要么可以读取，要么可以写入，不能同时进行，效率较低。
+
+JDK1.4引入了Java New IO(Java NIO),与Java IO不同，Java NIO基于缓冲区(Buffer)。数据被读入缓冲区，然后使用通道(Channel)对其进行进一步处理。Java NIO最大的优势在于它可以提供双向传输。
+
+用一张图说明通道、缓冲区、java程序、数据源和数据接收器之间的交互。
+![java-io](/images/java-history/java-nio.png)。
+
+### Buffer
+**Buffer是Java NIO构建的基石。**
+
+Buffer是一个承载特定的原始类型的线性的，有限的容器。包括几个重要属性：
+- content 存储的对象
+- capacity 能承载的元素最大值，是一个非负定长数
+- limit 是当前buffer刻度的元素可读写的边界，是一个非负数且不可以超过capacity
+- position 是当前要读写元素的下标，不可以超过limit
+
+Buffer是一个抽象类，针对不同的原始类型，有不同的实现类，见继承关系如下：
+![java-io](/images/java-history/java-nio-buffer-classes.png)
+
+
+以一个例子说明
+```java
+private static void buffer2String(){
+        // Allocate a new non-direct byte buffer with a 50 byte capacity
+        // set this to a big value to avoid BufferOverflowException
+        CharBuffer buf = CharBuffer.allocate(50);
+
+        System.out.println("before insert into buffer");
+        System.out.println("capacity is " + buf.capacity());
+        System.out.println("limit is " + buf.limit());
+        System.out.println("position is " + buf.position() + "\n");
+
+        // Write a string to char buffer
+        buf.put("How to do in java");
+
+        System.out.println("after insert into buffer");
+        System.out.println("capacity is " + buf.capacity());
+        System.out.println("limit is " + buf.limit());
+        System.out.println("position is " + buf.position() + "\n");
+
+        // Flips this buffer. The limit is set to the current position and then
+        // the position is set to zero. If the mark is defined then it is
+        // discarded
+        buf.flip();
+
+        // Output again
+        System.out.println("after flip ");
+        System.out.println("capacity is " + buf.capacity());
+        System.out.println("limit is " + buf.limit());
+        System.out.println("position is " + buf.position() + "\n");
+
+        String s = buf.toString(); // a string
+        System.out.println(s);
+
+    }
+
+```
+### Channel 
+Channel表示与硬件设备，文件，网络套接字或程序组件之类的实体的开放连接，该实体能够执行一个或多个不同的I/O操作（例如，读取或写入）。
+
+```java
+
+    public static void readWithChannel() {
+        try {
+            // random access a file
+            RandomAccessFile aFile = new RandomAccessFile("test.txt", "r");
+
+            // open a channel
+            FileChannel inChannel = aFile.getChannel();
+            long fileSize = inChannel.size();
+
+            // create a buffer
+            ByteBuffer buffer = ByteBuffer.allocate((int) fileSize);
+            inChannel.read(buffer);
+            buffer.flip();
+
+            //Verify the file content
+            for (int i = 0; i < fileSize; i++) {
+                System.out.print((char) buffer.get());
+            }
+
+            inChannel.close();
+            aFile.close();
+        } catch (Exception exc) {
+            System.out.println(exc);
+            System.exit(1);
+        }
+    }
+
+```
+### Selector
+
+Selector是一个组件，它可以检查一个或多个Java NIO通道实例，并确定哪些通道可以读取或写入。通过这种方式，一个线程可以管理多个通道，从而实现多个网络连接。
+
+#### 创建一个Selector
+```java
+    Selector selector = Selector.open();  
+```
+#### 创建一个服务端socket
+```java
+    ServerSocketChannel serverSocket = ServerSocketChannel.open();  
+    InetSocketAddress hostAddress = new InetSocketAddress("localhost", 8080);  
+    serverSocket.bind(hostAddress);  
+```
+#### 使用Selector选择Channel
+```java
+    Set<SelectionKey> selectedKeys = selector.selectedKeys();  
+    Iterator<SelectionKey> keyIterator = selectedKeys.iterator();  
+    while(keyIterator.hasNext()) {    
+        SelectionKey key = keyIterator.next();  
+        if(key.isConnectable()) {  
+            // The connection was established with a remote server.  
+        } else if (key.isAcceptable()) {  
+            // The connection was accepted by a ServerSocketChannel.  
+        } else if (key.isWritable()) {  
+            //  The channel is ready for writing  
+        } else if (key.isReadable()) {  
+            // The channel is ready for reading  
+        }  
+        keyIterator.remove();  
+    }  
+```
+## Java Image I/O API
+
+`javax.imageio.ImageIO`包提供了一系列方便的静态方法来执行Image IO操作。
+
+Image IO读取一个Image文件是通过探测文件中的魔数来实现的。
+```java
+   public static void readImage() {
+           try {
+               File f = new File("D:\\images\\test.jpg");
+               BufferedImage bi = ImageIO.read(f);
+               System.out.println("image height " + bi.getHeight());
+               System.out.println("image width " + bi.getWidth());
+               System.out.println("image type " + bi.getType());
+   
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+            
+       }
+```
+写入一个文件，即可使用之前创建的对象来写入
+```java
+    public static void writeImage(BufferedImage image, String path){
+        try {
+            File f = new File(path);
+            ImageIO.write(image, "png", f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+## XML support
+JDK1.4 开启了对XML文件的支持，有两种解析的方式
+
+### DOM 
+Document Object Model (DOM)是W3C组织的官方推荐。它定义了一个接口，使程序能够访问和更新XML文档的样式、结构和内容。
+
+以一个例子来说明解析，待解析的XML文档如下：
+```xml
+<?xml version = "1.0"?>
+<class>
+    <student rollno = "393">
+        <firstname>dinkar</firstname>
+        <lastname>kad</lastname>
+        <nickname>dinkar</nickname>
+        <marks>85</marks>
+    </student>
+
+    <student rollno = "493">
+        <firstname>Vaneet</firstname>
+        <lastname>Gupta</lastname>
+        <nickname>vinni</nickname>
+        <marks>95</marks>
+    </student>
+
+    <student rollno = "593">
+        <firstname>jasvir</firstname>
+        <lastname>singn</lastname>
+        <nickname>jazz</nickname>
+        <marks>90</marks>
+    </student>
+</class>
+```
+
+```java
+private static void readWithJDOM() {
+        try {
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(DomParser.class.getClassLoader().getResourceAsStream("students.xml"));
+            doc.getDocumentElement().normalize();
+            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+            NodeList nList = doc.getElementsByTagName("student");
+            System.out.println("----------------------------");
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+                System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element eElement = (Element) nNode;
+                    System.out.println("Student roll no : "
+                            + eElement.getAttribute("rollno"));
+                    System.out.println("First Name : "
+                            + eElement
+                            .getElementsByTagName("firstname")
+                            .item(0)
+                            .getTextContent());
+                    System.out.println("Last Name : "
+                            + eElement
+                            .getElementsByTagName("lastname")
+                            .item(0)
+                            .getTextContent());
+                    System.out.println("Nick Name : "
+                            + eElement
+                            .getElementsByTagName("nickname")
+                            .item(0)
+                            .getTextContent());
+                    System.out.println("Marks : "
+                            + eElement
+                            .getElementsByTagName("marks")
+                            .item(0)
+                            .getTextContent());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+### Simple API for XML
+SAX（XML Simple API）是XML文档的基于事件的解析器。SAX是XML的流接口，解析时不需要解析出DOM树，这意味着使用SAX的应用程序将按顺序接收处理元素和属性的XML文档的事件通知。每次计息从文档顶部开始，结束于根元素的关闭。
+
+还是刚才的XML文件，这次以SAX方式解析。
+```java
+
+public class SAXParserDemo {
+
+
+   public static void main(String[] args) {
+
+      try {
+         SAXParserFactory factory = SAXParserFactory.newInstance();
+         SAXParser saxParser = factory.newSAXParser();
+         UserHandler userhandler = new UserHandler();
+         saxParser.parse(SAXParserDemo.class.getClassLoader().getResourceAsStream("students.xml"), userhandler);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+
+
+class UserHandler extends DefaultHandler {
+
+   boolean bFirstName = false;
+   boolean bLastName = false;
+   boolean bNickName = false;
+   boolean bMarks = false;
+
+   @Override
+   public void startElement(
+           String uri, String localName, String qName, Attributes attributes)
+           throws SAXException {
+
+      if (qName.equalsIgnoreCase("student")) {
+         String rollNo = attributes.getValue("rollno");
+         System.out.println("Roll No : " + rollNo);
+      } else if (qName.equalsIgnoreCase("firstname")) {
+         bFirstName = true;
+      } else if (qName.equalsIgnoreCase("lastname")) {
+         bLastName = true;
+      } else if (qName.equalsIgnoreCase("nickname")) {
+         bNickName = true;
+      } else if (qName.equalsIgnoreCase("marks")) {
+         bMarks = true;
+      }
+   }
+
+   @Override
+   public void endElement(String uri,
+                          String localName, String qName) throws SAXException {
+
+      if (qName.equalsIgnoreCase("student")) {
+         System.out.println("End Element :" + qName);
+      }
+   }
+
+   @Override
+   public void characters(char ch[], int start, int length) throws SAXException {
+
+          if (bFirstName) {
+             System.out.println("First Name: " + new String(ch, start, length));
+             bFirstName = false;
+          } else if (bLastName) {
+             System.out.println("Last Name: " + new String(ch, start, length));
+             bLastName = false;
+          } else if (bNickName) {
+             System.out.println("Nick Name: " + new String(ch, start, length));
+             bNickName = false;
+          } else if (bMarks) {
+             System.out.println("Marks: " + new String(ch, start, length));
+             bMarks = false;
+          }
+       }
+   }
+}
+```
