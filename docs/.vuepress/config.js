@@ -36,7 +36,6 @@ module.exports = {
 
     themeConfig: {
 
-
         copyRight: '@copyright2019-2020 Errison  ',
         nav: NavConfig,
         sidebar: SidebarConfig,

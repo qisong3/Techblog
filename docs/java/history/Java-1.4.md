@@ -570,3 +570,39 @@ class UserHandler extends DefaultHandler {
    }
 }
 ```
+
+## JCA  JCE  JSSE
+Java平台非常强调安全性，包括语言安全性、密码学、公钥基础设施、身份验证、安全通信和访问控制。自JDK1.4开始，原本作为附加组件的JCA，JCE，JSSE正式加入JDK。
+
+### Java Cryptography Architecture (JCA)
+JCA是Java平台的重要组成部分，包含一个"提供者"架构和一系列的API，包括数字签名，信息摘要，证书及证书认生，加解密，密钥生成和协商，安全随机码生成等等。这些API可以让
+开发者门轻松将安全性集成到应用代码中。这个架构的设计原则如下：
+-  **实现的独立性** 应用不需要实现安全性算法，可以直接通过Java平台去请求安全性服务。安全性服务就是实现了提供者架构中"提供者"所实现的，在Java平台上通过标注的接口嵌入Java平台。一个应用
+可以依赖多个相互独立的安全性"提供者"。
+- **实现的通用性** 安全性算法提供者可以在应用间独立。应用不依赖一一个特定的提供者，一个提供者也不绑定到具体的应用中。
+- **算法可扩展性** Java平台提供了一系列的广为使用的内置的安全性的服务。但是一些应用依赖于一些新兴的未实现的标准，或者一些专有服务。Java平台支持为这些为实现的服务安装定定制化提供者。
+
+在JDK中，JCA包括两个组件：
+1. 定义和提供密码学服务的框架。包括`java.security`, `javax.crypto`, `javax.crypto.spec`, and `javax.crypto.interfaces`
+2. 实际的密码学服务提供者，包括 `Sun`, `SunRsaSign`, `SunJCE`
+参考[JCA](https://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html)
+
+
+### Java Cryptography Extension (JCE) 
+JCE是JCA的扩展，也是JCA的一个组成部分。
+
+JCE扩展了JCA在密码学方便的范畴，包括加解，密钥生成，密钥协商，Hamc。支持的算法包括如下：
+- 对称组加密，如DES，RC2,IDEA
+- 对称流加密，如RC4
+- 非对称加密，如RSA
+- 基于密码加密，如PBE
+- 密钥协商
+- 消息认证，MAC
+参考[JCE](https://docs.oracle.com/javase//1.5.0/docs/guide/security/jce/JCERefGuide.html)
+
+### Java Secure Socket Extension(JSSE)
+JSSE用于Java平台的安全网络传输。JSSE提供了Java版本的SSL和TSL的协议实现和框架，包括数据加解密，服务端验证，消息完整性验证，可选的客户端验证等。
+
+开发者可以使用JSSE在服务端和客户端之间使用各种协议，包括HTTP，Telnet，FTP等进行安全通信。
+
+参考[JSSE](https://docs.oracle.com/javase/7/docs/technotes/guides/security/jsse/JSSERefGuide.html)
