@@ -262,8 +262,7 @@ Provider需要以Jar包形式提供，并且包含含一个`\\META-INF\\services
 这样，Java程序就可以自动加载JDBC驱动，如果有多个驱动同时存在，默认选取首个驱动。
 
 
-### Annotated SQL queries 注解查询
-
+## Annotated SQL queries 注解查询
 
 ### ROWID data type
 
