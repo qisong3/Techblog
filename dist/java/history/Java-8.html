@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Java-8 | Errison&#39;s share</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    <link rel="icon" href="/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <script>var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?b16f225f97b3c7e88a6ecd6e49d45b37";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
+          </script>
+    <meta name="description" content="A place to share IT tech">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <link rel="preload" href="/assets/css/0.styles.35789c7e.css" as="style"><link rel="preload" href="/assets/js/app.3fad4c8c.js" as="script"><link rel="preload" href="/assets/js/3.3e98eff2.js" as="script"><link rel="preload" href="/assets/js/29.ed2279e4.js" as="script"><link rel="preload" href="/assets/js/6.8fb5b480.js" as="script"><link rel="prefetch" href="/assets/js/10.d80d54bd.js"><link rel="prefetch" href="/assets/js/11.2bed8e41.js"><link rel="prefetch" href="/assets/js/12.0de17b5b.js"><link rel="prefetch" href="/assets/js/13.6bad91f0.js"><link rel="prefetch" href="/assets/js/14.da6b6d22.js"><link rel="prefetch" href="/assets/js/15.80d730ab.js"><link rel="prefetch" href="/assets/js/16.efab06a2.js"><link rel="prefetch" href="/assets/js/17.7c0e42de.js"><link rel="prefetch" href="/assets/js/18.adeb752e.js"><link rel="prefetch" href="/assets/js/19.8b3806ed.js"><link rel="prefetch" href="/assets/js/20.9ad4e03c.js"><link rel="prefetch" href="/assets/js/21.275389a5.js"><link rel="prefetch" href="/assets/js/22.25dd88ca.js"><link rel="prefetch" href="/assets/js/23.7f061ed6.js"><link rel="prefetch" href="/assets/js/24.03381a3b.js"><link rel="prefetch" href="/assets/js/25.6b352405.js"><link rel="prefetch" href="/assets/js/26.5a37d5b0.js"><link rel="prefetch" href="/assets/js/27.945ccdae.js"><link rel="prefetch" href="/assets/js/28.8422bf4d.js"><link rel="prefetch" href="/assets/js/30.e59268f6.js"><link rel="prefetch" href="/assets/js/31.459388c7.js"><link rel="prefetch" href="/assets/js/32.6f813853.js"><link rel="prefetch" href="/assets/js/33.0e6c0267.js"><link rel="prefetch" href="/assets/js/34.98d68aa6.js"><link rel="prefetch" href="/assets/js/35.a0c859eb.js"><link rel="prefetch" href="/assets/js/36.c2e25caa.js"><link rel="prefetch" href="/assets/js/37.240d3631.js"><link rel="prefetch" href="/assets/js/38.89f99f7a.js"><link rel="prefetch" href="/assets/js/39.fe1f6aa3.js"><link rel="prefetch" href="/assets/js/4.cc798e8b.js"><link rel="prefetch" href="/assets/js/40.53cb6b81.js"><link rel="prefetch" href="/assets/js/41.18357579.js"><link rel="prefetch" href="/assets/js/42.480d5eeb.js"><link rel="prefetch" href="/assets/js/43.7b10441d.js"><link rel="prefetch" href="/assets/js/5.83a396a2.js"><link rel="prefetch" href="/assets/js/7.2fb8f850.js"><link rel="prefetch" href="/assets/js/8.52ad8f25.js"><link rel="prefetch" href="/assets/js/9.c1752616.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1fdfa170.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35789c7e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Errison's share" class="logo"> <span class="site-name can-hide">Errison's share</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="source" class="dropdown-title"><span class="title">源码系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java源码
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/java-collections/" class="nav-link">
+  集合
+</a></li><li class="dropdown-subitem"><a href="/source/java-wrapper/" class="nav-link">
+  包装类
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/array/" class="nav-link">
+  数组
+</a></li><li class="dropdown-subitem"><a href="/algorithm/stack.html" class="nav-link">
+  栈
+</a></li><li class="dropdown-subitem"><a href="/algorithm/heap/" class="nav-link">
+  堆
+</a></li><li class="dropdown-subitem"><a href="/algorithm/tree.html" class="nav-link">
+  树
+</a></li><li class="dropdown-subitem"><a href="/algorithm/graph.html" class="nav-link">
+  图
+</a></li><li class="dropdown-subitem"><a href="/algorithm/hashtable.html" class="nav-link">
+  哈希表
+</a></li></ul></li><li class="dropdown-item"><h4>
+          算法
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/greedy.html" class="nav-link">
+  贪心
+</a></li><li class="dropdown-subitem"><a href="/algorithm/backtracking.html" class="nav-link">
+  回溯
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="java" class="dropdown-title"><span class="title">Java专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/history/" class="nav-link router-link-active">
+  Java简史
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java深入
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/review/" class="nav-link">
+  面试集锦
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="go" class="dropdown-title"><span class="title">Go专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/go/tutorial/" class="nav-link">
+  基础教程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="mysql" class="dropdown-title"><span class="title">Mysql专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Mysql基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/datatype/" class="nav-link">
+  mysql数据格式
+</a></li><li class="dropdown-subitem"><a href="/mysql/sql-statement/" class="nav-link">
+  数据库语句
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Mysql优化
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/upgrade/" class="nav-link">
+  Mysql优化
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="share" class="dropdown-title"><span class="title">分享</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          个人分享
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/technical/" class="nav-link">
+  实践技术
+</a></li></ul></li><li class="dropdown-item"><h4>
+          百家之长
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/top/" class="nav-link">
+  公众号精品
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/qisong3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Contact
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="source" class="dropdown-title"><span class="title">源码系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java源码
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/java-collections/" class="nav-link">
+  集合
+</a></li><li class="dropdown-subitem"><a href="/source/java-wrapper/" class="nav-link">
+  包装类
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/array/" class="nav-link">
+  数组
+</a></li><li class="dropdown-subitem"><a href="/algorithm/stack.html" class="nav-link">
+  栈
+</a></li><li class="dropdown-subitem"><a href="/algorithm/heap/" class="nav-link">
+  堆
+</a></li><li class="dropdown-subitem"><a href="/algorithm/tree.html" class="nav-link">
+  树
+</a></li><li class="dropdown-subitem"><a href="/algorithm/graph.html" class="nav-link">
+  图
+</a></li><li class="dropdown-subitem"><a href="/algorithm/hashtable.html" class="nav-link">
+  哈希表
+</a></li></ul></li><li class="dropdown-item"><h4>
+          算法
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/greedy.html" class="nav-link">
+  贪心
+</a></li><li class="dropdown-subitem"><a href="/algorithm/backtracking.html" class="nav-link">
+  回溯
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="java" class="dropdown-title"><span class="title">Java专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/history/" class="nav-link router-link-active">
+  Java简史
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java深入
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/review/" class="nav-link">
+  面试集锦
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="go" class="dropdown-title"><span class="title">Go专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Go基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/go/tutorial/" class="nav-link">
+  基础教程
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="mysql" class="dropdown-title"><span class="title">Mysql专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Mysql基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/datatype/" class="nav-link">
+  mysql数据格式
+</a></li><li class="dropdown-subitem"><a href="/mysql/sql-statement/" class="nav-link">
+  数据库语句
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Mysql优化
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/upgrade/" class="nav-link">
+  Mysql优化
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="share" class="dropdown-title"><span class="title">分享</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          个人分享
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/technical/" class="nav-link">
+  实践技术
+</a></li></ul></li><li class="dropdown-item"><h4>
+          百家之长
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/top/" class="nav-link">
+  公众号精品
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/qisong3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Contact
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Java简史</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/java/history/" aria-current="page" class="sidebar-link">Java简介</a></li><li><a href="/java/history/Java诞生史.html" class="sidebar-link">Java诞生史</a></li><li><a href="/java/history/Java-1.html" class="sidebar-link">Java-1</a></li><li><a href="/java/history/Java-1.1.html" class="sidebar-link">Java-1.1</a></li><li><a href="/java/history/Java-1.2.html" class="sidebar-link">Java-1.2</a></li><li><a href="/java/history/Java-1.3.html" class="sidebar-link">Java-1.3</a></li><li><a href="/java/history/Java-1.4.html" class="sidebar-link">Java-1.4</a></li><li><a href="/java/history/Java-5.html" class="sidebar-link">Java-5</a></li><li><a href="/java/history/Java-6.html" class="sidebar-link">Java-6</a></li><li><a href="/java/history/Java-7.html" class="sidebar-link">Java-7</a></li><li><a href="/java/history/Java-8.html" aria-current="page" class="active sidebar-link">Java-8</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/java/history/Java-8.html#interface-default-method-接口默认实现方法" class="sidebar-link">Interface default method  接口默认实现方法</a></li><li class="sidebar-sub-header"><a href="/java/history/Java-8.html#functional-interface-函数式接口" class="sidebar-link">Functional Interface  函数式接口</a></li><li class="sidebar-sub-header"><a href="/java/history/Java-8.html#lambda" class="sidebar-link">Lambda</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><p>2014年3月18日，JDK8正式发布。JDK8是JDK的一个重要版本，也是一个长期支持版本，从2014年开始，持续维护到2022年。</p> <h2 id="interface-default-method-接口默认实现方法"><a href="#interface-default-method-接口默认实现方法" class="header-anchor">#</a> Interface default method  接口默认实现方法</h2> <p>在JDK8之前，接口只能用来做两件事，声明接口中的函数，以及定义常量。</p> <p>如果在现有的接口上新增一个函数接口，那么所有实现这个接口的实现类，都得相应地实现这个新增的方法，代码改动量大，而且可能这个方法在旧的实现类中压根不需要。</p> <p>JDK8给接口增加了默认实现函数这一特性，使用<code>default</code>来标识类方法的默认实现，这样实现类就不必须重写这个方法。</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>  <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Dog</span> <span class="token punctuation">{</span>
+    <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">bark</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;wang&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>也正是由于这个特性，Java代码在为历史接口新增实现时就可以游刃有余，不用担心需要改动已有实现类。</p> <h2 id="functional-interface-函数式接口"><a href="#functional-interface-函数式接口" class="header-anchor">#</a> Functional Interface  函数式接口</h2> <p>JDK8中将只定义了一个抽象方法的接口称为函数式接口，并由专门的注解标识@FunctionalInterface。
+在JDK8之前已有的函数式接口有</p> <ul><li>java.lang.Runnable</li> <li>java.util.concurrent.Callable</li> <li>java.security.PrivilegedAction</li> <li>java.util.Comparator</li> <li>java.io.FileFilter</li> <li>java.nio.file.PathMatcher</li> <li>java.lang.reflect.InvocationHandler</li> <li>java.beans.PropertyChangeListener</li> <li>java.awt.event.ActionListener</li> <li>javax.swing.event.ChangeListener</li></ul> <div class="custom-block tip"><p>对于接口中包含多个方法，但是其他方法都有默认实现的也认定为函数式接口。</p></div> <p>JDK8中，引入了一个心报java.util.function，其中定义了若涵函数式接口，主要可以分为以下几类。可以从接口定义中来查找。</p> <ul><li>Function</li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code>
+<span class="token annotation punctuation">@FunctionalInterface</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Function</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">,</span> <span class="token class-name">R</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * Applies this function to the given argument.
+     *
+     * @param t the function argument
+     * @return the function result
+     */</span>
+    <span class="token class-name">R</span> <span class="token function">apply</span><span class="token punctuation">(</span><span class="token class-name">T</span> t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><ul><li><p>Consumer</p></li> <li><p>Supplier</p></li></ul> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token annotation punctuation">@FunctionalInterface</span>
+    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Supplier</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+    
+        <span class="token comment">/**
+         * Gets a result.
+         *
+         * @return a result
+         */</span>
+        <span class="token class-name">T</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><ul><li>Predict</li></ul> <h2 id="lambda"><a href="#lambda" class="header-anchor">#</a> Lambda</h2></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/qisong3/Techblog/edit/master/docs/java/history/Java-8.md" target="_blank" rel="noopener noreferrer">在Github上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/java/history/Java-7.html" class="prev">
+        Java-7
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.3fad4c8c.js" defer></script><script src="/assets/js/3.3e98eff2.js" defer></script><script src="/assets/js/29.ed2279e4.js" defer></script><script src="/assets/js/6.8fb5b480.js" defer></script>
+  </body>
+</html>
