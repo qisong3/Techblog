@@ -320,5 +320,128 @@ ForkJoinPool pool = new ForkJoinPool(Runtime.getRunTime().availableProcessors();
 - 一些脆弱的加密算法，如RC2，已经禁止在SSL握手中使用
 
 ## File Enhancement
+### NIO 2.0
+* The OpenOptions Parameter 增加了文件读写的若干选项
+* Commonly Used Methods for Small Files 小文件读写方法
+ ```java 
+    // 一次性读取文件所有内容
+    Path file = ...;
+    byte[] fileArray;
+    fileArray = Files.readAllBytes(file);
+    // 写文件
+    write(Path, byte[], OpenOption...)
+    write(Path, Iterable< extends CharSequence>, Charset, OpenOption...)
+ ```
+* Buffered I/O Methods for Text Files 缓存text文件
+ ```java 
+    // 用缓存读取文件
+    Charset charset = Charset.forName("US-ASCII");
+    try (BufferedReader reader = Files.newBufferedReader(file, charset)) {
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+    } catch (IOException x) {
+        System.err.format("IOException: %s%n", x);
+    }
+    // 用缓存写文件
+    Charset charset = Charset.forName("US-ASCII");
+    String s = ...;
+    try (BufferedWriter writer = Files.newBufferedWriter(file, charset)) {
+        writer.write(s, 0, s.length());
+    } catch (IOException x) {
+        System.err.format("IOException: %s%n", x);
+    }
+ ```
+* Reading a File by Using Stream I/O 使用流IO读取文件
+```java 
+Path file = ...;
+    try (InputStream in = Files.newInputStream(file);
+        BufferedReader reader =
+          new BufferedReader(new InputStreamReader(in))) {
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+    } catch (IOException x) {
+        System.err.println(x);
+    }
+```
+* Reading and Writing Files by Using Channel I/O 使用Channel I/O读写文件
+```java 
+// Defaults to READ
+   import static java.nio.file.StandardOpenOption.*;
+   import java.nio.*;
+   import java.nio.channels.*;
+   import java.nio.file.*;
+   import java.nio.file.attribute.*;
+   import java.io.*;
+   import java.util.*;
+   
+   public class LogFilePermissionsTest {
+   
+     public static void main(String[] args) {
+     
+       // Create the set of options for appending to the file.
+       Set<OpenOption> options = new HashSet<OpenOption>();
+       options.add(APPEND);
+       options.add(CREATE);
+   
+       // Create the custom permissions attribute.
+       Set<PosixFilePermission> perms =
+         PosixFilePermissions.fromString("rw-r-----");
+       FileAttribute<Set<PosixFilePermission>> attr =
+         PosixFilePermissions.asFileAttribute(perms);
+   
+       // Convert the string to a ByteBuffer.
+       String s = "Hello World! ";
+       byte data[] = s.getBytes();
+       ByteBuffer bb = ByteBuffer.wrap(data);
+       
+       Path file = Paths.get("./permissions.log");
+   
+       try (SeekableByteChannel sbc =
+         Files.newByteChannel(file, options, attr)) {
+         sbc.write(bb);
+       } catch (IOException x) {
+         System.out.println("Exception thrown: " + x);
+       }
+     }
+   }
+```
+* Methods for Creating Regular and Temporary Files 创建普通和临时文件
+```java 
+    Path file = ...;
+    try {
+        // Create the empty file with default permissions, etc.
+        Files.createFile(file);
+    } catch (FileAlreadyExistsException x) {
+        System.err.format("file named %s" +
+            " already exists%n", file);
+    } catch (IOException x) {
+        // Some other sort of failure, such as permissions.
+        System.err.format("createFile error: %s%n", x);
+    }
+ 
 
-### Java N
+    try {
+        Path tempFile = Files.createTempFile(null, ".myapp");
+        System.out.format("The temporary file" +
+            " has been created: %s%n", tempFile)
+    ;
+    } catch (IOException x) {
+        System.err.format("IOException: %s%n", x);
+    }
+```
+### Developing a Custom File System Provider 用户自定义文件系统
+文件系统的服务提供者类。 Files类定义的方法通常会委托给此类的实例。
+
+文件系统提供程序是此类的具体实现，它实现此类定义的抽象方法。 提供者由URI scheme标识 。 默认提供程序由URI方案“file”标识。 它创建了FileSystem ，可以访问Java虚拟机可访问的文件系统。 FileSystems类定义了文件系统提供程序的定位和加载方式。 默认提供程序通常是系统默认提供程序，但如果设置了系统属性java.nio.file.spi.DefaultFileSystemProvider则可以覆盖该提供程序。 在这种情况下，提供程序有一个参数构造函数，其形式参数类型为FileSystemProvider 。 所有其他提供程序都有一个零参数构造函数来初始化提供程序。
+
+提供者是一个或多个FileSystem实例的工厂。 每个文件系统由URI标识，其中URI的方案与提供者的scheme匹配。 例如，默认文件系统由URI "file:///" 。 例如，基于存储器的文件系统可以由诸如"memory:///?name=logfs"的URI "memory:///?name=logfs" 。 newFileSystem方法可以用于创建文件系统，并且getFileSystem方法可以用于获得对提供者创建的现有文件系统的引用。 如果提供程序是单个文件系统的工厂，那么如果在初始化提供程序时创建文件系统，或者稍后在调用newFileSystem方法时创建文件系统，则它是提供程序相关的。 对于默认提供程序，将在初始化提供程序时创建FileSystem 。
+
+此类中的所有方法都可以安全地供多个并发线程使用。
+
+### Zip File System Provider zip文件服务提供者
+Zip File System Provider是Custom File System Provider的关于zip文件的一个具体实现。
+
