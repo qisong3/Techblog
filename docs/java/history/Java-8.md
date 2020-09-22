@@ -136,44 +136,90 @@ Lambda表达式是对Functional Interface的简写。Lambda表达式的具体定
 ```
 (parameter list) -> { body }
 ```
-表达式包含参数列表，一个`->`符号，以及方法体。如果方法只有一行语句`{}`也可以省略。
+表达式包含参数列表，一个`->`符号，以及方法体。如果参数只有一个，`()`可以省略，方法只有一行语句则`{}`也可以省略。
 
 列举一些Lambda表达式的定义示例
 ```java 
-    private static void defineLambdaFunction() {
-        BiFunction<Integer, Long, String> biFunction = (a, b) -> "BiFunction return: a :" + a + "  b: " + b;
-        String str = biFunction.apply(1, Long.MAX_VALUE);
-        System.out.println(str);
-    }
+    
+   // 有输入有输入
+   private static void defineLambdaFunction() {
+       BiFunction<Integer, Long, String> biFunction = (a, b) -> "BiFunction return: a :" + a + "  b: " + b;
+       String str = biFunction.apply(1, Long.MAX_VALUE);
+       System.out.println(str);
+   }
 
-    private static void defineLambdaConsumer() {
-        BiConsumer<Integer, Long> biConsumer = (a, b) -> System.out.println("BiConsumer a :" + a + "  b: " + b);
-        biConsumer.accept(1, Long.MAX_VALUE);
-    }
+   // 有输入无返回
+   private static void defineLambdaConsumer() {
+       BiConsumer<Integer, Long> biConsumer = (a, b) -> System.out.println("BiConsumer a :" + a + "  b: " + b);
+       biConsumer.accept(1, Long.MAX_VALUE);
+   }
 
-    private static void defineLambdaPredict() {
-        BiPredicate<Integer, Integer> biPredicate = (a, b) -> a > b;
-        System.out.println("Predict result : " + biPredicate.test(2, 4));;
-    }
+   // 有入参有返回
+   private static void defineLambdaPredict() {
+       BiPredicate<Integer, Integer> biPredicate = (a, b) -> a > b;
+       System.out.println("Predict result : " + biPredicate.test(2, 4));;
+   }
 
-    private static void defineLambdaSupplier() {
-        IntSupplier supplier = () -> 3;
-        System.out.println("Supplier : " + supplier.getAsInt());
-    }
+   // 没有参数
+   private static void defineLambdaSupplier() {
+       IntSupplier supplier = () -> 3;
+       System.out.println("Supplier : " + supplier.getAsInt());
+   }
+
 ```
 
 
-::: tip
-在JDK8之前已有的函数式接口有
-- java.lang.Runnable
-- java.util.concurrent.Callable
-- java.security.PrivilegedAction
-- java.util.Comparator
-- java.io.FileFilter
-- java.nio.file.PathMatcher
-- java.lang.reflect.InvocationHandler
-- java.beans.PropertyChangeListener
-- java.awt.event.ActionListener
-- javax.swing.event.ChangeListener
-:::
+## Method References 方法引用
 
+
+## Stream API 
+JDK8引入的Stream(流)，是支持顺序和并行聚合操作的元素序列。利用流可以自动遍历数组，容器等对象，并执行相关操作。
+
+### 创建
+
+#### empty
+```java 
+Stream<String> streamEmpty = Stream.empty();
+```
+#### Stream.of
+```java 
+// stream of list
+Collection<String> collection = Arrays.asList("a", "b", "c");
+Stream<String> streamOfCollection = collection.stream();
+
+// stream of array
+Stream<String> streamOfArray = Stream.of("a", "b", "c");
+```
+
+#### Stream.builder
+```java 
+Stream<String> streamBuilder = Stream.<String>builder().add("a").add("b").add("c").build();
+```
+#### Stream.generate
+```java
+Stream<String> stringStream1 = Stream.generate(()-> "what a long story").limit(10);
+```
+#### Stream.iterate
+```java
+Stream<Integer> streamIterated = Stream.iterate(40, n -> n + 2).limit(20);
+streamIterated.forEach( x -> System.out.print(x));
+```
+
+
+### forEach
+JDK8中新增了集合遍历的新方式，并且可以在遍历的过程中执行相关的操作,操作对象接收一个参数的Functional Interface。
+```java 
+    List<Integer> list = Arrays.asList(1, 2, 3);
+    // forEach循环
+    list.forEach(x -> {
+        if (x > 3) {
+            System.out.println("numbers bigger than " + x);
+        }
+    });
+
+    // 对比JDK7的for循环
+    for (Integer i : list){
+        if (i > 3) {
+            System.out.println("numbers bigger than " + x);
+        }
+    }
