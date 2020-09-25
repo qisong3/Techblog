@@ -375,7 +375,7 @@ Method reference(方法引用)也是JDK8推出的一项新功能，是Lambda表�
 |引用构造器方法|Class::new|String::new|() -> new String()|
 
 ### 静态方法引用
-静态方法的引用，以下面的代码举例，静态方法的入参要和List.forEach(Consumer<T>)中的泛型匹配。
+静态方法的引用，以下面的代码举例，静态方法的入参要和List.forEach(Consumer)中的泛型匹配。
 ```java 
     private void testStaticMethod() {
         List<String> list = Arrays.asList("aaa", "bbb", "ccc");
@@ -389,6 +389,7 @@ Method reference(方法引用)也是JDK8推出的一项新功能，是Lambda表�
         }
     }
 ```
+
 ### 特定对象实例方法引用
 与静态方法引用不同的是，调用者由类名变成了实例名，即由这个实例调用该实例的方法。
 ```java
@@ -419,6 +420,7 @@ Method reference(方法引用)也是JDK8推出的一项新功能，是Lambda表�
         Collections.sort(list, (a, b) -> myComparator.compare(a,b));
     }
 ```
+
 ### 特定类型实例方法引用
 如果一组对象都有相同的方法，则可以使用类名::引用的方式来调用。
 ```java 
@@ -436,6 +438,7 @@ Method reference(方法引用)也是JDK8推出的一项新功能，是Lambda表�
     }
 
 ```
+
 这里MyComparator就是特定类型，循环中将依次调用列表里实例对象的`count`方法。与静态方法引用不同的地方在于，静态引用是将当前对象传给调用的方法，而这里的调用则是在
 
 每个实例对象上进行特定方法调用。
@@ -469,8 +472,95 @@ Method reference(方法引用)也是JDK8推出的一项新功能，是Lambda表�
 
 ```
 
+## Time
 
+JDK8之前，Java中的时间/日期处理处理一直为人所诟病。一方面是定义分散混乱，日期处理定义在`java.util.Date`，`java.sql.Date`也定义了一份，而日期格式化则定义在了`java.text`中。另外由于构建这
 
+些API的年代比较久远(JDK1.0,JDK1.1)，大多数API都不具备线程安全特性，这就导致了使用这些API的时候得格外小心。
 
+在JDK8，Java终于做出改变，推出了全新的Date/Time API。新推出的包都在`java.time`中，以示例来说明：
+```java
+    private static void testDateTime(){
+        // Test LocalDate
+        LocalDate d1 = LocalDate.now();
+        System.out.println(d1);  // 2018-04-30
+        LocalDate d2 = LocalDate.of(2017, Month.JANUARY, 8);  // year, month, day
+        System.out.println(d2);  // 2017-01-08
+
+        // Test LocalTime
+        LocalTime t1 = LocalTime.now();
+        System.out.println(t1);  // 21:24:24.699162200
+        LocalTime t2 = LocalTime.of(12, 34, 56, 123456);  // hour, minute, second, nanosecond
+        System.out.println(t2);  // 12:34:56.000123456
+
+        // Test LocalDateTime
+        LocalDateTime dt1 = LocalDateTime.now();
+        System.out.println(dt1);  // 2018-04-30T21:25:38.615116500 (default foramt in ISO_LOCAL_DATE_TIME)
+
+    }
+
+    private static void testGetProperty(){
+        // Test "Getters"
+        LocalDateTime dt2 = LocalDateTime.of(2017, 2, 18, 23, 56, 45, 123456789);
+        System.out.println(dt2);                 // 2017-02-18T23:56:45.123456789
+        System.out.println(dt2.getYear());       // 2017
+        System.out.println(dt2.getMonth());      // FEBRUARY (using enum java.time.Month)
+        System.out.println(dt2.getDayOfMonth()); // 18
+        System.out.println(dt2.getHour());       // 23
+        System.out.println(dt2.getMinute());     // 56
+        System.out.println(dt2.getSecond());     // 45
+        System.out.println(dt2.getNano());       // 123456789 (nanosecond)
+        System.out.println(dt2.getDayOfWeek());  // SATURDAY (using enum java.time.DayOfWeek)
+        System.out.println(dt2.getDayOfYear());  // 49
+    }
+
+    private static void testParse(){
+
+        // Test Input Parser
+        LocalDateTime dt4 = LocalDateTime.parse("2017-05-02T23:15:43.967");
+        System.out.println(dt4);  // 2017-05-02T23:15:43.967
+        LocalDateTime dt5 = LocalDateTime.parse("18-Feb-2017 11:56:45", f1);
+        System.out.println(dt5);  // 2017-02-18T11:56:45
+
+        // You can also create the current date/time specifying a timezone.
+        LocalDateTime dt6 = LocalDateTime.now(ZoneId.of("America/Los_Angeles"));
+        System.out.println(dt6);  // 2018-04-30T06:50:00.419534
+    }
+
+    private static void testFormat(){
+        // Test Output Formatter
+        LocalDateTime dt3 = LocalDateTime.of(2017, 2, 18, 23, 56, 45);
+        // Using formatter with pre-defined constant
+        System.out.println(dt3.format(DateTimeFormatter.ISO_LOCAL_DATE));  // 2017-02-18
+        // Using formatter with pattern
+        DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
+        // HH for 24-hour clock, kk for 12-hour clock
+        System.out.println(dt3.format(f1));  // 18-Feb-2017 11:56:45
+    }
+```
+
+## Enhancement
+### Unsigned int and long Support
+Java自诞生之日起就不支持无符号整型变量，在现有的数据类型基础上已没有修改并支持的空间。
+
+不过JDK为相应的整型类添加了无符号整型变量的部分功能，变相支持部分无符号整型功能。
+
+```java
+ System.out.println(Integer.parseInt("2147483647"));  // max 32-bit unsigned integer
+      System.out.println(Integer.parseInt("-2147483648")); // min 32-bit unsigned integer
+      //System.out.println(Integer.parseInt("2147483648"));  // error: NumberFormatException
+
+      // JDK 8
+      // 32-bit unsigned int ranges from 0 to 4,294,967,295 (2^32 – 1)
+      int i1 = Integer.parseUnsignedInt("4294967295");  // max 32-bit unsigned integer
+      System.out.println(i1);   // -1 (treated as signed int)
+      System.out.println(Integer.toUnsignedString(i1));  // 4294967295
+      System.out.println(Integer.toUnsignedString(-1));  // 4294967295
+
+      long l1 = Long.parseUnsignedLong("18446744073709551615");  // max 64-bit unsigned integer
+      System.out.println(l1);  // -1 (treated as signed long)
+      System.out.println(Long.toUnsignedString(l1));  // 18446744073709551615
+      System.out.println(Long.toUnsignedString(-1));  // 18446744073709551615
+```
 
 
