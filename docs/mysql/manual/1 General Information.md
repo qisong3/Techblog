@@ -69,8 +69,92 @@ MySQL的官方发音是"My Ess Que Ell"
 
 ### 1.2.2 The Main Features of MySQL
 
+本节介绍MySQL数据库软件的一些重要特性。在大部分情况下，这些特性能覆盖MySQL的各个版本。需要查看各个版本的各自的特性，可以参考各自版本的"新特性简介"章节
 
+#### 内部结构和可移植性
+
+- 使用C和C++编写
+- 使用各种不同的编译器进行测试
+- 适用于多个平台
+- 使用CMake以方便移植
+- 用Purify(一个商业内存泄漏检测器)以及Valgrind(一个GPL工具)进行了测试
+- 采用模块独立的多层服务器设计
+- 提供事务性和非事务性存储引擎
+- 索引压缩方面使用非常快的B-tree结构（MyISAM)
+- 从设计上支持已于添加其他存储引擎。入座需要提供一个支持SQL接口的内部数据库，这将十分有用
+- 使用基于线程的快速内存分配系统
+- 使用嵌套循环，使得join查询异常快速
+- 使用高度优化的类库来实现SQL方法。在每次查询初始化时几乎不需要重新分配内存
+- 在C/S架构中提供单独的服务程序，在单独的应用程序中也可以以类库形式嵌入，这些盈盈程序可以在没有网络的情况下运行。
+
+#### 数据类型
+- 支持多种熟路类型， 有符号/无符号的1，2，3，4，8字节的[Integer]，[FLOAT], [DOUBLE], [CHAR], [VARCHAR], [BINARY], [VARBINARY], [TEXT], [BLOB], [DATE], [TIME], [DATETIME],[TIMESTAMP], [YEAR], [SET], [ENUM],以及OPenGIS类型数据。
+
+- 定长和不定长字符串
+
+#### 数据结构和方法
+
+- 在SELECT 列表和 WHERE 条件中均支持操作符和方法
+
+```sql
+mysql> SELECT CONCAT(first_name, ' ', last_name)
+    -> FROM citizen
+    -> WHERE income/dependents > 10000 AND age > 30;
+```
+- 支持"GROUP BY"和"ORDER BY"语句，支持聚合方法((COUNT(), AVG(), STD(), SUM(), MAX(), MIN(), and GROUP_CONCAT())
+- 在标准SQL上和ODBC语法上都支持LEFT OUTER JOIN  RIGHT  OUTER JOIN
+- 支持标准SQL要求的table和Column可以拥有别名
+- DELETE, INSERT, REPLACE, 和UPDATE方法返回方法影响到的行数，或者直接返回匹配的行数而不是设置一个标识位
+- 支持MySQL数据库独加支持的SHOW方法，以现实数据库，引擎，表和索引的信息。使用标准SQL支持INFORMATION_SCHEMA数据库
+- EXPLAIN方法可以协助了解优化器如何处理一个查询
+- 支持关键字方法同名的table或者Column。如ABS可以是一个有效的Column名。唯一的限制是在方法调用时，不允许在方法名和"("之间有空格。
+- 可以在以挑语句中涉及到不同库的不同表
+
+#### 安全性
+
+- 一个非常灵活和安全的权限和口令系统，并支持基于主机的验证
+- 连接服务器进行口令操作时，全程进行密码算法保护
+
+#### 可伸缩性和限制
+
+- 支持大数据库。可以使用MySQL服务武器支持超过五千万条记录。据了解，MySQL用户有使用服务器支持超过20万个表以及500亿行记录
+- 每个表格至多支持64个索引。每个索引支持1-16列。Inn哦DB表最大索引宽度是767字节或者3072字节。MyISAM表最大迟迟索引宽度1000字节。
+
+#### 连通性
+
+- 客户端可以使用多种协议连接MySQL服务器
+    * 客户端可以在任何平台上使用TCP/IP连接
+    * 在Windows操作系统上，如果服务器启动时设置了允许named_pipe参数，客户端可以通过命名管道连接服务器。如果服务器设置了shared_memory参数，可客户端可以通过--protocol=memory选项进行连接
+    * 在Unix系统中，客户端可以通过Unix套接字文件进行连接
+- MySQL的客户端程序可以使用多种语言编写。C编写的客户端库可以供C或者C++语言的程序使用，其他可以调用C的语言也可以使用。
+- MySQL支持C, C++, Eiffel, Java, Perl, PHP, Python, Ruby, 和Tcl语言的API调用，使得客户端可以用多种语言编写。
+- The Connector/ODBC(MyODBC)向使用ODBC连接的客户端程序提供MySQL支持。举例说明，可以使用微软Access连接MySQL服务器。客户端可以在Windows和Linux系统上运行，所有ODBC的源码都是可见的，所有ODBC2.5的方法均支持。
+- The Connector/J 向使用Java客户端程序连接MySQL提供支持。
+- MySQL Connector/NET使开发者可以轻松建立需要安全高效MySQL连接的.NET应用程序。它完全实现了ADO.NET的接口并且集成到ADO.NET感知工具中。开发人员可以使用他们选择的.NET语言来构建应用程序。MySQL Connector/NET是使用纯C#编写的。
+
+#### 本地化
+
+- 服务器可以用多种语言向客户端提供错误消息。
+- 充分支持几种不同的字符集，包括latin1 (cp1252)、german、big5、ujis、几种Unicode字符集等等。
+- 所有数据都保存在选定的字符集中。
+- 排序和比较是根据默认字符集和排序规则进行的。现在支持服务器启动后动态修改字符集和排序方式。
+- 服务器可以动态更改时区，各个客户机可以指定自己的时区。
+
+::: tip ODBC
+Open Database Connectivity (ODBC) 是一个支持应用程序连接到数据库的标准应用程序接口(API)。
+:::
+
+#### 客户端和工具
+
+- MySQL包括多个客户端和实用程序。包括命令行程序[mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)和[mysqladmin](https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html)以及可视化工具[MySQL Workbench](https://dev.mysql.com/doc/refman/8.0/en/workbench.html). 
+- MySQL程序可以调用-help或-?选择获得在线帮助。
 
 ### 1.2.3 History of MySQL
 
- 
+我们一开始打算使用mSQL数据库系统，用我们自己的快速低级别(ISAM)例程连接到表。不过经过测试以后，我们得出结论mSQL无论从数度上还是灵活性都难以满足我们的需求。这就促成了新的连接数据库的SQL接口，孙然几乎和mSQL的接口一样。这个API设计之初就是为了可以使为mSQL编写的第三方代码可以轻易迁移到MySQL上。
+
+MySQL的"My"是以合伙人Monty Widenius的女儿命名的.
+
+MySQL海豚(图标)名为“Sakia",是从"给海豚命名"的竞赛中，在一大串建议列表中挑选而得的，这个名字的提交者是一名非洲开伊斯瓦蒂尼(Eswatini)源软件开发者Ambrose Twebaze。根据安布罗斯的说法，女性名字Sakila源于伊斯瓦蒂尼的当地语言SiSwati。Sakila也是坦桑尼亚阿鲁沙的一个小镇的名字，靠近安布罗斯的原籍国乌干达。
+
+
