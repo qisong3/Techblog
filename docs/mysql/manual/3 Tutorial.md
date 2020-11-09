@@ -173,5 +173,94 @@ MySQL的关键字不区分大小写，下面几个查询是等效的
 从现在开始，多行语句将在没有辅助（->或其他）提示的情况下编写，从而更方便复制粘贴，可以自己试验一下。
 :::
 
+## 3.3 Creating and Using a Database
 
+一旦了解了任何进入SQL命令行，就可以正式开始操作数据库了。
+
+假设您的家里(您的动物园)有几只宠物，您想要跟踪关于它们的各种类型的信息。您可以通过创建表来保存数据，并用所需的信息加载它们来实现这一点。然后，您可以通过从表中检索数据来回答关于您的动物的不同类型的问题。
+
+本节向您展示如何执行以下操作:
+
+- 创建数据库
+- 创建表格
+- 加载表格
+- 以多种形式从表格中获取数据
+- 使用多张表格
+
+动物园数据库设计得比较简单，但是在现实世界中找到一个相似的数据库应用场景并不难。例如，农民可以使用这样的数据库来跟踪牲畜，兽医可以使用这样的数据库来跟踪病人记录。动物园数据库可以从MySQL的网站上获得，在[https://dev.mysql.com/doc/](https://dev.mysql.com/doc/)。
+
+使用`SHOW`命令来展示服务器上已经存在的库
+```sql
+mysql> SHOW DATABASES;
++----------+
+| Database |
++----------+
+| mysql    |
+| test     |
+| tmp      |
++----------+
+```
+mysql库描述用户访问特权。test库通常可以作为用户进行测试的工作区。
+
+显示的数据库在不同的机器上可能不同，`SHOW DATABASES`只显示用户对拥有权限的库，没有权限的则不展示。
+
+如果test库存在，可以直接进入这个库
+
+```sql
+    mysql> USE test
+    Database changed
+```
+
+`USE`命令和`QUIT`一样，不需要分号，`USE`命令必须写在同一行上。
+
+如果有权限的话，现在可以直接访问test库了。如果别人也对这个库有权限，那么自己所做的任何修改，都可能被别人抹去。因此可以向管理员申请一个独占的库。假设你想操作menagerie库。管理员可以执行如下命令：
+```sql 
+    mysql> GRANT ALL ON menagerie.* TO 'your_mysql_name'@'your_client_host';
+```
+
+`your_mysql_name`是MySQL的用户名，`your_client_host`是连接数据库的主机。
+
+### 3.3.1 Creating and Selecting a Database
+
+如果管理员已经为你创建了menagerie库并授予你权限，那么可以继续使用了。否则，需要自己动手来创建：
+```sql 
+    mysql> CREATE DATABASE menagerie;
+```
+在Unix体系中，数据库名是大小写敏感的(SQL语句不是),所以必须要以`menagerie`而不是` Menagerie`，`MENAGERIE`或者其他变体来访问。这个对于表名同样适用。
+
+在Windows系统中，并没有这个限制，尽管您必须在整个给定查询中使用相同的字母大小写引用数据库和表。不过鉴于重重原因，建议创建和使用库时使用相同的大小写。
+
+::: tip Note
+如果在创建数据库时得到了下面的错误"ERROR 1044 (42000): Access denied for user 'micah'@'localhost' to database 'menagerie'"。这说明你并没有权力去建库。
+:::
+
+仅仅是建库并没有默认选中这个库，必须显式执行。要将menagerie设置为当前选中的数据库，使用如下语句：
+```SQL
+    mysql> USE menagerie
+    Database changed
+```
+一个库只能创建一次，但是每次开始MySQL对话的时候都需要单独引用。可以像上面一样使用USE来选中，可以如下面索视在调用MySQL命令行的的时候就显示选中库，只需要声明需要连接的库名作为必要的参数。
+
+```SQL
+    shell> mysql -h host -u user -p menagerie
+    Enter password: ********
+```
+
+::: warning
+命令行中的`menagerie`并不是待输入的密码。如果想直接在-p后面输入密码，则在-p和密码之间不能留有空行(-ppassword 而不是-p password)。不过，不建议在命令行中直接输入密码，因为这样密码可能泄露给其他可以登录这台电脑的用户。
+:::
+::: tip
+要查看当前选中了哪个数据库，可以执行 SELECT DATABASE()语句。
+:::
+
+### 3.3.2 Creating a Table
+
+创建数据库是小菜一碟，但是目前这个库还是空的，可以从SHOW TABLES中看出选中的表:
+
+```sql
+    mysql> SHOW TABLES;
+    Empty set (0.00 sec)
+```
+
+该如何组织数据库，如何建表和设置表字段才是有挑战的部分。
 
