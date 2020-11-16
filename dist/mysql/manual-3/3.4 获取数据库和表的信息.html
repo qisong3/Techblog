@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>3.4 获取数据库和表的信息 | Errison&#39;s share</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    <link rel="icon" href="/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <script>var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?b16f225f97b3c7e88a6ecd6e49d45b37";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
+          </script>
+    <meta name="description" content="A place to share IT tech">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    <link rel="preload" href="/assets/css/0.styles.35789c7e.css" as="style"><link rel="preload" href="/assets/js/app.fa407c53.js" as="script"><link rel="preload" href="/assets/js/3.3e98eff2.js" as="script"><link rel="preload" href="/assets/js/45.f3108410.js" as="script"><link rel="preload" href="/assets/js/6.8fb5b480.js" as="script"><link rel="prefetch" href="/assets/js/10.f6744800.js"><link rel="prefetch" href="/assets/js/11.2bed8e41.js"><link rel="prefetch" href="/assets/js/12.67232347.js"><link rel="prefetch" href="/assets/js/13.dc37efd6.js"><link rel="prefetch" href="/assets/js/14.402a84c0.js"><link rel="prefetch" href="/assets/js/15.a6704a02.js"><link rel="prefetch" href="/assets/js/16.eccb204d.js"><link rel="prefetch" href="/assets/js/17.7c0e42de.js"><link rel="prefetch" href="/assets/js/18.2e024a33.js"><link rel="prefetch" href="/assets/js/19.817ab5d0.js"><link rel="prefetch" href="/assets/js/20.1858375f.js"><link rel="prefetch" href="/assets/js/21.40f44eb2.js"><link rel="prefetch" href="/assets/js/22.57da9c6f.js"><link rel="prefetch" href="/assets/js/23.98e764aa.js"><link rel="prefetch" href="/assets/js/24.e53cc848.js"><link rel="prefetch" href="/assets/js/25.84990ced.js"><link rel="prefetch" href="/assets/js/26.d5d92d1f.js"><link rel="prefetch" href="/assets/js/27.9d2bdaeb.js"><link rel="prefetch" href="/assets/js/28.6a1f07cb.js"><link rel="prefetch" href="/assets/js/29.edde5476.js"><link rel="prefetch" href="/assets/js/30.d84a70ec.js"><link rel="prefetch" href="/assets/js/31.7a75195c.js"><link rel="prefetch" href="/assets/js/32.84b259f6.js"><link rel="prefetch" href="/assets/js/33.93e520f7.js"><link rel="prefetch" href="/assets/js/34.3657ae07.js"><link rel="prefetch" href="/assets/js/35.4595c6cf.js"><link rel="prefetch" href="/assets/js/36.b6bcfb4e.js"><link rel="prefetch" href="/assets/js/37.f4be5a8b.js"><link rel="prefetch" href="/assets/js/38.580a8ba2.js"><link rel="prefetch" href="/assets/js/39.629baee9.js"><link rel="prefetch" href="/assets/js/4.8a998d3c.js"><link rel="prefetch" href="/assets/js/40.960801e8.js"><link rel="prefetch" href="/assets/js/41.e318806e.js"><link rel="prefetch" href="/assets/js/42.2cb325bd.js"><link rel="prefetch" href="/assets/js/43.60fd26c7.js"><link rel="prefetch" href="/assets/js/44.ca94385c.js"><link rel="prefetch" href="/assets/js/46.8bb949cf.js"><link rel="prefetch" href="/assets/js/47.264a2263.js"><link rel="prefetch" href="/assets/js/48.07d0f154.js"><link rel="prefetch" href="/assets/js/49.e6cf3d6c.js"><link rel="prefetch" href="/assets/js/5.83a396a2.js"><link rel="prefetch" href="/assets/js/50.56537ae7.js"><link rel="prefetch" href="/assets/js/51.229b01ca.js"><link rel="prefetch" href="/assets/js/52.a281cd1f.js"><link rel="prefetch" href="/assets/js/53.0a2293ef.js"><link rel="prefetch" href="/assets/js/54.9878ce28.js"><link rel="prefetch" href="/assets/js/55.b1ee048f.js"><link rel="prefetch" href="/assets/js/56.a54f012e.js"><link rel="prefetch" href="/assets/js/57.a1391080.js"><link rel="prefetch" href="/assets/js/58.9cc66c1c.js"><link rel="prefetch" href="/assets/js/59.e5ba7263.js"><link rel="prefetch" href="/assets/js/60.bcb44bda.js"><link rel="prefetch" href="/assets/js/61.5a366a26.js"><link rel="prefetch" href="/assets/js/7.1092fa13.js"><link rel="prefetch" href="/assets/js/8.836e5e20.js"><link rel="prefetch" href="/assets/js/9.e6e87226.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.1fdfa170.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.35789c7e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Errison's share" class="logo"> <span class="site-name can-hide">Errison's share</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="source" class="dropdown-title"><span class="title">源码系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java源码
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/java-collections/" class="nav-link">
+  集合
+</a></li><li class="dropdown-subitem"><a href="/source/java-wrapper/" class="nav-link">
+  包装类
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/array/" class="nav-link">
+  数组
+</a></li><li class="dropdown-subitem"><a href="/algorithm/stack.html" class="nav-link">
+  栈
+</a></li><li class="dropdown-subitem"><a href="/algorithm/heap/" class="nav-link">
+  堆
+</a></li><li class="dropdown-subitem"><a href="/algorithm/tree.html" class="nav-link">
+  树
+</a></li><li class="dropdown-subitem"><a href="/algorithm/graph.html" class="nav-link">
+  图
+</a></li><li class="dropdown-subitem"><a href="/algorithm/hashtable.html" class="nav-link">
+  哈希表
+</a></li></ul></li><li class="dropdown-item"><h4>
+          算法
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/greedy.html" class="nav-link">
+  贪心
+</a></li><li class="dropdown-subitem"><a href="/algorithm/backtracking.html" class="nav-link">
+  回溯
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="java" class="dropdown-title"><span class="title">Java专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/history/" class="nav-link">
+  Java简史
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java深入
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/review/" class="nav-link">
+  面试集锦
+</a></li><li class="dropdown-subitem"><a href="/java/topic/" class="nav-link">
+  专题系列
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="mysql" class="dropdown-title"><span class="title">MySQL专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL8.0官方手册中文版
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/manual/" class="nav-link">
+  手册概述
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-1/" class="nav-link">
+  1 基本信息
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-3/" class="nav-link router-link-active">
+  3 入门教程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MySQL进阶
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/advance/" class="nav-link">
+  MySQL优化
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="share" class="dropdown-title"><span class="title">分享</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          个人分享
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/theoretical/" class="nav-link">
+  理论见深度
+</a></li><li class="dropdown-subitem"><a href="/share/technical/" class="nav-link">
+  实践出真知
+</a></li></ul></li><li class="dropdown-item"><h4>
+          百家之长
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/top/" class="nav-link">
+  公众号精品
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/qisong3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Contact
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="source" class="dropdown-title"><span class="title">源码系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java源码
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/java-collections/" class="nav-link">
+  集合
+</a></li><li class="dropdown-subitem"><a href="/source/java-wrapper/" class="nav-link">
+  包装类
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/array/" class="nav-link">
+  数组
+</a></li><li class="dropdown-subitem"><a href="/algorithm/stack.html" class="nav-link">
+  栈
+</a></li><li class="dropdown-subitem"><a href="/algorithm/heap/" class="nav-link">
+  堆
+</a></li><li class="dropdown-subitem"><a href="/algorithm/tree.html" class="nav-link">
+  树
+</a></li><li class="dropdown-subitem"><a href="/algorithm/graph.html" class="nav-link">
+  图
+</a></li><li class="dropdown-subitem"><a href="/algorithm/hashtable.html" class="nav-link">
+  哈希表
+</a></li></ul></li><li class="dropdown-item"><h4>
+          算法
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/greedy.html" class="nav-link">
+  贪心
+</a></li><li class="dropdown-subitem"><a href="/algorithm/backtracking.html" class="nav-link">
+  回溯
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="java" class="dropdown-title"><span class="title">Java专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/history/" class="nav-link">
+  Java简史
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java深入
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/review/" class="nav-link">
+  面试集锦
+</a></li><li class="dropdown-subitem"><a href="/java/topic/" class="nav-link">
+  专题系列
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="mysql" class="dropdown-title"><span class="title">MySQL专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL8.0官方手册中文版
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/manual/" class="nav-link">
+  手册概述
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-1/" class="nav-link">
+  1 基本信息
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-3/" class="nav-link router-link-active">
+  3 入门教程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MySQL进阶
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/advance/" class="nav-link">
+  MySQL优化
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="share" class="dropdown-title"><span class="title">分享</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          个人分享
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/theoretical/" class="nav-link">
+  理论见深度
+</a></li><li class="dropdown-subitem"><a href="/share/technical/" class="nav-link">
+  实践出真知
+</a></li></ul></li><li class="dropdown-item"><h4>
+          百家之长
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/top/" class="nav-link">
+  公众号精品
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/qisong3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Contact
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>3 入门教程</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/mysql/manual-3/" aria-current="page" class="sidebar-link">前言</a></li><li><a href="/mysql/manual-3/3.1 连接及断开服务器.html" class="sidebar-link">3.1 连接及断开服务器</a></li><li><a href="/mysql/manual-3/3.2 进入查询.html" class="sidebar-link">3.2 进入查询</a></li><li><a href="/mysql/manual-3/3.3 创建并使用库.html" class="sidebar-link">3.3 创建并使用库</a></li><li><a href="/mysql/manual-3/3.4 获取数据库和表的信息.html" class="active sidebar-link">3.4 获取数据库和表的信息</a></li><li><a href="/mysql/manual-3/3.5 以批处理模式使用mysql.html" class="sidebar-link">3.5 以批处理模式使用mysql</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><p>如果忘了数据库或者表的名字，或者忘了表结构(必如说有哪些列)？MySQL通过一些语句来解决此问题，这些语句提供有关它支持的数据库和表的信息。</p> <p>可能之前已经见识了<a href="https://dev.mysql.com/doc/refman/8.0/en/show-databases.html" target="_blank" rel="noopener noreferrer">SHOW DATABASES<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>，这个命令可以列举服务器管理的数据库。查找究竟哪个数据库是当前已选中的，使用<a href="https://dev.mysql.com/doc/refman/8.0/en/information-functions.html#function_database" target="_blank" rel="noopener noreferrer">DATABASE()<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>方法。</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token keyword">DATABASE</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">------------+</span>
+<span class="token operator">|</span> <span class="token keyword">DATABASE</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------------+</span>
+<span class="token operator">|</span> menagerie  <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">------------+</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>如果当前并没有选中任何一个数据库，查询的结果是NULL。</p> <p>查找当前默认的库中究竟有那些表(比如说不记得表名了),可以使用下面的语句：</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">SHOW</span> <span class="token keyword">TABLES</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">---------------------+</span>
+<span class="token operator">|</span> Tables_in_menagerie <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------------+</span>
+<span class="token operator">|</span> event               <span class="token operator">|</span>
+<span class="token operator">|</span> pet                 <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------------------+</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>输出的列名一直是<code>Tables_in_db_name</code>，<code>db_name</code>是数据库的名称，可以参见<a href="https://dev.mysql.com/doc/refman/8.0/en/show-tables.html" target="_blank" rel="noopener noreferrer">Section 13.7.7.39, “SHOW TABLES Statement”<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>来获得更多信息。</p> <p>如果想查看表结构，使用<a href="https://dev.mysql.com/doc/refman/8.0/en/describe.html" target="_blank" rel="noopener noreferrer">DESCRIBE<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>语句，它可以打印出关于表的列信息。</p> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">DESCRIBE</span> pet<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">---------+-------------+------+-----+---------+-------+</span>
+<span class="token operator">|</span> Field   <span class="token operator">|</span> <span class="token keyword">Type</span>        <span class="token operator">|</span> <span class="token boolean">Null</span> <span class="token operator">|</span> <span class="token keyword">Key</span> <span class="token operator">|</span> <span class="token keyword">Default</span> <span class="token operator">|</span> Extra <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+-------------+------+-----+---------+-------+</span>
+<span class="token operator">|</span> name    <span class="token operator">|</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">|</span> YES  <span class="token operator">|</span>     <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span>       <span class="token operator">|</span>
+<span class="token operator">|</span> owner   <span class="token operator">|</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">|</span> YES  <span class="token operator">|</span>     <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span>       <span class="token operator">|</span>
+<span class="token operator">|</span> species <span class="token operator">|</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">|</span> YES  <span class="token operator">|</span>     <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span>       <span class="token operator">|</span>
+<span class="token operator">|</span> sex     <span class="token operator">|</span> <span class="token keyword">char</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>     <span class="token operator">|</span> YES  <span class="token operator">|</span>     <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span>       <span class="token operator">|</span>
+<span class="token operator">|</span> birth   <span class="token operator">|</span> <span class="token keyword">date</span>        <span class="token operator">|</span> YES  <span class="token operator">|</span>     <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span>       <span class="token operator">|</span>
+<span class="token operator">|</span> death   <span class="token operator">|</span> <span class="token keyword">date</span>        <span class="token operator">|</span> YES  <span class="token operator">|</span>     <span class="token operator">|</span> <span class="token boolean">NULL</span>    <span class="token operator">|</span>       <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+-------------+------+-----+---------+-------+</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>Field代表列明，Type代表这一列的数据类型，NULL代表这一列是否可以包含NULL值，KEY意味着这一列是否已经加了索引，Default则代表这一列的默认值。Extra列展示了这个列的特殊信息，如果这一列是自动递增的，那么Extra字段则显示auto_increment。</p> <p>DESC是DESCRIBE的简称,可以参照<a href="https://dev.mysql.com/doc/refman/8.0/en/describe.html" target="_blank" rel="noopener noreferrer"> Section 13.8.1, “DESCRIBE Statement”<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>获取更多信息。</p> <p>可以使用<a href="https://dev.mysql.com/doc/refman/8.0/en/show-create-table.html" target="_blank" rel="noopener noreferrer">SHOW CREATE TABLE<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>来展示建表时使用的语句，具体参见<a href="https://dev.mysql.com/doc/refman/8.0/en/show-create-table.html" target="_blank" rel="noopener noreferrer"> Section 13.7.7.10, “SHOW CREATE TABLE Statement”<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p> <p>如果表中有索引，使用SHOW INDEX FROM tbl_name来查看索引相关信息，具体参照<a href="https://dev.mysql.com/doc/refman/8.0/en/show-index.html" target="_blank" rel="noopener noreferrer"> Section 13.7.7.22, “SHOW INDEX Statement<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/qisong3/Techblog/edit/master/docs/mysql/manual-3/3.4 获取数据库和表的信息.md" target="_blank" rel="noopener noreferrer">在Github上编辑此页</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/mysql/manual-3/3.3 创建并使用库.html" class="prev">
+        3.3 创建并使用库
+      </a></span> <span class="next"><a href="/mysql/manual-3/3.5 以批处理模式使用mysql.html">
+        3.5 以批处理模式使用mysql
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.fa407c53.js" defer></script><script src="/assets/js/3.3e98eff2.js" defer></script><script src="/assets/js/45.f3108410.js" defer></script><script src="/assets/js/6.8fb5b480.js" defer></script>
+  </body>
+</html>
