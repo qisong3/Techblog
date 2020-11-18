@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JDK8——LinkedList源码解读 | Errison&#39;s share</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/logo.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-152x152.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3eaf7c">
+    <script>var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?b16f225f97b3c7e88a6ecd6e49d45b37";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
+          </script>
+    <meta name="description" content="A place to share IT tech">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/assets/css/0.styles.f8109ada.css" as="style"><link rel="preload" href="/assets/js/app.97e375c5.js" as="script"><link rel="preload" href="/assets/js/3.fdc0d355.js" as="script"><link rel="preload" href="/assets/js/58.e7e5bc18.js" as="script"><link rel="preload" href="/assets/js/6.4d2b9347.js" as="script"><link rel="prefetch" href="/assets/js/10.23465533.js"><link rel="prefetch" href="/assets/js/11.a3bbc94e.js"><link rel="prefetch" href="/assets/js/12.c31076e8.js"><link rel="prefetch" href="/assets/js/13.d06284f9.js"><link rel="prefetch" href="/assets/js/14.e6200aac.js"><link rel="prefetch" href="/assets/js/15.dd3cba4b.js"><link rel="prefetch" href="/assets/js/16.6842e063.js"><link rel="prefetch" href="/assets/js/17.25ef7258.js"><link rel="prefetch" href="/assets/js/18.5f965dd5.js"><link rel="prefetch" href="/assets/js/19.41894caf.js"><link rel="prefetch" href="/assets/js/20.63bd8964.js"><link rel="prefetch" href="/assets/js/21.56bde27f.js"><link rel="prefetch" href="/assets/js/22.2b8e7da4.js"><link rel="prefetch" href="/assets/js/23.cfc9d513.js"><link rel="prefetch" href="/assets/js/24.19ba9efd.js"><link rel="prefetch" href="/assets/js/25.5b202a55.js"><link rel="prefetch" href="/assets/js/26.9fdec0c5.js"><link rel="prefetch" href="/assets/js/27.905c9462.js"><link rel="prefetch" href="/assets/js/28.9b50a481.js"><link rel="prefetch" href="/assets/js/29.7ca93053.js"><link rel="prefetch" href="/assets/js/30.9f728996.js"><link rel="prefetch" href="/assets/js/31.a0932788.js"><link rel="prefetch" href="/assets/js/32.837722f2.js"><link rel="prefetch" href="/assets/js/33.4294d0ff.js"><link rel="prefetch" href="/assets/js/34.4f7c63b5.js"><link rel="prefetch" href="/assets/js/35.70606b8a.js"><link rel="prefetch" href="/assets/js/36.9c85520e.js"><link rel="prefetch" href="/assets/js/37.758326bb.js"><link rel="prefetch" href="/assets/js/38.523fc434.js"><link rel="prefetch" href="/assets/js/39.ac9412b0.js"><link rel="prefetch" href="/assets/js/4.dccf3179.js"><link rel="prefetch" href="/assets/js/40.6f2c15b8.js"><link rel="prefetch" href="/assets/js/41.07614239.js"><link rel="prefetch" href="/assets/js/42.45f49ff1.js"><link rel="prefetch" href="/assets/js/43.0dc5bc42.js"><link rel="prefetch" href="/assets/js/44.02c9b2aa.js"><link rel="prefetch" href="/assets/js/45.b17835c4.js"><link rel="prefetch" href="/assets/js/46.69dd2d02.js"><link rel="prefetch" href="/assets/js/47.8bcedcbb.js"><link rel="prefetch" href="/assets/js/48.7fe41b26.js"><link rel="prefetch" href="/assets/js/49.cb7e3799.js"><link rel="prefetch" href="/assets/js/5.c160f37b.js"><link rel="prefetch" href="/assets/js/50.58a09a34.js"><link rel="prefetch" href="/assets/js/51.38f70cbc.js"><link rel="prefetch" href="/assets/js/52.59b0d079.js"><link rel="prefetch" href="/assets/js/53.88cf19eb.js"><link rel="prefetch" href="/assets/js/54.3b7bb64e.js"><link rel="prefetch" href="/assets/js/55.0eb19523.js"><link rel="prefetch" href="/assets/js/56.a39efb79.js"><link rel="prefetch" href="/assets/js/57.20eaadac.js"><link rel="prefetch" href="/assets/js/59.ef5f0f55.js"><link rel="prefetch" href="/assets/js/60.b65b496c.js"><link rel="prefetch" href="/assets/js/61.aee3d645.js"><link rel="prefetch" href="/assets/js/62.6227285d.js"><link rel="prefetch" href="/assets/js/7.ac30f5ef.js"><link rel="prefetch" href="/assets/js/8.7eb25cae.js"><link rel="prefetch" href="/assets/js/9.1aee6502.js"><link rel="prefetch" href="/assets/js/vendors~flowchart.654d1c0f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f8109ada.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Errison's share" class="logo"> <span class="site-name can-hide">Errison's share</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="source" class="dropdown-title"><span class="title">源码系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java源码
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/java-collections/" class="nav-link router-link-active">
+  集合
+</a></li><li class="dropdown-subitem"><a href="/source/java-wrapper/" class="nav-link">
+  包装类
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/array/" class="nav-link">
+  数组
+</a></li><li class="dropdown-subitem"><a href="/algorithm/stack.html" class="nav-link">
+  栈
+</a></li><li class="dropdown-subitem"><a href="/algorithm/heap/" class="nav-link">
+  堆
+</a></li><li class="dropdown-subitem"><a href="/algorithm/tree.html" class="nav-link">
+  树
+</a></li><li class="dropdown-subitem"><a href="/algorithm/graph.html" class="nav-link">
+  图
+</a></li><li class="dropdown-subitem"><a href="/algorithm/hashtable.html" class="nav-link">
+  哈希表
+</a></li></ul></li><li class="dropdown-item"><h4>
+          算法
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/greedy.html" class="nav-link">
+  贪心
+</a></li><li class="dropdown-subitem"><a href="/algorithm/backtracking.html" class="nav-link">
+  回溯
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="java" class="dropdown-title"><span class="title">Java专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/history/" class="nav-link">
+  Java简史
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java深入
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/review/" class="nav-link">
+  面试集锦
+</a></li><li class="dropdown-subitem"><a href="/java/topic/" class="nav-link">
+  专题系列
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="mysql" class="dropdown-title"><span class="title">MySQL专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL8.0官方手册中文版
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/manual/" class="nav-link">
+  手册概述
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-1/" class="nav-link">
+  1 基本信息
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-3/" class="nav-link">
+  3 入门教程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MySQL进阶
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/advance/" class="nav-link">
+  MySQL优化
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="share" class="dropdown-title"><span class="title">分享</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          个人分享
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/theoretical/" class="nav-link">
+  理论见深度
+</a></li><li class="dropdown-subitem"><a href="/share/technical/" class="nav-link">
+  实践出真知
+</a></li></ul></li><li class="dropdown-item"><h4>
+          百家之长
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/top/" class="nav-link">
+  公众号精品
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/qisong3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Contact
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="source" class="dropdown-title"><span class="title">源码系列</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java源码
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/source/java-collections/" class="nav-link router-link-active">
+  集合
+</a></li><li class="dropdown-subitem"><a href="/source/java-wrapper/" class="nav-link">
+  包装类
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">算法</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          数据结构
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/array/" class="nav-link">
+  数组
+</a></li><li class="dropdown-subitem"><a href="/algorithm/stack.html" class="nav-link">
+  栈
+</a></li><li class="dropdown-subitem"><a href="/algorithm/heap/" class="nav-link">
+  堆
+</a></li><li class="dropdown-subitem"><a href="/algorithm/tree.html" class="nav-link">
+  树
+</a></li><li class="dropdown-subitem"><a href="/algorithm/graph.html" class="nav-link">
+  图
+</a></li><li class="dropdown-subitem"><a href="/algorithm/hashtable.html" class="nav-link">
+  哈希表
+</a></li></ul></li><li class="dropdown-item"><h4>
+          算法
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/algorithm/greedy.html" class="nav-link">
+  贪心
+</a></li><li class="dropdown-subitem"><a href="/algorithm/backtracking.html" class="nav-link">
+  回溯
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="java" class="dropdown-title"><span class="title">Java专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Java基础
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/history/" class="nav-link">
+  Java简史
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Java深入
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/java/review/" class="nav-link">
+  面试集锦
+</a></li><li class="dropdown-subitem"><a href="/java/topic/" class="nav-link">
+  专题系列
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="mysql" class="dropdown-title"><span class="title">MySQL专题</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          MySQL8.0官方手册中文版
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/manual/" class="nav-link">
+  手册概述
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-1/" class="nav-link">
+  1 基本信息
+</a></li><li class="dropdown-subitem"><a href="/mysql/manual-3/" class="nav-link">
+  3 入门教程
+</a></li></ul></li><li class="dropdown-item"><h4>
+          MySQL进阶
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/mysql/advance/" class="nav-link">
+  MySQL优化
+</a></li></ul></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="share" class="dropdown-title"><span class="title">分享</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          个人分享
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/theoretical/" class="nav-link">
+  理论见深度
+</a></li><li class="dropdown-subitem"><a href="/share/technical/" class="nav-link">
+  实践出真知
+</a></li></ul></li><li class="dropdown-item"><h4>
+          百家之长
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/share/top/" class="nav-link">
+  公众号精品
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="https://github.com/qisong3" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Contact
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Java集合</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/source/java-collections/" aria-current="page" class="sidebar-link">Java容器源码解读</a></li><li><a href="/source/java-collections/JDK8——HashMap源码解读.html" class="sidebar-link">JDK8——HashMap源码解读</a></li><li><a href="/source/java-collections/JDK8——ArrayList源码解读.html" class="sidebar-link">JDK8——ArrayList源码解读</a></li><li><a href="/source/java-collections/JDK8——LinkedList源码解读.html" class="active sidebar-link">JDK8——LinkedList源码解读</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#概述" class="sidebar-link">概述</a></li><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#成员变量" class="sidebar-link">成员变量</a></li><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#函数解析" class="sidebar-link">函数解析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#构造函数" class="sidebar-link">构造函数</a></li><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#增加元素" class="sidebar-link">增加元素</a></li><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#增删元素" class="sidebar-link">增删元素</a></li><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#删除元素" class="sidebar-link">删除元素</a></li><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#其他方法" class="sidebar-link">其他方法</a></li></ul></li><li class="sidebar-sub-header"><a href="/source/java-collections/JDK8——LinkedList源码解读.html#小结" class="sidebar-link">小结</a></li></ul></li><li><a href="/source/java-collections/JDK8——Vector源码解读.html" class="sidebar-link">JDK8——Vector源码解读</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="概述"><a href="#概述" class="header-anchor">#</a> 概述</h2> <p>LinkedList继承自List，是一种常用的容器。虽然同为ArrayList和LinkedList同为List，但二者的实现方式完全不同，导致二者的性能和使用场景都有较大的不同，本文将从源码角度解析LinkedList。
+<img src="/images/java-source/linkedList-1.png" alt="ArrayList继承">
+LinkedList的类图关系如上图所示。简而言之，LinkedList是实现了可复制，可序列化的一种双向链表。虽然它同时实现了List和Deque接口，从内在基因上个人更倾向于将其归于双向队列。下面就从源码的角度看一看LinkedList的实现。</p> <h2 id="成员变量"><a href="#成员变量" class="header-anchor">#</a> 成员变量</h2> <div class="language-java line-numbers-mode"><pre class="language-java"><code>        <span class="token comment">/**
+        *
+        * LinkedList的结点
+        */</span>
+        <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+            <span class="token class-name">E</span> item<span class="token punctuation">;</span>
+            <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> next<span class="token punctuation">;</span>
+            <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> prev<span class="token punctuation">;</span>
+     
+            <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> prev<span class="token punctuation">,</span> <span class="token class-name">E</span> element<span class="token punctuation">,</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>item <span class="token operator">=</span> element<span class="token punctuation">;</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>next <span class="token operator">=</span> next<span class="token punctuation">;</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>prev <span class="token operator">=</span> prev<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token comment">// size of list</span>
+        <span class="token keyword">transient</span> <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     
+        <span class="token comment">/**
+        *  Pointer to first node
+        */</span>
+        <span class="token keyword">transient</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> first；
+        
+        <span class="token comment">/**
+        *  Pointer to lastnode
+        */</span>
+        <span class="token keyword">transient</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> last<span class="token punctuation">;</span>   
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><p>这里列出了几个关键的变量。首先重中之重是Node，即LinkedList的结点。每一个LinkedList由一个一个的Node连接起来。Node由三部分组成，前驱指针指向前一个Node，后继指针指向后面的Node，结点元素存储值。其他几个变量从字面上也都很容易理解。</p> <h2 id="函数解析"><a href="#函数解析" class="header-anchor">#</a> 函数解析</h2> <h3 id="构造函数"><a href="#构造函数" class="header-anchor">#</a> 构造函数</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code>  <span class="token comment">/**
+   * Constructs an empty list.
+   */</span>
+  <span class="token keyword">public</span> <span class="token class-name">LinkedList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+   
+  <span class="token comment">/**
+   * Constructs a list containing the elements of the specified
+   * collection, in the order they are returned by the collection's
+   * iterator.
+   *
+   * @param  c the collection whose elements are to be placed into this list
+   * @throws NullPointerException if the specified collection is null
+   */</span>
+  <span class="token keyword">public</span> <span class="token class-name">LinkedList</span><span class="token punctuation">(</span><span class="token class-name">Collection</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">addAll</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>                                                                           
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>构造函数有三个：</p> <ul><li>无参构造函数：elementData初始化为空数组，此时size默认为0。</li> <li>初始化长度构造函数：elementData扩容为指定长度的未初始化数组。注意这里size并没有被设置为指定长度，此时elementData.length和size是不一致的。实际上elementData.length表示当前ArrayList的最大容量，而size则表示了实际存放元素的个数。</li> <li>容器初始化函数：通过容器已有数据构造ArrayList。</li></ul> <h3 id="增加元素"><a href="#增加元素" class="header-anchor">#</a> 增加元素</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code> <span class="token comment">/**                                                                          
+  * Inserts the specified element at the specified position in this           
+  * list. Shifts the element currently at that position (if any) and          
+  * any subsequent elements to the right (adds one to their indices).         
+  *                                                                           
+  * @param index index at which the specified element is to be inserted       
+  * @param element element to be inserted                                     
+  * @throws IndexOutOfBoundsException {@inheritDoc}                           
+  */</span>                                                                          
+ <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token class-name">E</span> element<span class="token punctuation">)</span> <span class="token punctuation">{</span>                                      
+     <span class="token function">rangeCheckForAdd</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>                                                 
+     modCount<span class="token operator">++</span><span class="token punctuation">;</span>                                                              
+     <span class="token keyword">final</span> <span class="token keyword">int</span> s<span class="token punctuation">;</span>                                                             
+     <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> elementData<span class="token punctuation">;</span>                                                    
+     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>s <span class="token operator">=</span> size<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token punctuation">(</span>elementData <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>elementData<span class="token punctuation">)</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span>               
+         elementData <span class="token operator">=</span> <span class="token function">grow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                                
+     <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">arraycopy</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span> index<span class="token punctuation">,</span>                                     
+                      elementData<span class="token punctuation">,</span> index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>                                 
+                      s <span class="token operator">-</span> index<span class="token punctuation">)</span><span class="token punctuation">;</span>                                             
+     elementData<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> element<span class="token punctuation">;</span>                                            
+     size <span class="token operator">=</span> s <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>                                                            
+ <span class="token punctuation">}</span>                                                                     
+ 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>add函数重载的包括多个，这里只列出一个具有代表性的进行说明，其他的add方法可由它推演而来。这个函数做了这么几件事，首先检查要插入的下标是否越界，是的话直接抛异常退出。然后检查elementData.length和size是否一致，一致说明容量已满，需要扩容，增加一个元素的容量。将index之后的元素分别拷贝到原下标+1的位置，将index位置设为指定element，并将ArrayList的实际长度加一。</p> <p>这一步骤的关键，或者说ArrayList的关键，在于扩容，来看一下扩容的实现。</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>   <span class="token comment">/**                                                                    
+    * Increases the capacity to ensure that it can hold at least the      
+    * number of elements specified by the minimum capacity argument.      
+    *                                                                     
+    * @param minCapacity the desired minimum capacity                     
+    * @throws OutOfMemoryError if minCapacity is less than zero           
+    */</span>                                                                    
+   <span class="token keyword">private</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">grow</span><span class="token punctuation">(</span><span class="token keyword">int</span> minCapacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>                               
+       <span class="token keyword">return</span> elementData <span class="token operator">=</span> <span class="token class-name">Arrays</span><span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elementData<span class="token punctuation">,</span>                    
+                                          <span class="token function">newCapacity</span><span class="token punctuation">(</span>minCapacity<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      
+   <span class="token punctuation">}</span>                                                                      
+                                                                          
+   <span class="token keyword">private</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">grow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>                                              
+       <span class="token keyword">return</span> <span class="token function">grow</span><span class="token punctuation">(</span>size <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                                             
+   <span class="token punctuation">}</span>                                                                      
+                                                                          
+   <span class="token comment">/**                                                                    
+    * Returns a capacity at least as large as the given minimum capacity. 
+    * Returns the current capacity increased by 50% if that suffices.     
+    * Will not return a capacity greater than MAX_ARRAY_SIZE unless       
+    * the given minimum capacity is greater than MAX_ARRAY_SIZE.          
+    *                                                                     
+    * @param minCapacity the desired minimum capacity                     
+    * @throws OutOfMemoryError if minCapacity is less than zero           
+    */</span>                                                                    
+   <span class="token keyword">private</span> <span class="token keyword">int</span> <span class="token function">newCapacity</span><span class="token punctuation">(</span><span class="token keyword">int</span> minCapacity<span class="token punctuation">)</span> <span class="token punctuation">{</span>                             
+       <span class="token comment">// overflow-conscious code                                         </span>
+       <span class="token keyword">int</span> oldCapacity <span class="token operator">=</span> elementData<span class="token punctuation">.</span>length<span class="token punctuation">;</span>                              
+       <span class="token keyword">int</span> newCapacity <span class="token operator">=</span> oldCapacity <span class="token operator">+</span> <span class="token punctuation">(</span>oldCapacity <span class="token operator">&gt;&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>newCapacity <span class="token operator">-</span> minCapacity <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>                              
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>elementData <span class="token operator">==</span> DEFAULTCAPACITY_EMPTY_ELEMENTDATA<span class="token punctuation">)</span>          
+               <span class="token keyword">return</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>DEFAULT_CAPACITY<span class="token punctuation">,</span> minCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>            
+           <span class="token keyword">if</span> <span class="token punctuation">(</span>minCapacity <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">// overflow                               </span>
+               <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">OutOfMemoryError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                              
+           <span class="token keyword">return</span> minCapacity<span class="token punctuation">;</span>                                            
+       <span class="token punctuation">}</span>                                                                  
+       <span class="token keyword">return</span> <span class="token punctuation">(</span>newCapacity <span class="token operator">-</span> MAX_ARRAY_SIZE <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>                         
+           <span class="token operator">?</span> newCapacity                                                  
+           <span class="token operator">:</span> <span class="token function">hugeCapacity</span><span class="token punctuation">(</span>minCapacity<span class="token punctuation">)</span><span class="token punctuation">;</span>      
+   <span class="token punctuation">}</span>                              
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br></div></div><p>LinkedList的构造函数有两个，一个是从集合从生成List，一个是空的构造函数。对于空的构造函数，size初始化为0，首节点和尾结点都为空指针。</p> <h3 id="增删元素"><a href="#增删元素" class="header-anchor">#</a> 增删元素</h3> <p>LinkedList同时实现了List和Deque接口，这两种接口对数据的操作有不同的接口函数和表现形式，不过从本质上说，都是针对Node的操作，这里我们着重关注增加和删除结点，其他的接口都可以由此衍变而来。</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>  <span class="token comment">/**
+   * Inserts the specified element at the specified position in this list.
+   * Shifts the element currently at that position (if any) and any
+   * subsequent elements to the right (adds one to their indices).
+   *
+   * @param index index at which the specified element is to be inserted
+   * @param element element to be inserted
+   * @throws IndexOutOfBoundsException {@inheritDoc}
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token class-name">E</span> element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">checkPositionIndex</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">==</span> size<span class="token punctuation">)</span>
+          <span class="token function">linkLast</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">else</span>
+          <span class="token function">linkBefore</span><span class="token punctuation">(</span>element<span class="token punctuation">,</span> <span class="token function">node</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+   
+  <span class="token comment">/**
+   * Inserts element e before non-null Node succ.
+   */</span>
+  <span class="token keyword">void</span> <span class="token function">linkBefore</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">,</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> succ<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// assert succ != null;</span>
+      <span class="token keyword">final</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> pred <span class="token operator">=</span> succ<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
+      <span class="token keyword">final</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> newNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>pred<span class="token punctuation">,</span> e<span class="token punctuation">,</span> succ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      succ<span class="token punctuation">.</span>prev <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>pred <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+          first <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+      <span class="token keyword">else</span>
+          pred<span class="token punctuation">.</span>next <span class="token operator">=</span> newNode<span class="token punctuation">;</span>
+      size<span class="token operator">++</span><span class="token punctuation">;</span>
+      modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+   
+  <span class="token comment">/**
+   * Returns the (non-null) Node at the specified element index.
+   */</span>
+  <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> <span class="token function">node</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// assert isElementIndex(index);</span>
+   
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> <span class="token punctuation">(</span>size <span class="token operator">&gt;&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> x <span class="token operator">=</span> first<span class="token punctuation">;</span>
+          <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> index<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+              x <span class="token operator">=</span> x<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+          <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> x <span class="token operator">=</span> last<span class="token punctuation">;</span>
+          <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&gt;</span> index<span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>
+              x <span class="token operator">=</span> x<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
+          <span class="token keyword">return</span> x<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>                                                                            
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br></div></div><p>增加元素看add这个函数就够了。首先判断增加元素的下标是否合法，增加位置等于List长度则在尾结点后添加Node。更为一般的，则是在任意位置添加元素。添加时首先要找到这个结点要放置的位置，找位置的方式是先将List长度二分，然后根据index和二分位置的比较来决定是在前半部分还是后半部分遍历寻找。</p> <p>由于LinkedList遍历需要从每一个结点找到指向下一个结点的指针，再如此循环，所以这种遍历比较耗时，时间复杂度为O(n)（n为List长度）。而在LinkedList的开头和结尾处添加元素则很快，只需要O(1)常数时间。</p> <h3 id="删除元素"><a href="#删除元素" class="header-anchor">#</a> 删除元素</h3> <p>删除元素对ArrayList来说也有一定的工作量，需要将指定index位置以后的元素统统向前移位，如果ArrayList较长且删除元素的位置靠前，这就是一个比较耗时的操作了</p> <div class="language-java line-numbers-mode"><pre class="language-java"><code>   <span class="token comment">/**
+    * Removes the element at the specified position in this list.  Shifts any
+    * subsequent elements to the left (subtracts one from their indices).
+    * Returns the element that was removed from the list.
+    *
+    * @param index the index of the element to be removed
+    * @return the element previously at the specified position
+    * @throws IndexOutOfBoundsException {@inheritDoc}
+    */</span>
+   <span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">remove</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token function">checkElementIndex</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">return</span> <span class="token function">unlink</span><span class="token punctuation">(</span><span class="token function">node</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+    
+   <span class="token comment">/**
+    * Unlinks non-null node x.
+    */</span>
+   <span class="token class-name">E</span> <span class="token function">unlink</span><span class="token punctuation">(</span><span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token comment">// assert x != null;</span>
+       <span class="token keyword">final</span> <span class="token class-name">E</span> element <span class="token operator">=</span> x<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
+       <span class="token keyword">final</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> next <span class="token operator">=</span> x<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+       <span class="token keyword">final</span> <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> prev <span class="token operator">=</span> x<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
+    
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>prev <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           first <span class="token operator">=</span> next<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           prev<span class="token punctuation">.</span>next <span class="token operator">=</span> next<span class="token punctuation">;</span>
+           x<span class="token punctuation">.</span>prev <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+    
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>next <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           last <span class="token operator">=</span> prev<span class="token punctuation">;</span>
+       <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           next<span class="token punctuation">.</span>prev <span class="token operator">=</span> prev<span class="token punctuation">;</span>
+           x<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+    
+       x<span class="token punctuation">.</span>item <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+       size<span class="token operator">--</span><span class="token punctuation">;</span>
+       modCount<span class="token operator">++</span><span class="token punctuation">;</span>
+       <span class="token keyword">return</span> element<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>                                                                                
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br></div></div><p>删除结点同样也需要找到它的位置。如果前驱结点为空，说明是List首部，则后面的结点作为首结点。如果后续结点为空，则前驱结点作为List尾。如果在队列中间，则将前后两个结点连接起来，并将自身清空，缩短队列长度。</p> <p>可以看到，删除的操作并不复杂，主要时间在查找结点位置上，同样也是O(n)的复杂度。</p> <h3 id="其他方法"><a href="#其他方法" class="header-anchor">#</a> 其他方法</h3> <div class="language-java line-numbers-mode"><pre class="language-java"><code><span class="token comment">/**
+ * Returns the element at the specified position in this list.
+ *
+ * @param index index of the element to return
+ * @return the element at the specified position in this list
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */</span>
+<span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">checkElementIndex</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">node</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">.</span>item<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token comment">/**
+ * Replaces the element at the specified position in this list with the
+ * specified element.
+ *
+ * @param index index of the element to replace
+ * @param element element to be stored at the specified position
+ * @return the element previously at the specified position
+ * @throws IndexOutOfBoundsException {@inheritDoc}
+ */</span>
+<span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token class-name">E</span> element<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">checkElementIndex</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Node</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">E</span><span class="token punctuation">&gt;</span></span> x <span class="token operator">=</span> <span class="token function">node</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">E</span> oldVal <span class="token operator">=</span> x<span class="token punctuation">.</span>item<span class="token punctuation">;</span>
+    x<span class="token punctuation">.</span>item <span class="token operator">=</span> element<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> oldVal<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token comment">/**
+ * Adds the specified element as the tail (last element) of this list.
+ *
+ * @param e the element to add
+ * @return {@code true} (as specified by {@link Queue#offer})
+ * @since 1.5
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">offer</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">add</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token comment">/**
+ * Pushes an element onto the stack represented by this list.  In other
+ * words, inserts the element at the front of this list.
+ *
+ * &lt;p&gt;This method is equivalent to {@link #addFirst}.
+ *
+ * @param e the element to push
+ * @since 1.6
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">push</span><span class="token punctuation">(</span><span class="token class-name">E</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">addFirst</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token comment">/**
+ * Pops an element from the stack represented by this list.  In other
+ * words, removes and returns the first element of this list.
+ *
+ * &lt;p&gt;This method is equivalent to {@link #removeFirst()}.
+ *
+ * @return the element at the front of this list (which is the top
+ *         of the stack represented by this list)
+ * @throws NoSuchElementException if this list is empty
+ * @since 1.6
+ */</span>
+<span class="token keyword">public</span> <span class="token class-name">E</span> <span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">removeFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+                                                      
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br></div></div><p>可以看到，常用的get，set方法，主要是在找元素的位置。其他如常见的队列方法，都是在add，remove的基础上做了封装。</p> <h2 id="小结"><a href="#小结" class="header-anchor">#</a> 小结</h2> <p>LinkedList是一个List，也是一个Deque，有较为丰富的接口。不同于ArrayList可以用下标找到地址，LinkedList的增删改查都需要遍历List，处理起来比较耗时，因此适用于经常对首尾元素操作且性能要求不高的场景。</p> <p>此外，由于LinkedList是动态申请每一块内存，对内存的连续性要求不高，在虚拟机堆内存较少的情况下可以考虑使用。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/qisong3/Techblog/edit/master/docs/source/java-collections/JDK8——LinkedList源码解读.md" target="_blank" rel="noopener noreferrer">在Github上编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/source/java-collections/JDK8——ArrayList源码解读.html" class="prev">
+        JDK8——ArrayList源码解读
+      </a></span> <span class="next"><a href="/source/java-collections/JDK8——Vector源码解读.html">
+        JDK8——Vector源码解读
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.97e375c5.js" defer></script><script src="/assets/js/3.fdc0d355.js" defer></script><script src="/assets/js/58.e7e5bc18.js" defer></script><script src="/assets/js/6.4d2b9347.js" defer></script>
+  </body>
+</html>
