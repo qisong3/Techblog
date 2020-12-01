@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /bg.png
+heroImage: /bg.jpg
 ---
 
 <div class="features">
