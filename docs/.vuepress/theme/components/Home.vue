@@ -114,6 +114,9 @@ export default {
     flex-grow 1
     flex-basis 30%
     max-width 30%
+    &:hover
+      transform scale(1.05)
+      box-shadow 0 2px 12px 0 var(--card-shadow-color)
     h2
       font-size 1.4rem
       font-weight 500

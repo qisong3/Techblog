@@ -18,16 +18,25 @@ heroImage: /bg.jpg
   </div>
 </div>
 
-### As long as you stick to it as me
+::: warning 最新动态
+1. 持续更新MySQL8.0中文文档
 
-``` bash
-##收藏Errison's blog  
-(https://blog.errison.cn)
+2. 持续更新leetcode SQL面试题
 
-跟随Errison日常更新的日志和博客，跟进最新内容。
+3. 修改主页布局
+:::
 
-## 在Github上fork这个，修正Errison描述不准确的地方，补充自己的新内容！
-[repo](https://github.com/qisong3/Techblog)
-```
+::: danger 最近文章
+1. [8.2 优化SQL表达式](mysql/manual-8/8.2%20优化SQL表达式.md)
+
+2. [181. 超过经理收入的员工](mysql/leetcode/181.%20超过经理收入的员工.md)
+:::
+
+::: tip Follow me
+1. 收藏Errison's blog  (https://blog.errison.cn)跟随Errison日常更新的日志和博客，跟进最新内容。
+
+2. 在Github上fork这个[repo](https://github.com/qisong3/Techblog)，修正Errison描述不准确的地方，补充自己的新内容！
+
+::: 
 
 
