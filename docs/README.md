@@ -29,7 +29,7 @@ heroImage: /bg.jpg
 ::: danger 最近文章
 1. [8.2 优化SQL表达式](mysql/manual-8/8.2%20优化SQL表达式.md)
 
-2. [181. 超过经理收入的员工](mysql/leetcode/181.%20超过经理收入的员工.md)
+2. [185. 部门工资前三高的所有员工](mysql/leetcode/185.%20部门工资前三高的所有员工.md)
 :::
 
 ::: tip Follow me
