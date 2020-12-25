@@ -9,17 +9,11 @@ keywords:
  - leetcode
 ---
 
-SQL是一门实践性语言，需要反复练习，不断打磨，同时也要熟悉优化技巧。本专题列举leetcode中的SQL例题。
+SQL是一门实践性语言，需要反复练习，不断打磨，同时也要熟悉优化技巧。本专题列举leetcode中的简单级别SQL例题。
 
 [175. 合并两个表es](175.%20合并两个表.md)<Badge text="简单" type="tip"/>  
 
 [176. 第二高的薪水](176.%20第二高的薪水.md)<Badge text="简单" type="tip"/>
-
-[177. 第N高的薪水](177.%20第N高的薪水.md)<Badge text="中等" type="warning"/> 
-
-[178. 分数排名](178.%20分数排名.md)<Badge text="中等" type="warning"/> 
-
-[180. 连续出现的数字](180.%20连续出现的数字.md)<Badge text="中等" type="warning"/> 
 
 [181. 超过经理收入的员工](181.%20超过经理收入的员工.md)<Badge text="简单" type="tip"/>
 
@@ -27,17 +21,14 @@ SQL是一门实践性语言，需要反复练习，不断打磨，同时也要�
 
 [183. 从不订购的客户](183.%20从不订购的客户.md)<Badge text="简单" type="tip"/>
 
-[184. 部门工资最高的员工](184.%20部门工资最高的员工.md)<Badge text="中等" type="warning"/> 
-
-[185. 部门工资前三高的所有员工](185.%20部门工资前三高的所有员工.md)<Badge text="困难" type="error"/> 
-
 [196. 删除重复的电子邮箱](196.%20删除重复的电子邮箱.md)<Badge text="简单" type="tip"/>
 
 [197. 上升的温度](197.%20上升的温度.md)<Badge text="简单" type="tip"/>
 
-[262. 行程和用户](262.%20行程和用户.md)<Badge text="困难" type="error"/> 
-
 [595. 大的国家](595.%20大的国家.md)<Badge text="简单" type="tip"/>
 
 [596. 超过5名学生的课](596.%20超过5名学生的课.md)<Badge text="简单" type="tip"/>
+
+[620. 有趣的电影](620..%20620. 有趣的电影.md)<Badge text="简单" type="tip"/>
+
 
