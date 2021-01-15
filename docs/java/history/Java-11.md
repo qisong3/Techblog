@@ -125,28 +125,90 @@ var list = new ArrayList<String>(); // infers ArrayList<String>
 var stream = list.stream(); // infers Stream<String>s
 var bos = new ByteArrayOutputStream();
 ```
-Java 11中，局部变量推断推广到了lambda表达式中
+
+但是在 Java 10 中，还有下面几个限制：
+
+- 只能用于局部变量上
+- 声明时必须初始化
+- 不能用作方法参数
+- 不能在 Lambda 表达式中使用
+
+Java 11 与 Java 10 的不同之处在于允许开发者在 Lambda 表达式中使用 var 进行参数声明。乍一看，这一举措似乎有点多余，因为在写代码过程中可以省略 Lambda 参数的类型，并通过类型推断确定它们。但是，添加上类型定义同时使用 @Nonnull 和 @Nullable 等类型注释还是很有用的，既能保持与局部变量的一致写法，也不丢失代码简洁。
+
+Lambda 表达式使用隐式类型定义，它形参的所有类型全部靠推断出来的。隐式类型 Lambda 表达式如下：
+
+(x, y) -> x.process(y)
+
+Java 10 为局部变量提供隐式定义写法如下：
+
 ```java 
-// Not allowed to mix 'var' and 'no var' in implicitly typed lambda expression
-(var a, b) -> a+b
+var x = new Foo();
+for (var x : xs) { ... }
+try (var x = ...) { ... } catch ...
 
-// Not allowed to mix 'var' and manifest types in explicitly typed lambda expression
-(var a, int b) -> a+b   
 ```
+为了 Lambda 类型表达式中正式参数定义的语法与局部变量定义语法的不一致，且为了保持与其他局部变量用法上的一致性，希望能够使用关键字 var 隐式定义 Lambda 表达式的形参：
+(var x, var y) -> x.process(y)
+于是在 Java 11 中将局部变量和 Lambda 表达式的用法进行了统一，并且可以将注释应用于局部变量和 Lambda 表达式：
 
-
+```java 
+@Nonnull var x = new Foo();
+(@Nonnull var x, @Nullable var y) -> x.process(y)
+```
 ## ZGC 垃圾回收器
 
-ZGC垃圾回收器是一个实验性的，低延时的垃圾回收器，可以覆盖从很小的堆到上T的巨大的堆。ZGC同步执行所有耗时操作，停顿将不超过10ms。并且相比于G1回收器，对应用吞吐性能的影响将低于15%。
+ZGC 即 Z Garbage Collector（垃圾收集器或垃圾回收器），这应该是 Java 11 中最为瞩目的特性，没有之一。ZGC 是一个可伸缩的、低延迟的垃圾收集器，主要为了满足如下目标进行设计：
 
+- GC 停顿时间不超过 10ms
+- 即能处理几百 MB 的小堆，也能处理几个 TB 的大堆
+- 应用吞吐能力不会下降超过 15%（与 G1 回收算法相比）
+- 方便在此基础上引入新的 GC 特性和利用 colord
+- 针以及 Load barriers 优化奠定基础
+- 当前只支持 Linux/x64 位平台
+
+停顿时间在 10ms 以下，10ms 其实是一个很保守的数据，即便是 10ms 这个数据，也是 GC 调优几乎达不到的极值。根据 SPECjbb 2015 的基准测试，128G 的大堆下最大停顿时间才 1.68ms，远低于 10ms，和 G1 算法相比，改进非常明显。
 
 ## Flight Recorder
 
 Java Flight Recorder (JFR)是收集应用运行期间JVM信息的工具。JFR被集成到JVM中，并且随着JDK一起发布。
+Java 11 中提供一种低开销的 Java 堆分配采样方法，能够得到堆分配的 Java 对象信息，并且能够通过 JVMTI 访问堆信息。
+
+引入这个低开销内存分析工具是为了达到如下目的：
+
+- 足够低的开销，可以默认且一直开启
+- 能通过定义好的程序接口访问
+- 能够对所有堆分配区域进行采样
+- 能给出正在和未被使用的 Java 对象信息
+
+对用户来说，了解它们堆里的内存分布是非常重要的，特别是遇到生产环境中出现的高 CPU、高内存占用率的情况。目前有一些已经开源的工具，允许用户分析应用程序中的堆使用情况，比如：Java Flight Recorder、jmap、YourKit 以及 VisualVM tools.。但是这些工具都有一个明显的不足之处：无法得到对象的分配位置，headp dump 以及 heap histogram 中都没有包含对象分配的具体信息，但是这些信息对于调试内存问题至关重要，因为它能够告诉开发人员他们的代码中发生的高内存分配的确切位置，并根据实际源码来分析具体问题，这也是 Java 11 中引入这种低开销堆分配采样方法的原因。
+
 
 
 ## Transport Layer Security (TLS) 1.3
 
-JDK11开始正式全面支持TLS1.3。
+Java 11 中包含了传输层安全性（TLS）1.3 规范（RFC 8446）的实现，替换了之前版本中包含的 TLS，包括 TLS 1.2，同时还改进了其他 TLS 功能，例如 OCSP 装订扩展（RFC 6066，RFC 6961），以及会话散列和扩展主密钥扩展（RFC 7627），在安全性和性能方面也做了很多提升。
+
+新版本中包含了 Java 安全套接字扩展（JSSE）提供 SSL，TLS 和 DTLS 协议的框架和 Java 实现。目前，JSSE API 和 JDK 实现支持 SSL 3.0，TLS 1.0，TLS 1.1，TLS 1.2，DTLS 1.0 和 DTLS 1.2。
+
+同时 Java 11 版本中实现的 TLS 1.3，重新定义了以下新标准算法名称：
+
+- TLS 协议版本名称：TLSv1.3
+- SSLContext 算法名称：TLSv1.3
+- TLS 1.3 的 TLS 密码套件名称：TLS_AES_128_GCM_SHA256，TLS_AES_256_GCM_SHA384
+- 用于 X509KeyManager 的 keyType：RSASSA-PSS
+- 用于 X509TrustManager 的 authType：RSASSA-PSS
+
+还为 TLS 1.3 添加了一个新的安全属性 jdk.tls.keyLimits。当处理了特定算法的指定数据量时，触发握手后，密钥和 IV 更新以导出新密钥。还添加了一个新的系统属性 jdk.tls.server.protocols，用于在 SunJSSE 提供程序的服务器端配置默认启用的协议套件。
+
+之前版本中使用的 KRB5 密码套件实现已从 Java 11 中删除，因为该算法已不再安全。同时注意，TLS 1.3 与以前的版本不直接兼容。
+
+升级到 TLS 1.3 之前，需要考虑如下几个兼容性问题：
+
+    TLS 1.3 使用半关闭策略，而 TLS 1.2 以及之前版本使用双工关闭策略，对于依赖于双工关闭策略的应用程序，升级到 TLS 1.3 时可能存在兼容性问题。
+    TLS 1.3 使用预定义的签名算法进行证书身份验证，但实际场景中应用程序可能会使用不被支持的签名算法。
+    TLS 1.3 再支持 DSA 签名算法，如果在服务器端配置为仅使用 DSA 证书，则无法升级到 TLS 1.3。
+    TLS 1.3 支持的加密套件与 TLS 1.2 和早期版本不同，若应用程序硬编码了加密算法单元，则在升级的过程中需要修改相应代码才能升级使用 TLS 1.3。
+    TLS 1.3 版本的 session 用行为及秘钥更新行为与 1.2 及之前的版本不同，若应用依赖于 TLS 协议的握手过程细节，则需要注意。
+
 
 
