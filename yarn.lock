@@ -10000,6 +10000,11 @@ vuepress-html-webpack-plugin@^3.2.0:
     toposort "^1.0.0"
     util.promisify "1.0.0"
 
+vuepress-plugin-baidu-autopush@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-baidu-autopush/-/vuepress-plugin-baidu-autopush-1.0.1.tgz#e5042170f05a585c4a38f876e01ff4706cd82fbe"
+  integrity sha512-KVQkrmMgPY+GG8dtI2wcRxUv1n2h5DM8aFs75ltsSlFBSS9C/vfLb2LmywXAsoCXk2EHya2p66cpn7BxofK+Mw==
+
 vuepress-plugin-comment@^0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/vuepress-plugin-comment/-/vuepress-plugin-comment-0.7.3.tgz#2cff36b8f90896a7f88d494d78458398b1510249"
@@ -10032,6 +10037,11 @@ vuepress-plugin-flowchart@^1.4.3:
   integrity sha512-Vyhh2xiCvMoubwBBDdre5u2tekp3B0N9vGDxAbgHUJH5L6V1venq1pWsbhKi9Wmr2Pa/yOTq3se1ji2w/kDr+A==
   dependencies:
     flowchart.js "^1.11.3"
+
+vuepress-plugin-seo@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-seo/-/vuepress-plugin-seo-0.1.4.tgz#be8e5577491c1fc317a7ad4abe3ae51ff317be1e"
+  integrity sha512-foNKrAAKihiC47bx0UXFzs/+BIFmnowTQsLVF/8pfsnsPDp8FXjkTGyjxyjOhbwj7ADPv32CdX3pEoYGnZ7OjA==
 
 vuepress-plugin-smooth-scroll@^0.0.3:
   version "0.0.3"
