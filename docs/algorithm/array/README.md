@@ -17,15 +17,19 @@ last-update: 2020-08-12
 
 例如对于一个数组 ['oranges', 'apples', 'bananas', 'pears', 'tomatoes']，为了方便起见，我们假设每个元素只占用一个字节，它的索引与内存地址的关系如下图所示。
 
+![leetcode-array-2](/images/algorithm-array/leetcode-array-2.png)
+
 在具体的编程语言中，数组的实现方式具有一定差别。比如 C++ 和 Java 中，数组中的元素类型必须保持一致，而 Python 中则可以不同。相比之下，Python 中的数组（称为 list）具有更多的高级功能。
 
 以下是数组的经典题目。
 
 
-![leetcode-array-2](/images/algorithm-array/leetcode-array-2.png)
-
 [4. 寻找两个正序数组的中位数](4.%20寻找两个正序数组的中位数.md)<Badge text="简单" type="tip"/>  
+
+[15. 三数之和](15.%20三数之和.md)<Badge text="简单" type="tip"/> 
 
 [26. 删除排序数组中的重复项](26.%20删除排序数组中的重复项.md)<Badge text="简单" type="tip"/>  
 
-[80. 删除排序数组中的重复项 II](80.%20删除排序数组中的重复项%20II.md)<Badge text="中等" type="warning"/>  
+[80. 删除排序数组中的重复项 II](80.%20删除排序数组中的重复项%20II.md)<Badge text="中等" type="warning"/> 
+
+[41. 缺失的第一个正数]() 

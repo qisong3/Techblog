@@ -16,7 +16,8 @@ last-update: 2021-02-21
 下面是动态规划一些经典题目。
 
 
-[51. N 皇后]
+[42. 接雨水](42.%20接雨水.md)<Badge text="简单" type="tip"/>
 
+[62. 不同路径](62.%20不同路径.md)<Badge text="简单" type="tip"/>
 
- 
+[63. 不同路径2](63.%20不同路径%20II.md)<Badge text="简单" type="tip"/>

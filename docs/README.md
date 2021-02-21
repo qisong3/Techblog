@@ -27,11 +27,11 @@ heroImage: /bg.jpg
 :::
 
 ::: danger 最近文章
-1. [8.2 优化SQL表达式](mysql/manual-8/8.2%20优化SQL表达式.md)
+1. [8.2 优化SQL表达式](mysql/manual-8/8.2%20优化SQL表达式--8.2.1%20优化SELECT表达式.md)
 
-2. [185. 部门工资前三高的所有员工](mysql/leetcode-medium/626.%20换座位.md)
+2. [185. 部门工资前三高的所有员工](mysql/leetcode-hard/185.%20部门工资前三高的所有员工.md)
 
-3. [601. 体育馆的人流量](mysql/leetcode-hard/601.%20体育馆的人流量.md)
+3. [1. 两数之和](algorithm/hashtable/1.%20两数之和.md)
 
 :::
 

@@ -10,6 +10,8 @@ last-update: 2020-08-12
 
 回溯算法的基本思想是：从一条路往前走，能进则进，不能进则退回来，换一条路再试。
 
-[51 N皇后](51.%20N%20皇后.md)<Badge text="简单" type="tip"/>  
-
 [39. 组合总和](39.%20组合总和.md)<Badge text="简单" type="tip"/>  
+
+[17. 电话号码的字母组合.md](17.%20电话号码的字母组合.md)<Badge text="简单" type="tip"/>  
+
+[51 N皇后](51.%20N%20皇后.md)<Badge text="中等" type="warning"/>  
