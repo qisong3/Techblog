@@ -14,4 +14,6 @@ last-update: 2020-08-12
 
 [17. 电话号码的字母组合.md](17.%20电话号码的字母组合.md)<Badge text="简单" type="tip"/>  
 
+[22. 括号生成](22.%20括号生成.md)<Badge text="中等" type="warning"/>  
+
 [51 N皇后](51.%20N%20皇后.md)<Badge text="中等" type="warning"/>  

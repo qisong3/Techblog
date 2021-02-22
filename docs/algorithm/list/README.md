@@ -22,4 +22,6 @@ last-update: 2020-08-12
 
 [2. 两数相加](2.%20两数相加.md)<Badge text="简单" type="tip"/>
 
+[19. 删除链表的倒数第 N 个结点](19.%20删除链表的倒数第%20N%20个结点.md)<Badge text="中等" type="warning"/>
+
 [206. 反转链表](206.%20反转链表.md)<Badge text="简单" type="tip"/>
