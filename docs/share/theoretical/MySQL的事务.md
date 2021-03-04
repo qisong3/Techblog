@@ -257,3 +257,11 @@ INSERT into Person (Id, Email ) VALUES (6, 'labs@example.com');
 将session2的事务提交以后，session1可正常执行。
 
 可见这种级别的事务隔离做到了完全独立相互阻塞，可以保证数据的强一致性。
+
+
+::: tip 
+
+MySQL通过
+set [global | session] transaction isolation level [READ UNCOMMITTED | READ COMMITTED｜REPEATABLE READ　｜　SERIALIZABLE]
+来设置全局/会话的事务隔离级别，默认是的隔离级别是　REPEATABLE READ
+:::
