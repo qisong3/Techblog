@@ -114,3 +114,58 @@ InnoDB执行行级锁的方式是这样的:当它搜索或扫描一个表索引�
 
 
 ## Insert Intention Locks
+
+插入意向锁是一种间隙锁，是行插入之前进行的操作。这个锁发出信号，如果多个事务插入到同一个索引间隙中，如果它们没有插入到这个间隙中的同一位置，那么它们就不需要等待对方。
+
+假设有索引记录4和7，不同的事务分别尝试插入5和6，每个锁住4和7之间在获取插入行的都站所之前先获取插入意向锁，但是他们不会相互阻塞，因为处理的行并不冲突。
+
+下面的例子示范了事务在获取独占锁进行插入之前先获取了插入意向锁。例子包含两个客户端，A和B。
+
+客户端A创建一个包含两个索引记录(90和102)的表，然后启动一个事务，对ID大于100的索引记录设置排他锁。排他锁包括记录102之前的间隙锁。
+
+```sql
+    mysql> CREATE TABLE child (id int(11) NOT NULL, PRIMARY KEY(id)) ENGINE=InnoDB;
+    mysql> INSERT INTO child (id) values (90),(102);
+    
+    mysql> START TRANSACTION;
+    mysql> SELECT * FROM child WHERE id > 100 FOR UPDATE;
+    +-----+
+    | id  |
+    +-----+
+    | 102 |
+    +-----+
+```
+客户B开始一个事务，向间隙中插入一条记录。事务在等待获取排他锁时接受一个插入意图锁。
+
+```sql
+    mysql> START TRANSACTION;
+    mysql> INSERT INTO child (id) VALUES (101);
+```
+
+可以通过 SHOW ENGINE INNODB STATUS 命令查看插入意图锁的事务数据
+
+```sql
+RECORD LOCKS space id 31 page no 3 n bits 72 index `PRIMARY` of table `test`.`child`
+trx id 8731 lock_mode X locks gap before rec insert intention waiting
+Record lock, heap no 3 PHYSICAL RECORD: n_fields 3; compact format; info bits 0
+ 0: len 4; hex 80000066; asc    f;;
+ 1: len 6; hex 000000002215; asc     " ;;
+ 2: len 7; hex 9000000172011c; asc     r  ;;...
+```
+
+## AUTO-INC Locks 自增锁
+
+自增锁是一种特殊的表级锁，由插入到具有自动递增列的表中的事务所获得。在最简单的情况下，如果一个事务正在向表中插入值，那么任何其他事务都必须等待自己对该表的插入，以便由第一个事务插入的行接收连续的主键值。
+
+innodb_autoinc_lock_mode配置选项控制了自增锁的算法。它允许您选择如何在可预测的自动递增值序列和插入操作的最大并发性之间进行权衡。
+
+## Predicate Locks for Spatial Indexes 空间索引的预测锁
+
+InnoDB支持在包含空间列上建立空间索引。
+
+在处理包含空间索引的锁方面，Next-key锁不能很好支持REPEATABLE READ或者SERIALIZABLE事务隔离级别。因为在多维的空间上没有明确的顺序概念，因此next-key指向不明。
+
+为了支持空间索引的隔离级别，InnoDB采用判定锁。空间索引包含最小边界矩形(MBR)值，因此InnoDB通过对用于查询的MBR值设置一个判定锁来强制对索引进行一致读取。其他事务不能插入或修改将匹配查询条件的行。
+
+## 锁小结
+
