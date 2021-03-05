@@ -1,0 +1,116 @@
+---
+title: InnoDB中的锁
+date: 2021-03-05
+last-update: 2021-03-05
+keywords:
+ - MySQL 
+ - 事务
+ - 锁
+---
+
+## 概述
+
+InnoDB是MySQL默认的搜索引擎，支持多种锁，本文将逐一介绍
+
+- Shared and Exclusive Locks 共享锁和独占锁
+- Intention Locks 意向锁
+- Record Locks 记录锁
+- Gap Locks 间隙锁
+- Next-Key Locks 
+- Insert Intention Locks 插入意向锁
+- AUTO-INC Locks 自增锁
+- Predicate Locks for Spatial Indexes 
+
+## Shared and Exclusive Locks 
+
+InnoDB实现了标准的两种行级锁
+- shared(s) lock： 允许持有锁的事务读取行
+- exclusive(x) lock: 允许持有锁的事务执行更新或者删除行的操作
+
+如果事务T1持有行r的分享锁(s)，那么来自另一个不同的事务T2对行r的请求会如下操作：
+- T2对行r的分享锁请求会立即被允许，之后T1和T2同时持有r行的分享锁
+- T2对行r的独占锁请求不会被立即允许
+
+如果T1持有的是行r的独占锁(x)，那么T2的分享锁和独占锁请求都不会被立即允许，直到T1释放了独占锁。
+
+## Intention Locks
+
+InnoDB支持多粒度的锁，允许行锁和表锁同时存在。比如说，表达式`LOCK TABLES ... WRITE`是一个独占的表锁。为了支持多粒度的表，InnoDB使用Intention Locks。
+
+Intention Lock是一个表级别的锁，指示下一个事务需要表中的行的哪种类型的锁。
+
+- Intension shared lock（IS)，指示事务打算在表中的单个行上设置共享锁。
+- Intension exclusive lock（IX)，指示事务打算在表中的每一行上设置一个排他锁。
+
+比如说`For example, SELECT ... FOR SHARE` 设置 IS lock, and `SELECT ... FOR UPDATE` 设置IX lock. 
+
+Intention Lock协议如下：
+- 在事务获得表中某一行的共享锁之前，它必须首先获得表上的IS锁或更强的锁。
+- 在事务可以获取表中某行的排它锁之前，它必须首先获取该表中的IX锁。
+
+表级锁类型兼容性总结在下面的矩阵中：
+
+||X|IX|S|IS|
+|:--:|:--:|:--:|:--:|
+|X|冲突|冲突|冲突|冲突|
+|IX|冲突|兼容|冲突|兼容|
+|IS|冲突|冲突|兼容|兼容|
+|IS|冲突|兼容|兼容|兼容|
+
+如果一个锁与现有的锁兼容，那么它就会被授予请求事务，但如果它与现有的锁冲突，则不会授予它。事务等待，直到冲突的现有锁被释放。如果一个锁请求与一个现有的锁冲突，并且因为它会导致死锁而不能被授予，那么就会发生错误。
+
+Intention lock不会阻塞除全表锁(如，LOCK TABLES ... WRITE))以外的其他锁请求。Intention lock的主要目的是显示某人正在锁定某一行，或者将要锁定表中的某一行。
+
+## Record Locks
+
+Record Lock是在索引记录上的锁。比如说，`SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE`阻止其他事务插入，更新或者删除t.c1 = 10的行。
+
+Record Lock总是锁定有索引的记录，即使一个表没有定义索引。比如说，InnoDB会为没有聚簇索引的表隐式创建一个聚簇索引。
+
+## Gap Locks
+
+Gap Lock是加在索引记录间隙的锁，或者在索引前后的间隙的锁。比如说，`SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE`，阻止其他事务向表中插入c1 = 15的数据。不管c1 = 15是否已经存在，因为已经锁住了c1的10-20的间隙。
+
+间隙可以是一个单个的索引值，多个索引值或者为空。
+
+Gap Lock是同步和表现之间的平衡产物，只用于部分事务隔离级别。
+
+Gap lock不需要用于使用唯一索引锁定行以搜索唯一行的语句(对于多个列组成的唯一索引中的部分列，Gap Lock可以使用)。比如说，id列是一个唯一索引，那么下面的表达式只在id = 100这里设置了Record Lock，并不阻止其他事务插入下面的间隙。
+
+```sql
+    SELECT * FROM child WHERE id = 100;
+```
+
+如果id列没有索引或者不是独立索引，那么表达式会锁住间歇。
+
+这里还值得注意的是，不同的事务可以在一个间隙上持有冲突的锁。例如，事务A可以在一个间隙上持有一个共享间隙锁(gap S-lock)，而事务B在同一个间隙上持有一个排他间隙锁(gap X-lock)。允许冲突间隙锁的原因是，如果一条记录从一个索引中被清除，那么记录上由不同事务持有的间隙锁必须被合并。
+
+InnoDB中的Gap lock是纯抑制的，这意味着它们的唯一目的是防止其他事务插入到Gap中。Gap lock可以共存。一个事务取得的Gap lock并不会阻止另一个事务取得同一间隙上的Gap lock。
+
+Gap lock定可以显式禁用。 如果将事务隔离级别更改为READ COMMITTED，则Gap lock被禁止。在这种情况下，Gap lock被禁止用于搜索和索引，只用于外键约束检测和重复索引检测。
+
+使用READ COMMITTED务隔离级别还有其他影响。不匹配行的Record Lock在MySQL计算WHERE条件后释放。对于UPDATE表达式，InnoDB使用"半一致"读取，它返回最近提交版本的数据，以便检测行是否匹配update条件。
+
+## Next-Key Locks
+
+Next-Key Lock是索引上的Record Lock和索引记录前间隙上的Gap Lock的合体。
+
+InnoDB执行行级锁的方式是这样的:当它搜索或扫描一个表索引时，它会在遇到的索引记录上设置共享锁或排他锁。因此行级锁实际上就是索引记录锁。next-key lock也影响在索引记录之前的间隙。即next-key lock是索引记录锁以及该索引之前的间隙锁。
+
+如果一个会话在一个索引的记录R上拥有共享锁或者独占锁，另一个会话不可以在R记录之前(按索引排序)插入一个新的索引记录。
+
+假设一个索引包含值10，11，13，20，可能的next-key lock包括以下范围，圆括号表示不含，方括号包含
+```shell script
+(negative infinity, 10]
+(10, 11]
+(11, 13]
+(13, 20]
+(20, positive infinity)
+```
+
+最后一个间隙两边都不包含，实际上next-key lock包含的范围为(negative infinity, 20]
+
+默认状态下，InnoDB执行REPEATABLE READ事务隔离级别，在这种情况下，InnoDB使用next-key lock搜索和索引扫描，避免幻读。
+
+
+## Insert Intention Locks

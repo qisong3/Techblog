@@ -259,9 +259,66 @@ INSERT into Person (Id, Email ) VALUES (6, 'labs@example.com');
 可见这种级别的事务隔离做到了完全独立相互阻塞，可以保证数据的强一致性。
 
 
-::: tip 
+## 事务的设置语法
 
-MySQL通过
-set [global | session] transaction isolation level [READ UNCOMMITTED | READ COMMITTED｜REPEATABLE READ　｜　SERIALIZABLE]
-来设置全局/会话的事务隔离级别，默认是的隔离级别是　REPEATABLE READ
-:::
+```sql
+    SET [GLOBAL | SESSION] TRANSACTION
+        transaction_characteristic [, transaction_characteristic] ...
+    
+    transaction_characteristic: {
+        ISOLATION LEVEL level
+      | access_mode
+    }
+    
+    level: {
+         REPEATABLE READ
+       | READ COMMITTED
+       | READ UNCOMMITTED
+       | SERIALIZABLE
+    }
+    
+    access_mode: {
+         READ WRITE
+       | READ ONLY
+    }
+```
+
+设置的内容分三个部分
+1. 事务范围
+- global
+    * 后续所有会话都执行
+    * 已存在的会话不影响
+    * 必须有 CONNECTION_ADMIN 权限才能设置
+- session
+    * 当前会话的所有事务都执行
+    * 只允许在事务完成后，另一个事务开启前设置，对已经存在的事务不影响
+    * 新设置的会覆盖旧的设置
+- 如果未指明范围
+    * 只影响当前会话的下一个事务
+    * 下一个事务执行完以后，会延续之前的事务设置
+    * 事务中不允许设置
+2. 事务隔离级别
+    
+- READ UNCOMMITTED
+- READ COMMITTED
+- REPEATABLE READ
+- SERIALIZABLE
+
+只能设置单个值 
+
+3. 事务访问模式
+- READ ONLY 这种模式下不允许修改表
+- READ WRITE 独写表都被禁止
+
+举例说明：
+
+设置全局READ COMMITTED READ WRITE
+```sql
+    SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;
+    SET GLOBAL TRANSACTION READ WRITE;
+```
+读取全局和会话的事务设置
+```sql
+    SELECT @@GLOBAL.transaction_isolation, @@GLOBAL.transaction_read_only;
+    SELECT @@SESSION.transaction_isolation, @@SESSION.transaction_read_only;
+```
