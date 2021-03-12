@@ -73,8 +73,11 @@ jstat,jinfo,jlink等，用于开发基于Java语言的应用程序。<br>
 人们日常所所的IDE，不在上述讨论的名词范围内。知名的Java开发IDE如IDEA, Eclipse等都是开发工具，是为了更方便的开发Java语言的应用程序。
 :::
 
+## 各版本下载
 
-
+- [JDK 8](https://pan.baidu.com/s/1MrpXNd_lRBjAdbadsnKkdg)  提取码:ujeg
+- [JDK 11](https://pan.baidu.com/s/1M-WzMU3HV5dpJ4KQaUDLgw ) 提取码：ez2q 
+- [JDK 7](https://pan.baidu.com/s/1adVCJJ2bysVfzu_5BLjlbg) 提取码：8hb7 
 
 
 
