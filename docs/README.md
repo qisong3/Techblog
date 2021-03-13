@@ -2,6 +2,7 @@
 home: true
 heroImage: /bg.jpg
 ---
+![](https://img.shields.io/badge/blog-@errison-red.svg)![](https://img.shields.io/badge/license-MIT-green.svg)
 
 <div class="features">
   <div class="feature">
