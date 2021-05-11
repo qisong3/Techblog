@@ -109,7 +109,78 @@ if (obj instanceof String) {
 这一特性的主要目标是改进G1垃圾回收期，以便在不活动时立即将Java堆内存返回给操作系统。为了达成这个目的，G1会在应用不活跃时或者在一个持续性的周期中检查整个Java堆的使用情况。
 
 
+## 其他API特性
 
+### NumberFormat
+
+NumberFormat增加了以紧凑格式格式化数字的支持。 紧凑的数字格式是指数字的简短形式或易于理解的形式。 例如，在en_US语言环境中，根据NumberFormat.Style指定的样式，可以将1000格式化为“ 1K”，将1000000格式化为“ 1M”。 紧凑数字格式由LDML的紧凑数字格式规范定义。 若要获取实例，请使用NumberFormat给出的工厂方法之一来进行紧凑数字格式化。 例如：
+
+```java 
+    private static void formatNum() {
+        NumberFormat fmt = NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);
+        System.out.println(fmt.format(1000));
+        fmt = NumberFormat.getCompactNumberInstance(Locale.CHINA, NumberFormat.Style.LONG);
+        System.out.println(fmt.format(12457854));
+    }
+
+    // output
+    // 1K
+    // 1246万
+```
+### String API
+
+```java 
+    
+    // String.transform
+    private static void testTransform(){
+
+        List<String> list1 = List.of("Java", " Python", " Go ");
+        List<String> list2 = new ArrayList<>();
+
+        list1.forEach(element ->
+                list2.add(element.transform(String::strip)
+                        .transform(String::toUpperCase)
+                        .transform((e) -> "Hi," + e))
+        );
+
+        list2.forEach(System.out::println);
+    }
+
+    // String.indent
+    private static void testIndent(){
+            String result = "Java\nPython\nGo".indent(5);
+            System.out.println(result);
+    }
+
+    // String.describeConstable
+    private static void testDescribeConstable(){
+        String name = "Java DescribeConstable";
+        Optional<String> optional = name.describeConstable();
+        System.out.println(optional.get());
+    }
+
+    // Files.mismatch
+    private static void testFile() throws IOException {
+        File file1 = new File("11");
+        File file2 = new File("22");
+        Files.mismatch(file1.toPath(),file2.toPath());
+    }
+
+
+```
+  
+    
+
+    
+
+
+### Unicode 11.0
+
+JDK 12版本包含对Unicode 11.0.0的支持。 在支持Unicode 10.0.0的JDK 11发行之后，Unicode 11.0.0引入了JDK 12现在包含的以下新功能：
+    
+- 684个新字符
+- 11个新blocks
+- 7个新脚本。
 
 
 
