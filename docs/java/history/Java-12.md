@@ -76,6 +76,19 @@ int numLetters = switch (day) {
   javac -Xlint:preview --enable-preview -source 12 src/main/java/SwitchExpressions.java
 ```
 
+除此以外，可以在break语句中返回数值
+```java 
+int result = switch (s) {
+    case "Foo": 
+        break 1;
+    case "Bar":
+        break 2;
+    default:
+        System.out.println("Neither Foo nor Bar, hmmm...");
+        break 0;
+};
+```
+
 ## instanceof的模式匹配
 这也是一个预览功能，通过下面两个例子说明。
 
@@ -127,7 +140,7 @@ NumberFormat增加了以紧凑格式格式化数字的支持。 紧凑的数字�
     // 1K
     // 1246万
 ```
-### String API
+### New API
 
 ```java 
     
@@ -168,12 +181,7 @@ NumberFormat增加了以紧凑格式格式化数字的支持。 紧凑的数字�
 
 
 ```
-  
-    
-
-    
-
-
+ 
 ### Unicode 11.0
 
 JDK 12版本包含对Unicode 11.0.0的支持。 在支持Unicode 10.0.0的JDK 11发行之后，Unicode 11.0.0引入了JDK 12现在包含的以下新功能：
