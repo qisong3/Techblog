@@ -41,6 +41,7 @@ heroImage: /bg.jpg
 
 2. 在Github上fork这个[repo](https://github.com/qisong3/Techblog)，修正Errison描述不准确的地方，补充自己的新内容！
 
+3  long time no see!
 ::: 
 
 
