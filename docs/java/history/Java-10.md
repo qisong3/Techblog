@@ -46,9 +46,9 @@ JDK10提供了一个通用的Garbage Collector Interface(垃圾回收器接口)�
 
 在JDK10 的代码中路径为 openjdk/src/hotspot/share/gc/，各个 GC 实现共享依赖 shared 代码，GC 包括目前默认的 G1，也有经典的 Serial、Parallel、CMS 等 GC 实现。
 
-## 类文件分享
+## 类文件共享
 
-CDS(Class-Date Sharing)即类文件分享最初在JDK1.5时被引入，是为了提升JVM的启动速度并减少启动占用空间。
+CDS(Class-Data Sharing)即类文件分享最初在JDK1.5时被引入，是为了提升JVM的启动速度并减少启动占用空间。
 
 JVM启动平台的初始阶段，其中一个步骤是将类文件加载到内存中，如果有多个jar包并且有多个类文件，那么第一个请求的延迟就很明显了。这对于无服务架构就是一个问题，因为启动时间是关键。为了降低应用的启动时间，可以启用CDC。思路是减少于同进程使用的公用的类文件的占用空间。
 
